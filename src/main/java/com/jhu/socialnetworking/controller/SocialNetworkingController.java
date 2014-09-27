@@ -22,6 +22,7 @@ import com.jhu.socialnetworking.service.SocialNetworkingService;
  * @date Sep 27, 2014
  */
 @Controller
+@RequestMapping("/")
 public class SocialNetworkingController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(SocialNetworkingController.class);
@@ -33,9 +34,9 @@ public class SocialNetworkingController {
 		this.socialNetworkingService = socialNetworkingService;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String home() {
-		return "home";	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String getHome() {
+		return "home";
 	}
 	
 	/**
@@ -50,7 +51,7 @@ public class SocialNetworkingController {
 		return socialNetworkingService.getAllStudents();
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public Student register(@RequestBody Student student) {
 		

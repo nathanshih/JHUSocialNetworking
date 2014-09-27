@@ -1,19 +1,25 @@
 $(document).ready(function() {
 	
-	//	On Click SignIn Button Checks For Valid E-mail And All Field Should Be Filled
+	//	login
 	$("#login").click(function() {
+		
+		// first check that the email is in correct format and all fields are filled in
 		var email = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
 		if ($("#loginemail").val() === '' || $("#loginpassword").val() === '') {
 			alert("All fields required.");
 		} else if (!($("#loginemail").val()).match(email)) {
 			alert("Invalid email entered.");
 		} else {
+			// TODO: implement login jquery logic
 			alert("You have successfully logged in.");
 			$("form")[0].reset();
 		}
 	});
 	
+	// register
 	$("#register").click(function() {
+		
+		// first check that the email is in correct format and all fields are filled in
 		var email = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
 		if ($("#name").val() === '' || $("#registeremail").val() === '' || $("#registerpassword").val() === '' || $("#contact").val() === '') {
 			alert("All fields required.");
@@ -21,7 +27,10 @@ $(document).ready(function() {
 			alert("Invalid email entered.");
 		} else {
 			alert("You have successfully signed up. Now you can login.");
+			
+			// send the register call
 			$.ajax({
+				url: "register",
 				contentType: "application/json",
 				data: JSON.stringify({
 					"name": $("#name").val(),
@@ -40,14 +49,14 @@ $(document).ready(function() {
 		}
 	});
 	
-	//	On Click SignUp It Will Hide Login Form and Display Registration Form
+	//	hide login form and display registration form
 	$("#signup").click(function() {
 		$("#first").slideUp("slow", function() {
 			$("#second").slideDown("slow");
 		});
 	});
 	
-	//	On Click SignIn It Will Hide Registration Form and Display Login Form
+	//	hide registration form and display login form
 	$("#signin").click(function() {
 		$("#second").slideUp("slow", function() {
 			$("#first").slideDown("slow");

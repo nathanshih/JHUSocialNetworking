@@ -1,6 +1,7 @@
 package com.jhu.socialnetworking.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Model class for the student object.
@@ -36,11 +37,12 @@ public class Student {
 		this.email = email;
 	}
 	
-	@JsonIgnore
+	@JsonIgnore // used to not send the pasword back in the response
 	public String getPassword() {
 		return password;
 	}
 	
+	@JsonProperty("password") // need this in conjunction with @JsonIgnore to ensure password is set
 	public void setPassword(String password) {
 		this.password = password;
 	}

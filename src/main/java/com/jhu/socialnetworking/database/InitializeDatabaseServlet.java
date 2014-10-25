@@ -49,17 +49,38 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
 
+		// Get a student DAO to add and remove students
 		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");
+		
+		// Add some students
 		Student student = new Student();
 		student.setFirstName("Chris");
-		student.setLastName("Karlen");
-				
+		student.setLastName("Karlen");			
 		studentDAO.insert(student);
-
-		List<Student> studentList = studentDAO.getAllStudents();
 		
+		student = new Student();
+		student.setFirstName("Nathan");
+		student.setLastName("Shih");			
+		studentDAO.insert(student);
+		
+		student = new Student();
+		student.setFirstName("Arthur");
+		student.setLastName("Tucker");			
+		studentDAO.insert(student);		
+				
+		// Get all the students from the database
+		List<Student> studentList = studentDAO.getAllStudents();
+				
+		// Print out all the students and remove each student from the database
 		for (Student studentObj : studentList) {
 			response.getWriter().println(studentObj);
+			studentDAO.remove(studentObj);
 		}
+				
+		// Print confirmation that all students were removed
+		studentList = studentDAO.getAllStudents();
+		if (studentList.size() == 0)
+			response.getWriter().println("No students in database");
+
 	}
 }

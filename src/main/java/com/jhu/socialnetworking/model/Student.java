@@ -11,22 +11,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Student {
 
-	private String name;
+	private int studentId;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String password;
 	private String contact;
 	
 	@Override
 	public String toString() {
-		return name;
+		return firstName + " " + lastName;
 	}
 	
 	public String getName() {
-		return name;
+		return firstName;
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.firstName = name;
 	}
 	
 	public String getEmail() {
@@ -53,5 +55,29 @@ public class Student {
 	
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
 }

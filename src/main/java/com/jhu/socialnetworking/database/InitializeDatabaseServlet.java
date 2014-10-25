@@ -51,6 +51,9 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");
 		Student student = new Student();
+		student.setFirstName("Chris");
+		student.setLastName("Karlen");
+				
 		studentDAO.insert(student);
 
 		List<Student> studentList = studentDAO.getAllStudents();

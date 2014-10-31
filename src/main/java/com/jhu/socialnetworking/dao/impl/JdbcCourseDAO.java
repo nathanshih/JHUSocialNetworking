@@ -9,33 +9,35 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.jhu.socialnetworking.dao.StudentDAO;
+import com.jhu.socialnetworking.dao.CourseDAO;
 import com.jhu.socialnetworking.database.InitializeDatabase;
-import com.jhu.socialnetworking.model.Student;
+import com.jhu.socialnetworking.model.Course;
 
 /**
- * Provides the implementation logic to persist a Student object
+ * Provides the implementation logic to persist a Course object
  */
-public class JdbcStudentDAO implements StudentDAO {
+public class JdbcCourseDAO implements CourseDAO {
 
 	/**
-	 * The datasource used to perist student objects
+	 * The datasource used to perist course objects
 	 */
 	private DataSource dataSource;
 
 	/**
 	 * Sets the datasource when the bean is instantiated
-	 * @param dataSource the datasource used to perist student objects
+	 * 
+	 * @param dataSource
+	 *            the datasource used to perist student objects
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
 	/**
-	 * Persists a student in the database
+	 * Persists a course in the database
 	 */
 	@Override
-	public void insert(Student student) {
+	public void insert(Course course) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -49,8 +51,9 @@ public class JdbcStudentDAO implements StudentDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("INSERT INTO Student(student_ID, first_name, last_name) VALUES (NULL, '%s', '%s')",
-							student.getFirstName(), student.getLastName());
+					.format("INSERT INTO Course(course_ID, course_name, course_description) VALUES ('%s', '%s', '%s')",
+							course.getCourseId(), course.getCourseName(),
+							course.getCourseDescription());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -70,10 +73,10 @@ public class JdbcStudentDAO implements StudentDAO {
 	}
 
 	/**
-	 * Removes a student from the database based on student id
+	 * Removes a course from the database based on course id
 	 */
 	@Override
-	public void remove(Student student) {
+	public void remove(Course course) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -86,9 +89,8 @@ public class JdbcStudentDAO implements StudentDAO {
 
 			conn = dataSource.getConnection();
 
-			sql = String.format(
-					"DELETE FROM STUDENT WHERE student_id='%s'",
-					student.getStudentId());
+			sql = String.format("DELETE FROM Course WHERE course_id='%s'",
+					course.getCourseId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -108,9 +110,9 @@ public class JdbcStudentDAO implements StudentDAO {
 	}
 
 	/**
-	 * Get all the students in the database
+	 * Get all the courses in the database
 	 */
-	public List<Student> getAllStudents() {
+	public List<Course> getAllCourses() {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -120,27 +122,26 @@ public class JdbcStudentDAO implements StudentDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		List<Student> studentList = null;
+		List<Course> courseList = null;
 
 		try {
 
 			conn = dataSource.getConnection();
-			sql = "SELECT * FROM Student";
+			sql = "SELECT * FROM Course";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
-			studentList = new ArrayList<Student>();
+			courseList = new ArrayList<Course>();
 
 			while (rs.next()) {
-				
-				Student student = new Student();
 
-				student.setStudentId(Integer.parseInt(rs
-						.getString("student_id")));
-				student.setFirstName(rs.getString("first_name"));
-				student.setLastName(rs.getString("last_name"));
+				Course course = new Course();
 
-				studentList.add(student);
+				course.setCourseId(rs.getString("course_id"));
+				course.setCourseName(rs.getString("course_name"));
+				course.setCourseDescription(rs.getString("course_description"));
+
+				courseList.add(course);
 			}
 
 			ps.close();
@@ -156,7 +157,8 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
-		
-		return studentList;
+
+		return courseList;
 	}
+
 }

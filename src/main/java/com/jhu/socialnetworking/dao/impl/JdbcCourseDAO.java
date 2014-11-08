@@ -160,5 +160,50 @@ public class JdbcCourseDAO implements CourseDAO {
 
 		return courseList;
 	}
+	
+	/**
+	 * Get a course by ID from the database
+	 */
+	public Course getCourseById(String courseId) {
+
+		// Ensure datasource is initialized with InitializeDatabase singleton
+		InitializeDatabase.getInstance().initializeDatabase(dataSource);
+
+		String sql = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Course course = null;
+		
+		try {
+
+			conn = dataSource.getConnection();
+			sql = String.format("SELECT * FROM Course WHERE course_id='%s'", courseId);
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			
+			course = new Course();
+			rs.next();
+			course.setCourseId(rs.getString("course_id"));
+			course.setCourseName(rs.getString("course_name"));
+			course.setCourseDescription(rs.getString("course_description"));
+			
+			ps.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return course;
+	}
 
 }

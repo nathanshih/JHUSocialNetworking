@@ -78,7 +78,7 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		student.setFirstName("Arthur");
 		student.setLastName("Tucker");
 		studentDAO.insert(student);
-
+		
 		// Get all the students from the database
 		List<Student> studentList = studentDAO.getAllStudents();
 
@@ -128,12 +128,23 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		course.setCourseDescription("This course explores how principles from theories of evolution and natural selection can be used to construct machines that exhibit nontrivial behavior..");
 		courseDAO.insert(course);
 		
+		// Get a course from the database by ID
+		course = courseDAO.getCourseById("605.747");
+		try {
+			response.getWriter().print("Retrieved course with id 605.747: ");
+			response.getWriter().println(course);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		// Get all the courses from the database
 		List<Course> courseList = courseDAO.getAllCourses();
 
 		try {
 			// Print out all the courses and remove each course from the database
 			for (Course courseObj : courseList) {
+				response.getWriter().print("Retrieve and delete:  ");
 				response.getWriter().println(courseObj);
 				courseDAO.remove(courseObj);
 			}

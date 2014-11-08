@@ -118,12 +118,12 @@ public class JdbcEvaluationDAO implements EvaluationDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("SELECT * FROM (EVALUATION) evaluations INNER JOIN (SELECT * FROM REGISTRATION WHERE professor_id='%s') registrations ON evaluations.registration_id = registrations.registration_id;",
+					.format("SELECT * FROM EVALUATION INNER JOIN (SELECT * FROM REGISTRATION WHERE professor_id='%s') registrations ON EVALUATION.registration_id=registrations.registration_id;",
 							professorId);
 
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-
+  
 			evaluationList = new ArrayList<Evaluation>();
 
 			while (rs.next()) {
@@ -175,7 +175,7 @@ public class JdbcEvaluationDAO implements EvaluationDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("SELECT * FROM (EVALUATION) evaluations INNER JOIN (SELECT * FROM REGISTRATION WHERE course_id='%s') registrations ON evaluations.registration_id=registrations.registration_id;",
+					.format("SELECT * FROM EVALUATION INNER JOIN (SELECT * FROM REGISTRATION WHERE course_id='%s') registrations ON EVALUATION.registration_id=registrations.registration_id;",
 							courseId);
 
 			ps = conn.prepareStatement(sql);

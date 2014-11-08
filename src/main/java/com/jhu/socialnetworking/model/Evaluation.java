@@ -30,5 +30,8 @@ public class Evaluation {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	public String toString() {
+		return "evaluation id: " + this.evaluationId;
+	}
 	
 }

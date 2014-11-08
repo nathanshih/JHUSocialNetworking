@@ -5,7 +5,8 @@ public class Professor {
 	private int professorId;
 	private String firstName;
 	private String lastName;
-	public int getProfessorId() {
+	
+	public int getProfessorId() {	
 		return professorId;
 	}
 	public void setProfessorId(int professorId) {

@@ -2,10 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-
-	<import resource="database/Spring-Datasource.xml" />
-	<import resource="student/Spring-Student.xml" />
-	<import resource="course/Spring-Course.xml" />
-	<import resource="professor/Spring-Professor.xml" />
-
+ 
+	<bean id="professorDAO" class="com.jhu.socialnetworking.dao.impl.JdbcProfessorDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+ 
 </beans>

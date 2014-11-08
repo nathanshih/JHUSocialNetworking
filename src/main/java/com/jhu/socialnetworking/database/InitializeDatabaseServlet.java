@@ -13,8 +13,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.jhu.socialnetworking.dao.CourseDAO;
+import com.jhu.socialnetworking.dao.ProfessorDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.Course;
+import com.jhu.socialnetworking.model.Professor;
 import com.jhu.socialnetworking.model.Student;
 
 /**
@@ -48,12 +50,65 @@ public class InitializeDatabaseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		response.getWriter().println("-----Testing StudentDAO-----");
 		testStudentDAO(request, response);
-
+		response.getWriter().println("-----Testing CourseDAO-----");
 		testCourseDAO(request, response);
+		response.getWriter().println("-----Testing ProfessorDAO-----");
+		testProfessorDAO(request, response);
 
 	}
 
+	private void testProfessorDAO(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"Spring-Module.xml");
+
+		// Get a professor DAO to add and remove students
+		ProfessorDAO professorDAO = (ProfessorDAO) context.getBean("professorDAO");
+
+		// Add some professor
+		Professor professor = new Professor();
+		professor.setFirstName("John");
+		professor.setLastName("Sheppard");
+		professorDAO.insert(professor);
+		
+		professor = new Professor();
+		professor.setFirstName("Kiran");
+		professor.setLastName("Chittargi");
+		professorDAO.insert(professor);
+
+		// Get a professor from the database by ID
+		professor = professorDAO.getProfessorById(1);
+		try {
+			response.getWriter().print("Retrieved professor with id 1:  ");
+			response.getWriter().println(professor);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		// Get all the professors from the database
+		List<Professor> professorList = professorDAO.getAllProfessors();
+
+		try {
+			// Print out all the professors and remove each professor from the database
+			for (Professor professorObj : professorList) {
+				response.getWriter().println(professorObj);
+				professorDAO.remove(professorObj);
+			}
+
+			// Print confirmation that all students were removed
+			professorList = professorDAO.getAllProfessors();
+			if (professorList.size() == 0)
+				response.getWriter().println("No professors in database");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private void testStudentDAO(HttpServletRequest request,
 			HttpServletResponse response) {
 

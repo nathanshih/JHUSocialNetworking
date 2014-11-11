@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import com.jhu.socialnetworking.dao.StudentDAO;
@@ -50,8 +49,8 @@ public class JdbcStudentDAO implements StudentDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("INSERT INTO Student(student_ID, first_name, last_name) VALUES (NULL, '%s', '%s')",
-							student.getFirstName(), student.getLastName());
+					.format("INSERT INTO Student(student_id, name, email) VALUES (NULL, '%s', '%s')",
+							student.getName(), student.getEmail());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -138,8 +137,8 @@ public class JdbcStudentDAO implements StudentDAO {
 
 				student.setStudentId(Integer.parseInt(rs
 						.getString("student_id")));
-				student.setFirstName(rs.getString("first_name"));
-				student.setLastName(rs.getString("last_name"));
+				student.setName(rs.getString("name"));
+				student.setEmail(rs.getString("email"));
 
 				studentList.add(student);
 			}

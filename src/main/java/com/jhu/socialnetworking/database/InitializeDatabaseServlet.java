@@ -54,18 +54,18 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		
 		// Add some students
 		Student student = new Student();
-		student.setFirstName("Chris");
-		student.setLastName("Karlen");			
+		student.setName("Chris Karlen");
+		student.setEmail("chris@email.com");			
 		studentDAO.insert(student);
 		
 		student = new Student();
-		student.setFirstName("Nathan");
-		student.setLastName("Shih");			
+		student.setName("Nathan Shih");
+		student.setEmail("nathan@email.com");			
 		studentDAO.insert(student);
 		
 		student = new Student();
-		student.setFirstName("Arthur");
-		student.setLastName("Tucker");			
+		student.setName("Arthur Tucker");
+		student.setEmail("arthur@email.com");			
 		studentDAO.insert(student);		
 				
 		// Get all the students from the database

@@ -39,7 +39,10 @@ $(document).ready(function() {
 					"contact": $("#contact").val()
 				}),
 				dataType: "json",
-				type: "POST"
+				type: "POST",
+				success: function() {
+					window.location = "example";
+				}
 			});
 			
 			$("#form")[0].reset();

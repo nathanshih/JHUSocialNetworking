@@ -11,12 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Student {
 
-	private int studentId;
+	private Integer studentId;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
 	private String contact;
+	private String degreeProgram;
 	
 	@Override
 	public String toString() {
@@ -73,11 +74,19 @@ public class Student {
 		this.lastName = lastName;
 	}
 
-	public int getStudentId() {
+	public Integer getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(int studentId) {
+	public void setStudentId(Integer studentId) {
 		this.studentId = studentId;
+	}
+
+	public String getDegreeProgram() {
+		return degreeProgram;
+	}
+
+	public void setDegreeProgram(String degreeProgram) {
+		this.degreeProgram = degreeProgram;
 	}
 }

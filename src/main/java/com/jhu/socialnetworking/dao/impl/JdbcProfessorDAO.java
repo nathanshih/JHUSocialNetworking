@@ -9,33 +9,28 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.jhu.socialnetworking.dao.StudentDAO;
+import com.jhu.socialnetworking.dao.ProfessorDAO;
 import com.jhu.socialnetworking.database.InitializeDatabase;
-import com.jhu.socialnetworking.model.Student;
+import com.jhu.socialnetworking.model.Professor;
 
-/**
- * Provides the implementation logic to persist a Student object
- */
-public class JdbcStudentDAO implements StudentDAO {
+public class JdbcProfessorDAO implements ProfessorDAO {
 
 	/**
-	 * The datasource used to perist student objects
+	 * The datasource used to perist professor objects
 	 */
 	private DataSource dataSource;
 
 	/**
 	 * Sets the datasource when the bean is instantiated
-	 * @param dataSource the datasource used to perist student objects
+	 * 
+	 * @param dataSource
+	 *            the datasource used to perist professor objects
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
-	/**
-	 * Persists a student in the database
-	 */
-	@Override
-	public void insert(Student student) {
+	public void insert(Professor professor) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -49,8 +44,8 @@ public class JdbcStudentDAO implements StudentDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("INSERT INTO Student(student_ID, first_name, last_name) VALUES (NULL, '%s', '%s')",
-							student.getFirstName(), student.getLastName());
+					.format("INSERT INTO Professor(professor_id, first_name, last_name) VALUES (NULL, '%s', '%s')",
+							professor.getFirstName(), professor.getLastName());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -67,13 +62,10 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
+
 	}
 
-	/**
-	 * Removes a student from the database based on student id
-	 */
-	@Override
-	public void remove(Student student) {
+	public void remove(Professor professor) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -87,8 +79,8 @@ public class JdbcStudentDAO implements StudentDAO {
 			conn = dataSource.getConnection();
 
 			sql = String.format(
-					"DELETE FROM STUDENT WHERE student_id='%s'",
-					student.getStudentId());
+					"DELETE FROM PROFESSOR WHERE professor_id='%s'",
+					professor.getProfessorId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -105,12 +97,10 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
+
 	}
 
-	/**
-	 * Get all the students in the database
-	 */
-	public List<Student> getAllStudents() {
+	public List<Professor> getAllProfessors() {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -120,27 +110,27 @@ public class JdbcStudentDAO implements StudentDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		List<Student> studentList = null;
+		List<Professor> professorList = null;
 
 		try {
 
 			conn = dataSource.getConnection();
-			sql = "SELECT * FROM Student";
+			sql = "SELECT * FROM Professor";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
-			studentList = new ArrayList<Student>();
+			professorList = new ArrayList<Professor>();
 
 			while (rs.next()) {
-				
-				Student student = new Student();
 
-				student.setStudentId(Integer.parseInt(rs
-						.getString("student_id")));
-				student.setFirstName(rs.getString("first_name"));
-				student.setLastName(rs.getString("last_name"));
+				Professor professor = new Professor();
 
-				studentList.add(student);
+				professor.setProfessorId((Integer.parseInt(rs
+						.getString("professor_id"))));
+				professor.setFirstName(rs.getString("first_name"));
+				professor.setLastName(rs.getString("last_name"));
+
+				professorList.add(professor);
 			}
 
 			ps.close();
@@ -156,7 +146,52 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
-		
-		return studentList;
+
+		return professorList;
+
 	}
+
+	public Professor getProfessorById(int professorId) {
+
+		// Ensure datasource is initialized with InitializeDatabase singleton
+		InitializeDatabase.getInstance().initializeDatabase(dataSource);
+
+		String sql = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Professor professor = null;
+
+		try {
+
+			conn = dataSource.getConnection();
+			sql = String.format("SELECT * FROM PROFESSOR WHERE professor_id='%s'",
+					professorId);
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			professor = new Professor();
+			rs.next();
+			professor.setProfessorId(Integer.parseInt(rs.getString("professor_id")));
+			professor.setFirstName(rs.getString("first_name"));
+			professor.setLastName(rs.getString("last_name"));
+			
+			ps.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return professor;
+
+	}
+
 }

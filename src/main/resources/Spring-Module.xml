@@ -9,5 +9,6 @@
 	<import resource="professor/Spring-Professor.xml" />
 	<import resource="evaluation/Spring-Evaluation.xml" />
 	<import resource="registration/Spring-Registration.xml" />
+	<import resource="connection/Spring-Connection.xml" />
 
 </beans>

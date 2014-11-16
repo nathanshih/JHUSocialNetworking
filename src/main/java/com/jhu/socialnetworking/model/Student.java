@@ -11,24 +11,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Student {
 
-	private int studentId;
-	private String firstName;
-	private String lastName;
+	private long studentId;
+	private String name;
 	private String email;
 	private String password;
 	private String contact;
+	private String degreeProgram;
 	
 	@Override
 	public String toString() {
-		return firstName + " " + lastName;
+		return name;
 	}
 	
 	public String getName() {
-		return firstName;
+		return name;
 	}
 	
 	public void setName(String name) {
-		this.firstName = name;
+		this.name = name;
 	}
 	
 	public String getEmail() {
@@ -57,27 +57,19 @@ public class Student {
 		this.contact = contact;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public int getStudentId() {
+	public long getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(int studentId) {
+	public void setStudentId(long studentId) {
 		this.studentId = studentId;
+	}
+
+	public String getDegreeProgram() {
+		return degreeProgram;
+	}
+
+	public void setDegreeProgram(String degreeProgram) {
+		this.degreeProgram = degreeProgram;
 	}
 }

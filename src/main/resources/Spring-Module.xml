@@ -5,5 +5,10 @@
 
 	<import resource="database/Spring-Datasource.xml" />
 	<import resource="student/Spring-Student.xml" />
+	<import resource="course/Spring-Course.xml" />
+	<import resource="professor/Spring-Professor.xml" />
+	<import resource="evaluation/Spring-Evaluation.xml" />
+	<import resource="registration/Spring-Registration.xml" />
+	<import resource="connection/Spring-Connection.xml" />
 
 </beans>

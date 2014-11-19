@@ -16,12 +16,14 @@ import com.jhu.socialnetworking.dao.CourseDAO;
 import com.jhu.socialnetworking.dao.EvaluationDAO;
 import com.jhu.socialnetworking.dao.ProfessorDAO;
 import com.jhu.socialnetworking.dao.RegistrationDAO;
+import com.jhu.socialnetworking.dao.StudentConnectionDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Evaluation;
 import com.jhu.socialnetworking.model.Professor;
 import com.jhu.socialnetworking.model.Registration;
 import com.jhu.socialnetworking.model.Student;
+import com.jhu.socialnetworking.model.StudentConnection;
 
 /**
  * Servlet implementation class InitializeDatabaseServlet
@@ -54,12 +56,12 @@ public class InitializeDatabaseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-//		response.getWriter().println("-----Testing StudentDAO-----");
-//		testStudentDAO(request, response);
-//		response.getWriter().println("-----Testing CourseDAO-----");
-//		testCourseDAO(request, response);
-//		response.getWriter().println("-----Testing ProfessorDAO-----");
-//		testProfessorDAO(request, response);
+		// response.getWriter().println("-----Testing StudentDAO-----");
+		// testStudentDAO(request, response);
+		// response.getWriter().println("-----Testing CourseDAO-----");
+		// testCourseDAO(request, response);
+		// response.getWriter().println("-----Testing ProfessorDAO-----");
+		// testProfessorDAO(request, response);
 		response.getWriter().println(
 				"-----Testing EvaluationDAO,RegistrationDAO-----");
 		testEvaluationRegistrationDAOs(request, response);
@@ -77,19 +79,19 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		// Add some students
 		Student student = new Student();
-		student.setFirstName("Chris");
-		student.setLastName("Karlen");
+		student.setName("Chris Karlen");
+		student.setEmail("chris@email.com");			
 		studentDAO.insert(student);
 
 		student = new Student();
-		student.setFirstName("Nathan");
-		student.setLastName("Shih");
+		student.setName("Nathan Shih");
+		student.setEmail("nathan@email.com");			
 		studentDAO.insert(student);
 
 		student = new Student();
-		student.setFirstName("Arthur");
-		student.setLastName("Tucker");
-		studentDAO.insert(student);
+		student.setName("Arthur Tucker");
+		student.setEmail("arthur@email.com");			
+		studentDAO.insert(student);		
 
 		// Get a professor DAO to add and remove students
 		ProfessorDAO professorDAO = (ProfessorDAO) context
@@ -100,7 +102,7 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		professor1.setFirstName("John");
 		professor1.setLastName("Sheppard");
 		professorDAO.insert(professor1);
-			
+
 		Professor professor2 = new Professor();
 		professor2.setFirstName("Kiran");
 		professor2.setLastName("Chittargi");
@@ -198,32 +200,69 @@ public class InitializeDatabaseServlet extends HttpServlet {
 				.getEvaluationsByCourseId(course1.getCourseId());
 
 		try {
-			response.getWriter().println("-----getEvaluationsByCourseId(course1)-----");
+			response.getWriter().println(
+					"-----getEvaluationsByCourseId(course1)-----");
 			for (Evaluation evaluationObj : evaluationList) {
-					response.getWriter().println(evaluationObj);
+				response.getWriter().println(evaluationObj);
 			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		evaluationList = evaluationDAO.getEvaluationsByProfessorId(1);
 		try {
-			response.getWriter().println("-----getEvaluationsByProfessorId(professor1)-----");
+			response.getWriter().println(
+					"-----getEvaluationsByProfessorId(professor1)-----");
 			for (Evaluation evaluationObj : evaluationList) {
-					response.getWriter().println(evaluationObj);
+				response.getWriter().println(evaluationObj);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		evaluationList = evaluationDAO.getEvaluationsByProfessorId(2);
 		try {
-			response.getWriter().println("-----getEvaluationsByProfessorId(professor2)-----");
+			response.getWriter().println(
+					"-----getEvaluationsByProfessorId(professor2)-----");
 			for (Evaluation evaluationObj : evaluationList) {
-					response.getWriter().println(evaluationObj);
+				response.getWriter().println(evaluationObj);
 			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		StudentConnectionDAO studentConnectionDAO = (StudentConnectionDAO) context
+				.getBean("studentConnectionDAO");
+
+		try {
+			response.getWriter().println(
+					"-----insert(new StudentConnection)-----");
+
+			studentConnectionDAO.insert(new StudentConnection(1, 2));
+			studentConnectionDAO.insert(new StudentConnection(2, 1));
+			studentConnectionDAO.insert(new StudentConnection(1, 3));
+
+			response.getWriter().println(
+					"-----getConnectionsByStudentId(studentId)-----");
+			List<StudentConnection> list = studentConnectionDAO
+					.getConnectionsByStudentId(1);
+
+			for (StudentConnection connection : list) {
+				response.getWriter().println(connection);
+				studentConnectionDAO.remove(connection);
+			}
+
+			response.getWriter().println(
+					"-----getConnectionsByStudentId(studentId)-----");
+			List<StudentConnection> list2 = studentConnectionDAO
+					.getConnectionsByStudentId(3);
+			for (StudentConnection connection : list2) {
+				response.getWriter().println(connection);
+			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -294,18 +333,15 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		// Add some students
 		Student student = new Student();
-		student.setFirstName("Chris");
-		student.setLastName("Karlen");
+		student.setName("Chris Karlen");
 		studentDAO.insert(student);
 
 		student = new Student();
-		student.setFirstName("Nathan");
-		student.setLastName("Shih");
+		student.setName("Nathan Shih");
 		studentDAO.insert(student);
 
 		student = new Student();
-		student.setFirstName("Arthur");
-		student.setLastName("Tucker");
+		student.setName("Arthur Tucker");
 		studentDAO.insert(student);
 
 		// Get all the students from the database

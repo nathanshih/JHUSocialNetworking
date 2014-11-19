@@ -1,10 +1,13 @@
 package com.jhu.socialnetworking.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.Student;
 
 /**
@@ -15,22 +18,29 @@ import com.jhu.socialnetworking.model.Student;
  */
 @Service
 public class SocialNetworkingServiceImpl implements SocialNetworkingService {
-
-	private List<Student> students; // TODO: should this be a Map instead of List?
+	
+	private StudentDAO studentDAO;
+	
+	private static AtomicLong idCounter;
 	
 	public SocialNetworkingServiceImpl() {
-		students = new ArrayList<Student>();
+		idCounter = new AtomicLong();
+		
+		@SuppressWarnings("resource")
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"Spring-Module.xml");
+		studentDAO = (StudentDAO) context.getBean("studentDAO");
 	}
 	
 	@Override
 	public Student register(Student student) {
-		students.add(student);
+		studentDAO.insert(student);
 		
 		return student;
 	}
 
 	@Override
 	public List<Student> getAllStudents() {
-		return students;
+		return studentDAO.getAllStudents();
 	}
 }

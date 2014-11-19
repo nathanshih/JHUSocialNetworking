@@ -60,8 +60,8 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		// testStudentDAO(request, response);
 		// response.getWriter().println("-----Testing CourseDAO-----");
 		// testCourseDAO(request, response);
-		// response.getWriter().println("-----Testing ProfessorDAO-----");
-		// testProfessorDAO(request, response);
+		response.getWriter().println("-----Testing ProfessorDAO-----");
+		testProfessorDAO(request, response);
 		response.getWriter().println(
 				"-----Testing EvaluationDAO,RegistrationDAO-----");
 		testEvaluationRegistrationDAOs(request, response);
@@ -97,16 +97,14 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		ProfessorDAO professorDAO = (ProfessorDAO) context
 				.getBean("professorDAO");
 
-		// Add some professors
-		Professor professor1 = new Professor();
-		professor1.setFirstName("John");
-		professor1.setLastName("Sheppard");
-		professorDAO.insert(professor1);
-
-		Professor professor2 = new Professor();
-		professor2.setFirstName("Kiran");
-		professor2.setLastName("Chittargi");
-		professorDAO.insert(professor2);
+//		// Add some professors
+//		Professor professor1 = new Professor();
+//		professor1.setName("John Sheppard");
+//		professorDAO.insert(professor1);
+//
+//		Professor professor2 = new Professor();
+//		professor2.setName("Kiran Chittargi");
+//		professorDAO.insert(professor2);
 
 		// Get a course DAO to add and remove courses
 		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
@@ -282,13 +280,11 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		// Add some professors
 		Professor professor = new Professor();
-		professor.setFirstName("John");
-		professor.setLastName("Sheppard");
+		professor.setName("John Sheppard");
 		professorDAO.insert(professor);
 
 		professor = new Professor();
-		professor.setFirstName("Kiran");
-		professor.setLastName("Chittargi");
+		professor.setName("Kiran Chittargi");
 		professorDAO.insert(professor);
 
 		// Get a professor from the database by ID

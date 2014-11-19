@@ -44,8 +44,8 @@ public class JdbcProfessorDAO implements ProfessorDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("INSERT INTO Professor(professor_id, first_name, last_name) VALUES (NULL, '%s', '%s')",
-							professor.getFirstName(), professor.getLastName());
+					.format("INSERT INTO Professor(professor_id, name) VALUES (NULL, '%s')",
+							professor.getName());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -127,8 +127,7 @@ public class JdbcProfessorDAO implements ProfessorDAO {
 
 				professor.setProfessorId((Integer.parseInt(rs
 						.getString("professor_id"))));
-				professor.setFirstName(rs.getString("first_name"));
-				professor.setLastName(rs.getString("last_name"));
+				professor.setName(rs.getString("name"));
 
 				professorList.add(professor);
 			}
@@ -173,8 +172,7 @@ public class JdbcProfessorDAO implements ProfessorDAO {
 			professor = new Professor();
 			rs.next();
 			professor.setProfessorId(Integer.parseInt(rs.getString("professor_id")));
-			professor.setFirstName(rs.getString("first_name"));
-			professor.setLastName(rs.getString("last_name"));
+			professor.setName(rs.getString("name"));
 			
 			ps.close();
 

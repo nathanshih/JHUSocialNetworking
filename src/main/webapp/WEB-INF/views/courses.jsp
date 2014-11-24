@@ -27,7 +27,9 @@
                             <h2>Foundations of Software Engineering</h2>
                             <p>605.401</p>
                             <div id="CollapsiblePanel1" class="CollapsiblePanel">
-                                <div class="CollapsiblePanelTab" tabindex="0"><a href="#"><u>MORE INFORMATION</u></a></div>
+                                <div class="CollapsiblePanelTab">
+                                    <a href="#"><u>MORE INFORMATION</u></a>
+                                </div>
                                 <div class="CollapsiblePanelContent">
                                     <p>Sam Schappelle</p>
                                     <p>http://apps.ep.jhu.edu/course-homepages/2731-605.401-foundations-of-software-engineering-schappelle</p>

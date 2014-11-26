@@ -1,8 +1,10 @@
 $(document).ready(function() {
 
-	$("#profile").click(function() {
-	    $("profileForm").slideDown("slow");
-	});
+    $("#profile").click(function() {
+        $("#contentLeft").slideUp("slow", function() {
+            $("#profileForm").slideDown("slow");
+        });
+    });
 
 	$("#update").click(function() {
 		var name = $("#name").val();

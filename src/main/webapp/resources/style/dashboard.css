@@ -55,6 +55,14 @@ a:hover    { color: black; }
 	float: left;
 }
 
+.controls {
+    width: 205px;
+    margin: 0;
+    padding-top: 44px;
+    padding-left: 30px;
+    float: left
+}
+
 .leftnavigation a {
 	display: block;
 	width: 185px;

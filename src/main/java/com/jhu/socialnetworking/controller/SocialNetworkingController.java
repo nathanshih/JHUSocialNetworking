@@ -59,4 +59,11 @@ public class SocialNetworkingController {
 		
 		return socialNetworkingService.register(student);
 	}
+
+	@RequestMapping(value = "/courses", method = RequestMethod.GET)
+    public String getCourses() {
+        
+        return "courses";
+    }
+    
 }

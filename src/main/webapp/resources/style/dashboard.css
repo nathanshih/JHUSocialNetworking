@@ -90,7 +90,31 @@ a:hover    { color: black; }
 /* CONTENT AREA */
 
 #profileForm {
+    width: 308px;
+    margin-top: 150px;
+    padding: 28px 25px;
+    background-color: #fff;
     display: none;
+    border: 1px solid #000;
+    border-radius: 5;
+    position: absolute;
+    left: 50%;
+    margin-left: -180px;
+    top: 0
+}
+
+#controls {
+    width: 308px;
+    margin-top: 150;
+    padding: 28px 25px;
+    background-color: #fff;
+    display: none;
+    border: 1px solid #000;
+    border-radius: 5;
+    position: absolute;
+    left: 50%;
+    margin-left: -180px;
+    top: 0
 }
 
 .contentleft {

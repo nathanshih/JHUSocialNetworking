@@ -24,7 +24,7 @@
 		</div>
 		<div id="contentArea" class="contentArea">
 			<div id="leftNavigation" class="leftnavigation">
-				<a href="#" >Home</a>
+				<a id="home" href="#" >Home</a>
 				<a id="courses" href="#" >Courses</a>
 				<a id="cart" href="#" >Cart</a>
 				<a id="classmates" href="#" >Classmates</a>
@@ -64,18 +64,11 @@
 			<div id="contentLeft" class="contentleft">
 			</div>
 			<div id="contentRight" class="contentright">
-			<p id="stuff">
 			</div>
 			<br class="clear_both" />
 		</div>
 	</div>
-	<script type="text/javascript">
-//        var cp1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel1", { contentIsOpen: false });
-//        var cp1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel2", { contentIsOpen: false });
-//        var cp1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel3", { contentIsOpen: false });
-//        var cp1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel4", { contentIsOpen: false });
-//        var cp1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel5", { contentIsOpen: false });
-//        var cp1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel6", { contentIsOpen: false });
+	<script id="javascript" type="text/javascript">
 	</script>
 	<div id="footerArea" class="footerArea">
 		<div id="footerContent" class="footercontent">

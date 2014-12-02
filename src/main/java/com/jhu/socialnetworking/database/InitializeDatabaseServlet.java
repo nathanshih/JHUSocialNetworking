@@ -113,19 +113,19 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		Course course1 = new Course();
 		course1.setCourseId("605.421");
 		course1.setCourseName("Foundations of Algorithms");
-		course1.setCourseDescription("This follow-on course to data structures (e.g., 605.202) provides a survey of computer algorithms, examines fundamental techniques in algorithm design and analysis, and develops problem-solving skills required in all programs of study involving computer science.");
+		course1.setDiscipline("Computer Science");
 		courseDAO.insert(course1);
 
 		Course course2 = new Course();
 		course2.setCourseId("605.411");
 		course2.setCourseName("Foundations of Computer Architecture");
-		course2.setCourseDescription("This course provides a detailed examination of the internal structure and operation of modern computer systems.");
+		course2.setDiscipline("Computer Science");
 		courseDAO.insert(course2);
 
 		Course course3 = new Course();
 		course3.setCourseId("605.747");
 		course3.setCourseName("Evolutionary Computation");
-		course3.setCourseDescription("This course explores how principles from theories of evolution and natural selection can be used to construct machines that exhibit nontrivial behavior..");
+		course3.setDiscipline("Computer Science");
 		courseDAO.insert(course3);
 
 		// Get a registration DAO to add and remove registrations
@@ -375,19 +375,19 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		Course course = new Course();
 		course.setCourseId("605.421");
 		course.setCourseName("Foundations of Algorithms");
-		course.setCourseDescription("This follow-on course to data structures (e.g., 605.202) provides a survey of computer algorithms, examines fundamental techniques in algorithm design and analysis, and develops problem-solving skills required in all programs of study involving computer science.");
+		course.setDiscipline("Computer Science");
 		courseDAO.insert(course);
 
 		course = new Course();
 		course.setCourseId("605.411");
 		course.setCourseName("Foundations of Computer Architecture");
-		course.setCourseDescription("This course provides a detailed examination of the internal structure and operation of modern computer systems.");
+		course.setDiscipline("Computer Science");
 		courseDAO.insert(course);
 
 		course = new Course();
 		course.setCourseId("605.747");
 		course.setCourseName("Evolutionary Computation");
-		course.setCourseDescription("This course explores how principles from theories of evolution and natural selection can be used to construct machines that exhibit nontrivial behavior..");
+		course.setDiscipline("Computer Science");
 		courseDAO.insert(course);
 
 		// Get a course from the database by ID

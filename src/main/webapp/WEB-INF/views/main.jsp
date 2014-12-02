@@ -55,10 +55,35 @@
                 </form>
             </div>
             <div id="profileForm">
-                <form action="" id="form" method="post" name="form">
-                    <input id="name" name="name" type="text">
-                    <input id="email" name="email" type="text">
-                    <input id="update" name="update" type="button" value="Update">
+                <form action="" id="form" method="post">
+                    <h3>User Profile Information</h3>
+                    <table>
+                        <tr>
+                            <td>Name:</td>
+                            <td>
+                                <input id="name" name="name" type="text" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email Address:</td>
+                            <td>
+                                <input id="email" name="email" type="email" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Degree Program:</td>
+                            <td>
+                                <input id="degree" name="degree" type="text" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Number of courses completed:</td>
+                        </tr>
+                        <tr>
+                            <td>Number of courses checked out:</td>
+                        </tr>
+                    </table>
+                    <input id="updateProfile" name="updateProfile" type="button" value="Update Profile">
                 </form>
             </div>
 			<div id="contentLeft" class="contentleft">

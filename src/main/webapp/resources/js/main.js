@@ -202,7 +202,37 @@ $(document).ready(function() {
         });
     });
 
-    $("#update").click(function() {
-        var name = $("#name").val();
+    $("#updateProfile").click(function() {
+        // first check that the email is in correct format and all fields are filled in
+        var email = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        if ($("#name").val() === '' || $("#email").val() === '' 
+          || $("#degree").val() === '') {
+            alert("All fields required.");
+        } else if (!($("#email").val()).match(email)) {
+            alert("Invalid email entered.");
+        } else {
+            $.ajax({
+                url: "register",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "name": $("#name").val(),
+                    "email": $("#email").val(),
+                    "degreeProgram": $("#degree").val()
+                }),
+                dataType: "json",
+                type: "POST",
+                success: function() {
+                    // clear contentLeft & contentRight
+                    $("#contentLeft").empty();
+                    $("#contentRight").empty();
+    
+                    // slide out profileForm
+                    $("#profileForm").slideUp("slow", function() {
+                        $("#contentLeft").slideDown("slow");
+                        $("#contentRight").slideDown("slow");
+                    });
+                }
+            });
+        }
     });
 });

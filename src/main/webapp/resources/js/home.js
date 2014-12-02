@@ -12,7 +12,8 @@ $(document).ready(function() {
 		} else {
 			// TODO: implement login jquery logic
 			alert("You have successfully logged in.");
-			$("form")[0].reset();
+//			$("form")[0].reset();
+			window.location = "main";
 		}
 	});
 	
@@ -41,7 +42,7 @@ $(document).ready(function() {
 				dataType: "json",
 				type: "POST",
 				success: function() {
-					window.location = "example";
+					window.location = "main";
 				}
 			});
 			

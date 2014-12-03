@@ -11,6 +11,7 @@ body {
 
 h1 { color: #102741; font-size: 24px; font-weight: normal; margin: 3px 0px 25px 0px; }
 h2 { color: #333333; font-size: 14px; font-weight: normal; margin: 0px 0px 15px 0px; }
+h3 { margin-top: 0 }
 a          { color: black; }
 a:visited  { color: black; }
 a:hover    { color: black; }
@@ -25,8 +26,7 @@ a:hover    { color: black; }
 	background-position: 0px bottom;
 }
 
-
-/* BANNER AREA */
+/* banner */
 .bannerArea {
 	width: 980px;height: 106px;
 	margin-left: auto;
@@ -45,22 +45,13 @@ a:hover    { color: black; }
 	padding: 0px 0px 15px 0px;
 }
 
-/* LEFT NAVIGATION */
-
+/* left navigation */
 .leftnavigation {
 	width: 205px;
 	margin: 0;
 	padding-top: 22px;
 	padding-left: 30px;
 	float: left;
-}
-
-.controls {
-    width: 205px;
-    margin: 0;
-    padding-top: 44px;
-    padding-left: 30px;
-    float: left
 }
 
 .leftnavigation a {
@@ -87,12 +78,62 @@ a:hover    { color: black; }
 	background-position: right -124px;
 }
 
-/* CONTENT AREA */
-
+/* forms */
 #profileForm {
+    width: 308px;
+    margin-top: 150px;
+    padding: 28px 25px;
+    background-color: #fff;
     display: none;
+    border: 1px solid #000;
+    border-radius: 5;
+    position: absolute;
+    left: 50%;
+    margin-left: -180px;
+    top: 0
 }
 
+#controls {
+    width: 308px;
+    margin-top: 150;
+    padding: 28px 25px;
+    background-color: #fff;
+    display: none;
+    border: 1px solid #000;
+    border-radius: 5;
+    position: absolute;
+    left: 50%;
+    margin-left: -180px;
+    top: 0
+}
+
+input[type=text], [type=email] {
+    padding: 7px;
+    width: 90%;
+    height: 10px;
+    margin-top: 15px;
+    font-size: 18px
+}
+
+input[type=button] {
+    background: linear-gradient(to bottom, #22abe9 5%, #36caf0 100%);
+    box-shadow: inset 0 1px 0 0 #7bdcf4;
+    border: 1px solid #0F799E;
+    color: #fff;
+    width: 306px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    text-shadow: 0 1px 0 #13506D
+}
+
+input[type=button]:hover {
+    background: linear-gradient(to bottom, #36caf0 5%, #22abe9 100%)
+}
+
+/* CONTENT AREA */
 .contentleft {
 	width: 350px;
 	padding-left: 10px;
@@ -181,7 +222,7 @@ a:hover    { color: black; }
 }
 
 
-/* FOOTER AREA */
+/* footer */
 .footerArea {
 	width: 100%;
 	height: 100px;

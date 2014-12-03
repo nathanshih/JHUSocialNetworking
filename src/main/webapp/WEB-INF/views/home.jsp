@@ -7,7 +7,7 @@
 	<title>JHU Social Networking</title>
 	<meta content="noindex, nofollow" name="robots">
 	<link href="${pageContext.request.contextPath}/resources/style/home.css" rel="stylesheet" type="text/css" media="screen" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>	
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>	
 	<script src="${pageContext.request.contextPath}/resources/js/home.js"></script>
 </head>
 

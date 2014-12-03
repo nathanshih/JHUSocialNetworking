@@ -7,7 +7,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.jhu.socialnetworking.dao.CourseDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
+import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Student;
 
 /**
@@ -20,6 +22,7 @@ import com.jhu.socialnetworking.model.Student;
 public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	
 	private StudentDAO studentDAO;
+	private CourseDAO courseDAO;
 	
 	private static AtomicLong idCounter;
 	
@@ -30,6 +33,7 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
 		studentDAO = (StudentDAO) context.getBean("studentDAO");
+		courseDAO = (CourseDAO) context.getBean("courseDAO");
 	}
 	
 	@Override
@@ -43,4 +47,17 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	public List<Student> getAllStudents() {
 		return studentDAO.getAllStudents();
 	}
+	
+    @Override
+    public Course insertCourse(Course course) {
+        courseDAO.insert(course);
+        
+        return course;
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return courseDAO.getAllCourses();
+    }
+	
 }

@@ -73,9 +73,14 @@ public class SocialNetworkingController {
         return socialNetworkingService.getAllCourses();
     }
     
+    /**
+     * This adds a course.
+     * @param course
+     * @return  course
+     */
     @RequestMapping(value = "/insertCourse", method = RequestMethod.POST)
     @ResponseBody
-    public Course register(@RequestBody Course course) {
+    public Course insertCourse(@RequestBody Course course) {
         
         LOG.debug("Inserting course: " + course.toString());
         

@@ -29,29 +29,17 @@
 				<a id="cart" href="#" >Cart</a>
 				<a id="classmates" href="#" >Classmates</a>
                 <a id="profile" href="#" >Profile</a>
+                <a id="admin" href="#" >Admin</a>
 			</div>
-            <div id="controls" class="controls">
+            <div id="courseControls">
                 <form action="" method="post">
-                    <table>
-                        <tr>
-                            <td>
-                                <select name="courseSelect">
-                                    <option value="all">All Courses</option>
-                                    <option value="checkedOut">Checked Out Courses</option>
-                                    <option value="completed">Completed Courses</option>
-                                    <option value="search">Search for Courses...</option>
-                                </select>
-                            </td>
-                            <td rowspan="2">
-                                <input id="searchButton" name="searchButton" type="button" value="Search">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input id="searchText" name="searchText" type="text">
-                            </td>
-                        </tr>
-                    </table>
+                    <select id="courseSelect" name="courseSelect" required>
+                        <option value="" selected disabled>Select courses to view...</option>
+                        <option value="allCourses">All Courses</option>
+                        <option value="checkedOutCourses" disabled>Checked Out Courses</option>
+                        <option value="completedCourses" disabled>Completed Courses</option>
+                    </select>
+                    <input id="courseButton" name="courseButton" type="button" value="Display Courses">
                 </form>
             </div>
             <div id="profileForm">
@@ -84,6 +72,53 @@
                         </tr>
                     </table>
                     <input id="updateProfile" name="updateProfile" type="button" value="Update Profile">
+                </form>
+            </div>
+            <div id="adminForm">
+                <form action="" method="post">
+                    <h3>Administrator Access</h3>
+                    <table>
+                        <tr>
+                            <td>Student Name:</td>
+                            <td>
+                                <input id="studentName" name="studentName" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Student Email Address:</td>
+                            <td>
+                                <input id="studentEmail" name="studentEmail" type="email">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Student Degree Program:</td>
+                            <td>
+                                <input id="studentDegree" name="studentDegree" type="text">
+                            </td>
+                        </tr>
+                    </table>
+                    <input id="addStudent" name="addStudent" type="button" value="Add Student">
+                    <table>
+                        <tr>
+                            <td>Course Name:</td>
+                            <td>
+                                <input id="courseName" name="courseName" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Course ID:</td>
+                            <td>
+                                <input id="courseId" name="courseId" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Course Description:</td>
+                            <td>
+                                <input id="courseDescription" name="courseDescription" type="text">
+                            </td>
+                        </tr>
+                    </table>
+                    <input id="addCourse" name="addCourse" type="button" value="Add Course">
                 </form>
             </div>
 			<div id="contentLeft" class="contentleft">

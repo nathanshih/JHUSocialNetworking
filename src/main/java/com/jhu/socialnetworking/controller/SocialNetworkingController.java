@@ -66,7 +66,7 @@ public class SocialNetworkingController {
      *
      * @return List<Course>
      */
-    @RequestMapping(value = "/courses", method = RequestMethod.GET)
+    @RequestMapping(value = "/allCourses", method = RequestMethod.GET)
     @ResponseBody
     public List<Course> getAllCourses() {
         

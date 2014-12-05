@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.service.SocialNetworkingService;
 
@@ -60,10 +61,30 @@ public class SocialNetworkingController {
 		return socialNetworkingService.register(student);
 	}
 
-	@RequestMapping(value = "/courses", method = RequestMethod.GET)
-    public String getCourses() {
+    /**
+     * This returns all the courses that are currently available.
+     *
+     * @return List<Course>
+     */
+    @RequestMapping(value = "/allCourses", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Course> getAllCourses() {
         
-        return "courses";
+        return socialNetworkingService.getAllCourses();
     }
     
+    /**
+     * This adds a course.
+     * @param course
+     * @return  course
+     */
+    @RequestMapping(value = "/insertCourse", method = RequestMethod.POST)
+    @ResponseBody
+    public Course insertCourse(@RequestBody Course course) {
+        
+        LOG.debug("Inserting course: " + course.toString());
+        
+        return socialNetworkingService.insertCourse(course);
+    }
+
 }

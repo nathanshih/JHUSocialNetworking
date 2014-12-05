@@ -2,6 +2,7 @@ package com.jhu.socialnetworking.service;
 
 import java.util.List;
 
+import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Student;
 
 /**
@@ -27,5 +28,20 @@ public interface SocialNetworkingService {
 	 */
 	public List<Student> getAllStudents();
 	
+    /**
+     * This inserts a new course.
+     *
+     * @param course - the new course to be inserted
+     * @return Course
+     */
+    public Course insertCourse(Course course);
+    
+    /**
+     * This returns back all the course currently available.
+     *
+     * @return List<Course>
+     */
+    public List<Course> getAllCourses();
+    
 	// TODO: Add new busness logic methods here
 }

@@ -56,16 +56,34 @@ public class InitializeDatabaseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"Spring-Module.xml");
+		
 		// response.getWriter().println("-----Testing StudentDAO-----");
 		// testStudentDAO(request, response);
 		// response.getWriter().println("-----Testing CourseDAO-----");
 		// testCourseDAO(request, response);
-		response.getWriter().println("-----Testing ProfessorDAO-----");
-		testProfessorDAO(request, response);
-		response.getWriter().println(
-				"-----Testing EvaluationDAO,RegistrationDAO-----");
-		testEvaluationRegistrationDAOs(request, response);
+		// response.getWriter().println("-----Testing ProfessorDAO-----");
+		// testProfessorDAO(request, response);
+		// response.getWriter().println(
+		// "-----Testing EvaluationDAO,RegistrationDAO-----");
+		// testEvaluationRegistrationDAOs(request, response);
 
+		response.getWriter().println("-----Number of Students prepopulated in database-----");
+		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");
+		response.getWriter()
+		.println(studentDAO.getAllStudents().size());
+		
+		response.getWriter().println("-----Number of Professors prepopulated in database-----");
+		ProfessorDAO professorDAO = (ProfessorDAO) context.getBean("professorDAO");
+		response.getWriter()
+		.println(professorDAO.getAllProfessors().size());
+		
+		response.getWriter().println("-----Number of Courses prepopulated in database-----");
+		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
+		response.getWriter()
+		.println(courseDAO.getAllCourses().size());
+		
 	}
 
 	private void testEvaluationRegistrationDAOs(HttpServletRequest request,
@@ -80,31 +98,31 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		// Add some students
 		Student student = new Student();
 		student.setName("Chris Karlen");
-		student.setEmail("chris@email.com");			
+		student.setEmail("chris@email.com");
 		studentDAO.insert(student);
 
 		student = new Student();
 		student.setName("Nathan Shih");
-		student.setEmail("nathan@email.com");			
+		student.setEmail("nathan@email.com");
 		studentDAO.insert(student);
 
 		student = new Student();
 		student.setName("Arthur Tucker");
-		student.setEmail("arthur@email.com");			
-		studentDAO.insert(student);		
+		student.setEmail("arthur@email.com");
+		studentDAO.insert(student);
 
 		// Get a professor DAO to add and remove students
 		ProfessorDAO professorDAO = (ProfessorDAO) context
 				.getBean("professorDAO");
 
-//		// Add some professors
-//		Professor professor1 = new Professor();
-//		professor1.setName("John Sheppard");
-//		professorDAO.insert(professor1);
-//
-//		Professor professor2 = new Professor();
-//		professor2.setName("Kiran Chittargi");
-//		professorDAO.insert(professor2);
+		// // Add some professors
+		// Professor professor1 = new Professor();
+		// professor1.setName("John Sheppard");
+		// professorDAO.insert(professor1);
+		//
+		// Professor professor2 = new Professor();
+		// professor2.setName("Kiran Chittargi");
+		// professorDAO.insert(professor2);
 
 		// Get a course DAO to add and remove courses
 		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");

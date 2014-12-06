@@ -17,8 +17,7 @@ public class Student {
 	private String name;
 	private String email;
 	private String password;
-	private String contact;
-	private String degreeProgram;
+	private String discipline;
 	private ArrayList<CourseLight> completedCourses;
 	private Cart cart;
 	
@@ -57,13 +56,13 @@ public class Student {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public String getContact() {
-		return contact;
+
+	public String getDiscipline() {
+		return discipline;
 	}
-	
-	public void setContact(String contact) {
-		this.contact = contact;
+
+	public void setDiscipline(String discipline) {
+		this.discipline = discipline;
 	}
 
 	public String getId() {
@@ -72,14 +71,6 @@ public class Student {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getDegreeProgram() {
-		return degreeProgram;
-	}
-
-	public void setDegreeProgram(String degreeProgram) {
-		this.degreeProgram = degreeProgram;
 	}
 	
 	public ArrayList<CourseLight> getCompletedCourses() {

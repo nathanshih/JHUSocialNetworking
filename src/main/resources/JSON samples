@@ -4,7 +4,7 @@ Student (model object returned)
 	"id": "1",
 	"name": "Nathan Shih",
 	"email": "somewhere@email.com",
-	"degree": "Computer Science",
+	"discipline": "Computer Science",
 	"completedCourses": [
 		{
 			"courseId": "605.782",
@@ -49,6 +49,7 @@ Course (model object returned)
 {
 	"courseId": "605.782",
 	"courseName": "Web Application Development with Java",
+	"description": "A description of this course",
 	"discipline": "Computer Science",
 	"usersCompleted": 3,
 	"usersCheckedOut": 1,

@@ -88,7 +88,7 @@ public class JdbcStudentDAO implements StudentDAO {
 
 			sql = String.format(
 					"DELETE FROM STUDENT WHERE student_id='%s'",
-					student.getStudentId());
+					student.getId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -135,8 +135,7 @@ public class JdbcStudentDAO implements StudentDAO {
 				
 				Student student = new Student();
 
-				student.setStudentId(Integer.parseInt(rs
-						.getString("student_id")));
+				student.setId(rs.getString("id"));
 				student.setName(rs.getString("name"));
 				student.setEmail(rs.getString("email"));
 

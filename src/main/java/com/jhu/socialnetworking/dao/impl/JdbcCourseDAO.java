@@ -51,9 +51,9 @@ public class JdbcCourseDAO implements CourseDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("INSERT INTO Course(course_ID, course_name, course_description) VALUES ('%s', '%s', '%s')",
+					.format("INSERT INTO Course(course_ID, course_name, discipline) VALUES ('%s', '%s', '%s')",
 							course.getCourseId(), course.getCourseName(),
-							course.getCourseDescription());
+							course.getDiscipline());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -139,7 +139,7 @@ public class JdbcCourseDAO implements CourseDAO {
 
 				course.setCourseId(rs.getString("course_id"));
 				course.setCourseName(rs.getString("course_name"));
-				course.setCourseDescription(rs.getString("course_description"));
+				course.setDiscipline(rs.getString("discpline"));
 
 				courseList.add(course);
 			}
@@ -187,7 +187,7 @@ public class JdbcCourseDAO implements CourseDAO {
 			rs.next();
 			course.setCourseId(rs.getString("course_id"));
 			course.setCourseName(rs.getString("course_name"));
-			course.setCourseDescription(rs.getString("course_description"));
+			course.setDiscipline(rs.getString("course_description"));
 			
 			ps.close();
 

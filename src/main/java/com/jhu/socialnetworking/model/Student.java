@@ -1,5 +1,7 @@
 package com.jhu.socialnetworking.model;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,12 +13,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Student {
 
-	private long studentId;
+	private String id;
 	private String name;
 	private String email;
 	private String password;
 	private String contact;
 	private String degreeProgram;
+	private ArrayList<CourseLight> completedCourses;
+	private Cart cart;
+	
+	public Student() {
+		completedCourses = new ArrayList<CourseLight>();
+		cart = new Cart();
+	}
 	
 	@Override
 	public String toString() {
@@ -57,12 +66,12 @@ public class Student {
 		this.contact = contact;
 	}
 
-	public long getStudentId() {
-		return studentId;
+	public String getId() {
+		return id;
 	}
 
-	public void setStudentId(long studentId) {
-		this.studentId = studentId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getDegreeProgram() {
@@ -71,5 +80,37 @@ public class Student {
 
 	public void setDegreeProgram(String degreeProgram) {
 		this.degreeProgram = degreeProgram;
+	}
+	
+	public ArrayList<CourseLight> getCompletedCourses() {
+		return completedCourses;
+	}
+	
+	public void setCompletedCourses(ArrayList<CourseLight> completedCourses) {
+		this.completedCourses = completedCourses;
+	}
+	
+	public void addCourse(CourseLight courseLight) {
+		completedCourses.add(courseLight);
+	}
+	
+	public void removeCourse(CourseLight courseLight) {
+		completedCourses.remove(courseLight);
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+	
+	public void addToCart(CourseLight courseLight) {
+		cart.addToCart(courseLight);
+	}
+	
+	public void removeFromCart(CourseLight courseLight) {
+		cart.removeFromCart(courseLight);
 	}
 }

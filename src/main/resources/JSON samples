@@ -1,0 +1,80 @@
+User Account Screen
+Student (model object returned)
+{
+	"id": "1",
+	"name": "Nathan Shih",
+	"email": "somewhere@email.com",
+	"degree": "Computer Science",
+	"completedCourses": [
+		{
+			"courseId": "605.782",
+			"courseName": "Web Application Development with Java",
+		},
+		{
+			"courseId": "605.784",
+			"courseName": "Enterprise Computing with Java"
+		}
+	],
+	"cart": {
+    	"checkedOutCourses": [
+    		{
+    			"courseId": "605.787",
+    			"courseName": "Rich Internet Applications with Ajax"
+    		},
+    		{
+    			"courseId": "605.788",
+    			"courseName": "Big Data Processing Using Hadoop"	
+    		}
+    	]
+	}
+}
+
+Course Cart Screen
+Cart (model object returned)
+{
+	"checkedOutCourses": [
+		{
+			"courseId": "605.787",
+			"courseName": "Rich Internet Applications with Ajax"
+		},
+		{
+			"courseId": "605.788",
+			"courseName": "Big Data Processing Using Hadoop"	
+		}
+	]
+}
+
+Course Listing Screen
+Course (model object returned)
+{
+	"courseId": "605.782",
+	"courseName": "Web Application Development with Java",
+	"discipline": "Computer Science",
+	"usersCompleted": 3,
+	"usersCheckedOut": 1,
+	"professors": [
+	   {
+	       "professorId": 1,
+	       "name": "Chittargi"
+	   },
+	   {
+	       "professorId": 2,
+	       "name": "Chaikin"
+	   }
+	]
+}
+
+Student Profile Listing Screen
+Contacts (model object returned)
+{
+	"contacts": [
+		"atuck@email.com",
+		"ckarlen@email.com"
+	]
+}
+
+Student Profile Screen
+Student (model object returned)
+{
+	(see above)
+}

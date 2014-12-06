@@ -8,6 +8,7 @@ public class Professor {
 	public int getProfessorId() {	
 		return professorId;
 	}
+	
 	public void setProfessorId(int professorId) {
 		this.professorId = professorId;
 	}
@@ -15,9 +16,11 @@ public class Professor {
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String toString() {
 		return name;
 	}

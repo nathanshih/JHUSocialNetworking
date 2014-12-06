@@ -10,5 +10,6 @@
 	<import resource="evaluation/Spring-Evaluation.xml" />
 	<import resource="registration/Spring-Registration.xml" />
 	<import resource="connection/Spring-Connection.xml" />
+	<import resource="completedCourse/Spring-Completed-Course.xml" />
 
 </beans>

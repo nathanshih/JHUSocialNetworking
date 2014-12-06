@@ -59,6 +59,7 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
 
+		// Test StudentDAO.update()
 		response.getWriter().println("-----Test Student Update-----");
 		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");
 		List<Student> studentList = studentDAO.getAllStudents();
@@ -69,6 +70,17 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		studentList = studentDAO.getAllStudents();
 		student = studentList.get(0);
 		response.getWriter().println(student.getName());
+		
+		response.getWriter().println("-----Test Course Update-----");
+		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
+		List<Course> courseList = courseDAO.getAllCourses();
+		Course course = courseList.get(0);
+		response.getWriter().println(course.getCourseName());
+		course.setCourseName("Introduction to Python Programming");
+		courseDAO.update(course);
+		courseList = courseDAO.getAllCourses();
+		course = courseList.get(0);
+		response.getWriter().println(course.getCourseName());
 
 	}
 }

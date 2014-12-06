@@ -17,4 +17,6 @@ public interface CourseDAO {
 	
 	public Course getCourseById(String courseId);
 	
+	public void update(Course course);
+	
 }

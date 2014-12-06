@@ -197,8 +197,10 @@ public class InitializeDatabase {
 			// create a COURSE table with a course_id as the primary key
 			sql = "CREATE TABLE Course (" + "course_id varchar(200), "
 					+ "course_name varchar(200), "
-					+ "course_description varchar(1000), "
+					+ "description varchar(1000), "
 					+ "discipline varchar(1000), "
+					+ "usersCompleted int, "
+					+ "usersCheckedOut int, "
 					+ "PRIMARY KEY (course_id));";
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -318,6 +320,8 @@ public class InitializeDatabase {
 		course1.setCourseName("Foundations of Algorithms");
 		course1.setDescription("This follow-on course to data structures (e.g., 605.202) provides a survey of computer algorithms, examines fundamental techniques in algorithm design and analysis, and develops problem-solving skills required in all programs of study involving computer science.");
 		course1.setDiscipline("Computer Science");
+		course1.setUsersCompleted(0);
+		course1.setUsersCheckedOut(0);
 		courseDAO.insert(course1);
 
 		Course course2 = new Course();
@@ -325,6 +329,8 @@ public class InitializeDatabase {
 		course2.setCourseName("Foundations of Computer Architecture");
 		course2.setDescription("This course provides a detailed examination of the internal structure and operation of modern computer systems.");
 		course2.setDiscipline("Computer Science");
+		course2.setUsersCompleted(0);
+		course2.setUsersCheckedOut(0);
 		courseDAO.insert(course2);
 
 		Course course3 = new Course();
@@ -332,6 +338,8 @@ public class InitializeDatabase {
 		course3.setCourseName("Evolutionary Computation");
 		course3.setDescription("This course explores how principles from theories of evolution and natural selection can be used to construct machines that exhibit nontrivial behavior..");
 		course3.setDiscipline("Computer Science");
+		course3.setUsersCompleted(0);
+		course3.setUsersCheckedOut(0);
 		courseDAO.insert(course3);
 
 		// Get a registration DAO to add some registrations

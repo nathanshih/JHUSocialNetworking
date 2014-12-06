@@ -49,8 +49,8 @@ public class JdbcStudentDAO implements StudentDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("INSERT INTO Student(student_id, name, email) VALUES (NULL, '%s', '%s')",
-							student.getName(), student.getEmail());
+					.format("INSERT INTO Student(student_id, name, email, password, discipline) VALUES (NULL, '%s', '%s', '%s', '%s')",
+							student.getName(), student.getEmail(), student.getPassword(), student.getDiscipline());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -106,6 +106,44 @@ public class JdbcStudentDAO implements StudentDAO {
 			}
 		}
 	}
+	
+	/**
+	 * Updates a student from the database based on student id
+	 */
+	@Override
+	public void update(Student student) {
+
+		// Ensure datasource is initialized with InitializeDatabase singleton
+		InitializeDatabase.getInstance().initializeDatabase(dataSource);
+
+		String sql = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+
+			conn = dataSource.getConnection();
+
+			sql = String.format(
+					"UPDATE Student SET name='%s', email='%s', password='%s', discipline='%s' WHERE student_id='%s'",
+					student.getName(), student.getEmail(), student.getPassword(), student.getDiscipline(), student.getId());
+			ps = conn.prepareStatement(sql);
+			ps.execute();
+
+			ps.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
 
 	/**
 	 * Get all the students in the database
@@ -138,6 +176,8 @@ public class JdbcStudentDAO implements StudentDAO {
 				student.setId(rs.getString("student_id"));
 				student.setName(rs.getString("name"));
 				student.setEmail(rs.getString("email"));
+				student.setEmail(rs.getString("password"));
+				student.setEmail(rs.getString("discipline"));
 
 				studentList.add(student);
 			}

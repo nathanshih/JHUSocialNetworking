@@ -58,21 +58,17 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
-		
-		response.getWriter().println("-----Number of Students prepopulated in database-----");
+
+		response.getWriter().println("-----Test Student Update-----");
 		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");
-		response.getWriter()
-		.println(studentDAO.getAllStudents().size());
-		
-		response.getWriter().println("-----Number of Professors prepopulated in database-----");
-		ProfessorDAO professorDAO = (ProfessorDAO) context.getBean("professorDAO");
-		response.getWriter()
-		.println(professorDAO.getAllProfessors().size());
-		
-		response.getWriter().println("-----Number of Courses prepopulated in database-----");
-		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
-		response.getWriter()
-		.println(courseDAO.getAllCourses().size());
-		
+		List<Student> studentList = studentDAO.getAllStudents();
+		Student student = studentList.get(0);
+		response.getWriter().println(student.getName());
+		student.setName("Aaron Rogers");
+		studentDAO.update(student);
+		studentList = studentDAO.getAllStudents();
+		student = studentList.get(0);
+		response.getWriter().println(student.getName());
+
 	}
 }

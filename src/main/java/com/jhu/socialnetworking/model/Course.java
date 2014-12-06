@@ -6,6 +6,7 @@ public class Course {
 
 	private String courseId;
 	private String courseName;
+	private String description;
 	private String discipline;
 	private Integer usersCompleted;
 	private Integer usersCheckedOut;
@@ -31,6 +32,14 @@ public class Course {
 		this.courseName = courseName;
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getDiscipline() {
 		return discipline;
 	}

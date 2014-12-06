@@ -139,7 +139,7 @@ public class JdbcCourseDAO implements CourseDAO {
 
 				course.setCourseId(rs.getString("course_id"));
 				course.setCourseName(rs.getString("course_name"));
-				course.setDiscipline(rs.getString("discpline"));
+				course.setDiscipline(rs.getString("discipline"));
 
 				courseList.add(course);
 			}

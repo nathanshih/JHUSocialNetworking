@@ -198,6 +198,7 @@ public class InitializeDatabase {
 			sql = "CREATE TABLE Course (" + "course_id varchar(200), "
 					+ "course_name varchar(200), "
 					+ "course_description varchar(1000), "
+					+ "discipline varchar(1000), "
 					+ "PRIMARY KEY (course_id));";
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);

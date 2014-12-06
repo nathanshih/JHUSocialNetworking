@@ -135,7 +135,7 @@ public class JdbcStudentDAO implements StudentDAO {
 				
 				Student student = new Student();
 
-				student.setId(rs.getString("id"));
+				student.setId(rs.getString("student_id"));
 				student.setName(rs.getString("name"));
 				student.setEmail(rs.getString("email"));
 

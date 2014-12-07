@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.jhu.socialnetworking.dao.CartTupleDAO;
 import com.jhu.socialnetworking.dao.CompletedCourseDAO;
 import com.jhu.socialnetworking.dao.CourseDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
+import com.jhu.socialnetworking.model.CartTuple;
 import com.jhu.socialnetworking.model.CompletedCourse;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Student;
@@ -64,7 +66,7 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		studentList = studentDAO.getAllStudents();
 		student = studentList.get(0);
 		response.getWriter().println(student.getName());
-		
+
 		response.getWriter().println("-----Test Course Update-----");
 		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
 		List<Course> courseList = courseDAO.getAllCourses();
@@ -75,30 +77,57 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		courseList = courseDAO.getAllCourses();
 		course = courseList.get(0);
 		response.getWriter().println(course.getCourseName());
-		
+
 		response.getWriter().println("-----Test CompletedCourses Insert-----");
-		CompletedCourseDAO ccDAO = (CompletedCourseDAO) context.getBean("completedCourseDAO");
+		CompletedCourseDAO ccDAO = (CompletedCourseDAO) context
+				.getBean("completedCourseDAO");
 
 		CompletedCourse cc = new CompletedCourse();
 		cc.setStudentId(0);
 		cc.setCourseId(3);
 		ccDAO.insert(cc);
-		
+
 		cc = new CompletedCourse();
 		cc.setStudentId(0);
 		cc.setCourseId(4);
 		ccDAO.insert(cc);
-				
-		response.getWriter().println("-----Test CompletedCourses getCourseIds by studentId-----");
-		
+
+		response.getWriter().println(
+				"-----Test CompletedCourses getCourseIds by studentId-----");
+
 		List<Integer> completedCoursesIds = null;
 		completedCoursesIds = ccDAO.getCompletedCourseIdsByStudentId(0);
 
 		for (Integer courseId : completedCoursesIds) {
-			
+
 			response.getWriter().println("course id: " + courseId);
-			
+
 		}
-		
+
+		response.getWriter().println("-----Test CartTuple Insert-----");
+		CartTupleDAO ctDAO = (CartTupleDAO) context.getBean("cartTupleDAO");
+
+		CartTuple ct = new CartTuple();
+		ct.setCourseId(100);
+		ct.setStudentId(200);
+		ctDAO.insert(ct);
+
+		ct = new CartTuple();
+		ct.setCourseId(300);
+		ct.setStudentId(200);
+		ctDAO.insert(ct);
+
+		response.getWriter().println(
+				"-----Test CartTuple getCourseIdsByStudentId-----");
+
+		completedCoursesIds = null;
+		completedCoursesIds = ctDAO.getCourseIdsByStudentId(200);
+
+		for (Integer courseId : completedCoursesIds) {
+
+			response.getWriter().println("course id: " + courseId);
+
+		}
+
 	}
 }

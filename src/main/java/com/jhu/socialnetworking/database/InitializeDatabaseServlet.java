@@ -12,18 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.jhu.socialnetworking.dao.CompletedCourseDAO;
 import com.jhu.socialnetworking.dao.CourseDAO;
-import com.jhu.socialnetworking.dao.EvaluationDAO;
-import com.jhu.socialnetworking.dao.ProfessorDAO;
-import com.jhu.socialnetworking.dao.RegistrationDAO;
-import com.jhu.socialnetworking.dao.StudentConnectionDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
+import com.jhu.socialnetworking.model.CompletedCourse;
 import com.jhu.socialnetworking.model.Course;
-import com.jhu.socialnetworking.model.Evaluation;
-import com.jhu.socialnetworking.model.Professor;
-import com.jhu.socialnetworking.model.Registration;
 import com.jhu.socialnetworking.model.Student;
-import com.jhu.socialnetworking.model.StudentConnection;
 
 /**
  * Servlet implementation class InitializeDatabaseServlet
@@ -81,6 +75,30 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		courseList = courseDAO.getAllCourses();
 		course = courseList.get(0);
 		response.getWriter().println(course.getCourseName());
+		
+		response.getWriter().println("-----Test CompletedCourses Insert-----");
+		CompletedCourseDAO ccDAO = (CompletedCourseDAO) context.getBean("completedCourseDAO");
 
+		CompletedCourse cc = new CompletedCourse();
+		cc.setStudentId(0);
+		cc.setCourseId(3);
+		ccDAO.insert(cc);
+		
+		cc = new CompletedCourse();
+		cc.setStudentId(0);
+		cc.setCourseId(4);
+		ccDAO.insert(cc);
+				
+		response.getWriter().println("-----Test CompletedCourses getCourseIds by studentId-----");
+		
+		List<Integer> completedCoursesIds = null;
+		completedCoursesIds = ccDAO.getCompletedCourseIdsByStudentId(0);
+
+		for (Integer courseId : completedCoursesIds) {
+			
+			response.getWriter().println("course id: " + courseId);
+			
+		}
+		
 	}
 }

@@ -51,22 +51,28 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		response.getWriter().println("-----Test Cart Insert-----");
 		CartDAO ctDAO = (CartDAO) context.getBean("cartDAO");
-		List<Integer> completedCoursesIds = null;
-		
 		ctDAO.insert(100, 200);
 		ctDAO.insert(300, 200);
-
-		response.getWriter().println(
-				"-----Test CartTuple getCourseIdsByStudentId-----");
-
+		
+		response.getWriter().println("-----Test CartTuple getCourseIdsByStudentId-----");
+		List<Integer> completedCoursesIds = null;
 		completedCoursesIds = null;
 		completedCoursesIds = ctDAO.getCourseIdsByStudentId(200);
 
+		/*
 		for (Integer courseId : completedCoursesIds) {
 
 			response.getWriter().println("course id: " + courseId);
 
+			ccDAO.insert(400,2);
+			ccDAO.insert(500,2);
+				
+			response.getWriter().println("-----Test CompletedCourses getCourseIds by studentId-----");
+			
+			List<Integer> completedCoursesIds = null;
+			completedCoursesIds = ccDAO.getCompletedCourseIdsByStudentId(2);
 		}
+		*/
 		
 		response.getWriter().println("-----Test Cart Remove-----");
 		ctDAO.remove(100, 200);

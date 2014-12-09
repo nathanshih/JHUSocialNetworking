@@ -2,11 +2,9 @@ package com.jhu.socialnetworking.dao;
 
 import java.util.List;
 
-import com.jhu.socialnetworking.model.CompletedCourse;
-
 public interface CompletedCourseDAO {
 
-	public void insert(CompletedCourse completedCourse);
+	public void insert(int course_id, int student_id);
 	
 	List<Integer> getCompletedCourseIdsByStudentId(int studentID);
 	

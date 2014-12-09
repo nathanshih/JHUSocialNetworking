@@ -18,7 +18,6 @@ import com.jhu.socialnetworking.dao.ProfessorCourseDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.CompletedCourse;
 import com.jhu.socialnetworking.model.Course;
-import com.jhu.socialnetworking.model.ProfessorCourse;
 import com.jhu.socialnetworking.model.Student;
 
 /**
@@ -104,16 +103,9 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		
 		response.getWriter().println("-----Test ProfessorCourse insert-----");
 		ProfessorCourseDAO pcDAO = (ProfessorCourseDAO) context.getBean("professorCourseDAO");
-		
-		ProfessorCourse pc = new ProfessorCourse();
-		pc.setCourseId(2000);
-		pc.setProfessorId(100);
-		pcDAO.insert(pc);
-		
-		pc = new ProfessorCourse();
-		pc.setCourseId(2000);
-		pc.setProfessorId(200);
-		pcDAO.insert(pc);
+
+		pcDAO.insert(2000, 100);
+		pcDAO.insert(2000, 200);
 		
 		response.getWriter().println("-----Test ProfessorCourse getProfessorIdsByCourseId-----");
 		List<Integer> professorIdList = null;

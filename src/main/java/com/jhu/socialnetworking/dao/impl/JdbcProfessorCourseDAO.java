@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 
 import com.jhu.socialnetworking.dao.ProfessorCourseDAO;
 import com.jhu.socialnetworking.database.InitializeDatabase;
-import com.jhu.socialnetworking.model.ProfessorCourse;
 
 public class JdbcProfessorCourseDAO implements ProfessorCourseDAO {
 
@@ -30,7 +29,7 @@ public class JdbcProfessorCourseDAO implements ProfessorCourseDAO {
 		this.dataSource = dataSource;
 	}
 
-	public void insert(ProfessorCourse professorCourse) {
+	public void insert(int courseId, int professorId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -45,8 +44,8 @@ public class JdbcProfessorCourseDAO implements ProfessorCourseDAO {
 
 			sql = String
 					.format("INSERT INTO ProfessorCourse(professor_course_id, course_id, professor_id) VALUES (NULL, '%s', '%s')",
-							professorCourse.getCourseId(),
-							professorCourse.getProfessorId());
+							courseId,
+							professorId);
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 

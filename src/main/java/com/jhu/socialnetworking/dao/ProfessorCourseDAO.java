@@ -2,11 +2,9 @@ package com.jhu.socialnetworking.dao;
 
 import java.util.List;
 
-import com.jhu.socialnetworking.model.ProfessorCourse;
-
 public interface ProfessorCourseDAO {
 
-	public void insert(ProfessorCourse professorCourse);
+	public void insert(int courseId, int professorId);
 	
 	public List<Integer> getProfessorIdsByCourseId(int courseId);
 	

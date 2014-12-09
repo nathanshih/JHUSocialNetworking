@@ -12,5 +12,5 @@
 	<import resource="connection/Spring-Connection.xml" />
 	<import resource="completedCourse/Spring-Completed-Course.xml" />
 	<import resource="cart/Spring-Cart.xml" />
-
+	<import resource="professorCourse/Spring-ProfessorCourse.xml" />
 </beans>

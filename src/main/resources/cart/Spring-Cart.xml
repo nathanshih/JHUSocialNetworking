@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
-	<bean id="cartTupleDAO" class="com.jhu.socialnetworking.dao.impl.JdbcCartTupleDAO">
+	<bean id="cartDAO" class="com.jhu.socialnetworking.dao.impl.JdbcCartDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
  

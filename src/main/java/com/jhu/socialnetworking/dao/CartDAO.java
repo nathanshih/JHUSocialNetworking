@@ -2,11 +2,9 @@ package com.jhu.socialnetworking.dao;
 
 import java.util.List;
 
-import com.jhu.socialnetworking.model.CartTuple;
+public interface CartDAO {
 
-public interface CartTupleDAO {
-
-	public void insert (CartTuple cartTuple);
+	public void insert (int course_id, int student_id);
 	
 	public List<Integer> getCourseIdsByStudentId(int studentId);
 	

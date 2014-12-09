@@ -9,11 +9,10 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.jhu.socialnetworking.dao.CartTupleDAO;
+import com.jhu.socialnetworking.dao.CartDAO;
 import com.jhu.socialnetworking.database.InitializeDatabase;
-import com.jhu.socialnetworking.model.CartTuple;
 
-public class JdbcCartTupleDAO implements CartTupleDAO {
+public class JdbcCartDAO implements CartDAO {
 
 	/**
 	 * The datasource used to perist student objects
@@ -31,7 +30,7 @@ public class JdbcCartTupleDAO implements CartTupleDAO {
 	}
 
 	@Override
-	public void insert(CartTuple cartTuple) {
+	public void insert(int course_id, int student_id) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -45,8 +44,8 @@ public class JdbcCartTupleDAO implements CartTupleDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("INSERT INTO CartTuple (cart_id, course_id, student_id) VALUES (NULL, '%s', '%s')",
-							cartTuple.getCourseId(), cartTuple.getStudentId());
+					.format("INSERT INTO Cart (cart_id, course_id, student_id) VALUES (NULL, '%s', '%s')",
+							course_id, student_id);
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -81,7 +80,7 @@ public class JdbcCartTupleDAO implements CartTupleDAO {
 
 			conn = dataSource.getConnection();
 			sql = String.format(
-					"SELECT * FROM CartTuple WHERE student_id='%s'", studentId);
+					"SELECT * FROM Cart WHERE student_id='%s'", studentId);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 

@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.jhu.socialnetworking.dao.CartTupleDAO;
+import com.jhu.socialnetworking.dao.CartDAO;
 import com.jhu.socialnetworking.dao.CompletedCourseDAO;
 import com.jhu.socialnetworking.dao.CourseDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
-import com.jhu.socialnetworking.model.CartTuple;
 import com.jhu.socialnetworking.model.CompletedCourse;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Student;
@@ -105,17 +104,10 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		}
 
 		response.getWriter().println("-----Test CartTuple Insert-----");
-		CartTupleDAO ctDAO = (CartTupleDAO) context.getBean("cartTupleDAO");
+		CartDAO ctDAO = (CartDAO) context.getBean("cartDAO");
 
-		CartTuple ct = new CartTuple();
-		ct.setCourseId(100);
-		ct.setStudentId(200);
-		ctDAO.insert(ct);
-
-		ct = new CartTuple();
-		ct.setCourseId(300);
-		ct.setStudentId(200);
-		ctDAO.insert(ct);
+		ctDAO.insert(100, 200);
+		ctDAO.insert(300, 200);
 
 		response.getWriter().println(
 				"-----Test CartTuple getCourseIdsByStudentId-----");

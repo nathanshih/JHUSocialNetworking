@@ -12,13 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.jhu.socialnetworking.dao.CompletedCourseDAO;
-import com.jhu.socialnetworking.dao.CourseDAO;
+import com.jhu.socialnetworking.dao.CartDAO;
 import com.jhu.socialnetworking.dao.ProfessorCourseDAO;
-import com.jhu.socialnetworking.dao.StudentDAO;
-import com.jhu.socialnetworking.model.CompletedCourse;
-import com.jhu.socialnetworking.model.Course;
-import com.jhu.socialnetworking.model.Student;
 
 /**
  * Servlet implementation class InitializeDatabaseServlet
@@ -54,53 +49,37 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
 
-		// Test StudentDAO.update()
-		response.getWriter().println("-----Test Student Update-----");
-		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");
-		List<Student> studentList = studentDAO.getAllStudents();
-		Student student = studentList.get(0);
-		response.getWriter().println(student.getName());
-		student.setName("Aaron Rogers");
-		studentDAO.update(student);
-		studentList = studentDAO.getAllStudents();
-		student = studentList.get(0);
-		response.getWriter().println(student.getName());
-		
-		response.getWriter().println("-----Test Course Update-----");
-		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
-		List<Course> courseList = courseDAO.getAllCourses();
-		Course course = courseList.get(0);
-		response.getWriter().println(course.getCourseName());
-		course.setCourseName("Introduction to Python Programming");
-		courseDAO.update(course);
-		courseList = courseDAO.getAllCourses();
-		course = courseList.get(0);
-		response.getWriter().println(course.getCourseName());
-		
-		response.getWriter().println("-----Test CompletedCourses Insert-----");
-		CompletedCourseDAO ccDAO = (CompletedCourseDAO) context.getBean("completedCourseDAO");
-
-		CompletedCourse cc = new CompletedCourse();
-		cc.setStudentId(0);
-		cc.setCourseId(3);
-		ccDAO.insert(cc);
-		
-		cc = new CompletedCourse();
-		cc.setStudentId(0);
-		cc.setCourseId(4);
-		ccDAO.insert(cc);
-				
-		response.getWriter().println("-----Test CompletedCourses getCourseIds by studentId-----");
-		
+		response.getWriter().println("-----Test Cart Insert-----");
+		CartDAO ctDAO = (CartDAO) context.getBean("cartDAO");
 		List<Integer> completedCoursesIds = null;
-		completedCoursesIds = ccDAO.getCompletedCourseIdsByStudentId(0);
+		
+		ctDAO.insert(100, 200);
+		ctDAO.insert(300, 200);
+
+		response.getWriter().println(
+				"-----Test CartTuple getCourseIdsByStudentId-----");
+
+		completedCoursesIds = null;
+		completedCoursesIds = ctDAO.getCourseIdsByStudentId(200);
 
 		for (Integer courseId : completedCoursesIds) {
-			
+
 			response.getWriter().println("course id: " + courseId);
-			
+
 		}
 		
+		response.getWriter().println("-----Test Cart Remove-----");
+		ctDAO.remove(100, 200);
+		
+		completedCoursesIds = null;
+		completedCoursesIds = ctDAO.getCourseIdsByStudentId(200);
+
+		for (Integer courseId : completedCoursesIds) {
+
+			response.getWriter().println("course id: " + courseId);
+
+		}
+
 		response.getWriter().println("-----Test ProfessorCourse insert-----");
 		ProfessorCourseDAO pcDAO = (ProfessorCourseDAO) context.getBean("professorCourseDAO");
 
@@ -116,6 +95,5 @@ public class InitializeDatabaseServlet extends HttpServlet {
 			response.getWriter().println("professor id: " + professorId);
 			
 		}
-		
 	}
 }

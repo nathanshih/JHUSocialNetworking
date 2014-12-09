@@ -11,5 +11,8 @@
 	<import resource="registration/Spring-Registration.xml" />
 	<import resource="connection/Spring-Connection.xml" />
 	<import resource="completedCourse/Spring-Completed-Course.xml" />
+	<import resource="professorCourse/Spring-ProfessorCourse.xml" />
+
+
 
 </beans>

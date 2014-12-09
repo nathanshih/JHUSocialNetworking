@@ -14,6 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.jhu.socialnetworking.dao.CompletedCourseDAO;
 import com.jhu.socialnetworking.dao.CourseDAO;
+import com.jhu.socialnetworking.dao.ProfessorCourseDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.CompletedCourse;
 import com.jhu.socialnetworking.model.Course;
@@ -97,6 +98,22 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		for (Integer courseId : completedCoursesIds) {
 			
 			response.getWriter().println("course id: " + courseId);
+			
+		}
+		
+		response.getWriter().println("-----Test ProfessorCourse insert-----");
+		ProfessorCourseDAO pcDAO = (ProfessorCourseDAO) context.getBean("professorCourseDAO");
+
+		pcDAO.insert(2000, 100);
+		pcDAO.insert(2000, 200);
+		
+		response.getWriter().println("-----Test ProfessorCourse getProfessorIdsByCourseId-----");
+		List<Integer> professorIdList = null;
+		professorIdList = pcDAO.getProfessorIdsByCourseId(2000);
+		
+		for (Integer professorId : professorIdList) {
+			
+			response.getWriter().println("professor id: " + professorId);
 			
 		}
 		

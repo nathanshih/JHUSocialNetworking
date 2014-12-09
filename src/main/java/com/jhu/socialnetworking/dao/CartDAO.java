@@ -8,4 +8,6 @@ public interface CartDAO {
 	
 	public List<Integer> getCourseIdsByStudentId(int studentId);
 	
+	public void remove (int course_id, int student_id);
+	
 }

@@ -79,8 +79,8 @@ public class JdbcCartDAO implements CartDAO {
 		try {
 
 			conn = dataSource.getConnection();
-			sql = String.format(
-					"SELECT * FROM Cart WHERE student_id='%s'", studentId);
+			sql = String.format("SELECT * FROM Cart WHERE student_id='%s'",
+					studentId);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
@@ -105,6 +105,40 @@ public class JdbcCartDAO implements CartDAO {
 		}
 
 		return courseIdList;
+
+	}
+
+	public void remove(int course_id, int student_id) {
+
+		// Ensure datasource is initialized with InitializeDatabase singleton
+		InitializeDatabase.getInstance().initializeDatabase(dataSource);
+
+		String sql = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+
+			conn = dataSource.getConnection();
+
+			sql = String.format("DELETE FROM Cart WHERE course_id='%s' AND student_id='%s'",
+					course_id, student_id);
+			ps = conn.prepareStatement(sql);
+			ps.execute();
+
+			ps.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 
 	}
 }

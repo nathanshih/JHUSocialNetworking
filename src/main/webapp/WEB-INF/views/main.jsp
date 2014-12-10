@@ -1,36 +1,23 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Use JSTL Tags --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>JERCS Dashboard</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="${pageContext.request.contextPath}/resources/style/dashboard.css" 
-          rel="stylesheet" type="text/css" media="screen"/>
-    <link href="${pageContext.request.contextPath}/resources/style/SpryCollapsiblePanel.css" 
-          rel="stylesheet" type="text/css" />
-    <script src="${pageContext.request.contextPath}/resources/js/SpryCollapsiblePanel.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>    
-    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+    <%-- Include the header --%>
+    <%@ include file="../includes/header.html"%>
 </head>
 
 <body>
 	<div id="main" class="container">
-		<div id="bannerArea" class="bannerArea">
-			<div id="topLogo" class="toplogo">
-			<a href="#">
-			<img src="${pageContext.request.contextPath}/resources/images/banner_logo.png" 
-			border="0" /></a>
-			</div>
-		</div>
+        <%-- Include the banner --%>
+        <%@ include file="../includes/banner.html"%>
 		<div id="contentArea" class="contentArea">
-			<div id="leftNavigation" class="leftnavigation">
-				<a id="home" href="#" >Home</a>
-				<a id="courses" href="#" >Courses</a>
-				<a id="cart" href="#" >Cart</a>
-				<a id="classmates" href="#" >Classmates</a>
-                <a id="profile" href="#" >Profile</a>
-                <a id="admin" href="#" >Admin</a>
-			</div>
+            <%-- Include the navigation menu --%>
+            <%@ include file="../includes/navigation.html"%>
             <div id="courseControls">
                 <form action="" method="post">
                     <select id="courseSelect" name="courseSelect" required>
@@ -130,13 +117,8 @@
 	</div>
 	<script id="javascript" type="text/javascript">
 	</script>
-	<div id="footerArea" class="footerArea">
-		<div id="footerContent" class="footercontent">
-			<div id="footerNav" class="footernav"><a href="#" >Privacy Policy</a>  &bull;  <a href="#" >Contact Us</a> </div>
-			<div id="copyright" class="copyright">&copy; 2014 JERCS.  All rights reserved.</div>
-		</div>
-	</div>
-
+    <%-- Include the footer --%>
+    <%@ include file="../includes/footer.html"%>
 </body>
 
 </html>

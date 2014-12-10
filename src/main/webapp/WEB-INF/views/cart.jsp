@@ -9,7 +9,7 @@
 <head>
     <%-- Include the header --%>
     <%@ include file="../includes/header.html"%>
-    <script src="${pageContext.request.contextPath}/resources/js/classmates.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/cart.js"></script>
 </head>
 
 <body>

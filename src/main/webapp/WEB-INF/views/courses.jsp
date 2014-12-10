@@ -12,13 +12,15 @@
     <script src="${pageContext.request.contextPath}/resources/js/courses.js"></script>
 </head>
 
-<body onload="viewCourses()">
+<body>
 	<div id="main" class="container">
         <%-- Include the banner --%>
         <%@ include file="../includes/banner.html"%>
 		<div id="contentArea" class="contentArea">
-            <%-- Include the navigation menu --%>
-            <%@ include file="../includes/navigation.html"%>
+            <div id="leftNavigation" class="leftnavigation">
+                <%-- Include the navigation menu --%>
+                <%@ include file="../includes/navigation.html"%>
+            </div>
             <div id="courseControls">
                 <form action="" method="post">
                     <select id="courseSelect" name="courseSelect" required>

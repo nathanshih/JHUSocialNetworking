@@ -1,10 +1,7 @@
+// Activated when clicking "Courses" from left navigation panel
 $(document).ready(function() {
 
-    // Activated when clicking "Courses" from left navigation panel
-
-    // slide out any forms if present
-    $("#adminForm").slideUp("slow", function() {});
-    $("#profileForm").slideUp("slow", function() {});
+    // slide down the course selection controls
     $("#contentLeft").slideUp("slow", function() {});
     $("#contentRight").slideUp("slow", function() {
         $("#courseControls").slideDown("slow");
@@ -35,7 +32,7 @@ $(document).ready(function() {
                     $("#contentRight").slideDown("slow");
                 });
                 
-                // iterate through students and display info
+                // iterate through courses and display info
                 $.each(response, function(i, course) {
                     content = $("<div class=\"contentbox\">").append(
                         $("<div class=\"contenttype\">").append(
@@ -53,13 +50,13 @@ $(document).ready(function() {
                         ),
                         $("<br class=\"clear_both\">")
                     );
-                    // space the displayed students between 2 columns
+                    // space the displayed courses between 2 columns
                     if (counter % 2 == 1)
                         content.appendTo("#contentLeft");
                     else
                         content.appendTo("#contentRight");
                     // build javascript string for collapsible panels
-                    jsString = jsString + "var cp" + counter + 
+                    jsString = jsString + "var cp1" + 
                       " = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 
                       counter + "\", { contentIsOpen: false });\n";
 

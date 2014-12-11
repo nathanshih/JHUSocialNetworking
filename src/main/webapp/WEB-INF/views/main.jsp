@@ -55,15 +55,10 @@
                     <input id="updateProfile" name="updateProfile" type="button" value="Update Profile">
                 </form>
             </div>
-			<div id="contentLeft" class="contentleft">
-			</div>
-			<div id="contentRight" class="contentright">
-			</div>
-			<br class="clear_both" />
+            <%-- Include the content --%>
+            <%@ include file="../includes/content.html"%>
 		</div>
 	</div>
-	<script id="javascript" type="text/javascript">
-	</script>
     <%-- Include the footer --%>
     <%@ include file="../includes/footer.html"%>
 </body>

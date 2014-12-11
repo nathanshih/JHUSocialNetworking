@@ -21,11 +21,8 @@
                 <%-- Include the navigation menu --%>
                 <%@ include file="../includes/navigation.html"%>
             </div>
-			<div id="contentLeft" class="contentleft">
-			</div>
-			<div id="contentRight" class="contentright">
-			</div>
-			<br class="clear_both" />
+            <%-- Include the content --%>
+            <%@ include file="../includes/content.html"%>
 		</div>
 	</div>
 	<script id="javascript" type="text/javascript">

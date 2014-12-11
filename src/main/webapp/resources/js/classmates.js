@@ -11,6 +11,9 @@ $(document).ready(function() {
 		contentType: "application/json",
 		dataType: "json",
 		type: "GET",
+        error: function() {
+            alert("Unable to display classmates.");
+        },
 		success: function(response) {
 		    var counter = 1;
 		    var jsString = "";
@@ -40,7 +43,7 @@ $(document).ready(function() {
 				else
 				    content.appendTo("#contentRight");
 				// build javascript string for collapsible panels
-				jsString = jsString + "var cp" + counter + 
+				jsString = jsString + "var cp1" + 
 				  " = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 
 				  counter + "\", { contentIsOpen: false });\n";
 

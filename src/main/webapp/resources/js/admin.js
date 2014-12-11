@@ -27,17 +27,18 @@ $(document).ready(function() {
                 }),
                 dataType: "json",
                 type: "POST",
+                error: function() {
+                    alert("Unable to add student.");
+                },
                 success: function() {
-                    // clear contentLeft & contentRight
-                    $("#contentLeft").empty();
-                    $("#contentRight").empty();
-    
-                    // slide out profileForm
-                    $("#adminForm").slideUp("slow", function() {
-                        $("#contentLeft").slideDown("slow");
-                        $("#contentRight").slideDown("slow");
-                    });
+                    alert("Student added successfully.");
                 }
+            });
+
+            // slide out adminForm
+            $("#adminForm").slideUp("slow", function() {
+                $("#contentLeft").slideDown("slow");
+                $("#contentRight").slideDown("slow");
             });
         }
     });
@@ -54,17 +55,18 @@ $(document).ready(function() {
             }),
             dataType: "json",
             type: "POST",
+            error: function() {
+                alert("Unable to add course.");
+            },
             success: function() {
-                // clear contentLeft & contentRight
-                $("#contentLeft").empty();
-                $("#contentRight").empty();
-
-                // slide out profileForm
-                $("#adminForm").slideUp("slow", function() {
-                    $("#contentLeft").slideDown("slow");
-                    $("#contentRight").slideDown("slow");
-                });
+                alert("Course added successfully.");
             }
+        });
+
+        // slide out adminForm
+        $("#adminForm").slideUp("slow", function() {
+            $("#contentLeft").slideDown("slow");
+            $("#contentRight").slideDown("slow");
         });
     });
 });

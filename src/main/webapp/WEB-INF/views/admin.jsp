@@ -68,15 +68,10 @@
                     <input id="addCourse" name="addCourse" type="button" value="Add Course">
                 </form>
             </div>
-			<div id="contentLeft" class="contentleft">
-			</div>
-			<div id="contentRight" class="contentright">
-			</div>
-			<br class="clear_both" />
+            <%-- Include the content --%>
+            <%@ include file="../includes/content.html"%>
 		</div>
 	</div>
-	<script id="javascript" type="text/javascript">
-	</script>
     <%-- Include the footer --%>
     <%@ include file="../includes/footer.html"%>
 </body>

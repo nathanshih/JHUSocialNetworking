@@ -21,16 +21,13 @@ $(document).ready(function() {
 			contentType: "application/json",
 			dataType: "json",
 			type: "GET",
+			error: function() {
+			    alert("Unable to display courses.");
+			},
 			success: function(response) {
                 var counter = 1;
                 var jsString = "";
                 var content;
-
-                // slide out course controls
-                $("#courseControls").slideUp("slow", function() {
-                    $("#contentLeft").slideDown("slow");
-                    $("#contentRight").slideDown("slow");
-                });
                 
                 // iterate through courses and display info
                 $.each(response, function(i, course) {
@@ -67,6 +64,12 @@ $(document).ready(function() {
                 $("#javascript").text(jsString);
 			}
 		});
+
+        // slide out course controls
+        $("#courseControls").slideUp("slow", function() {
+            $("#contentLeft").slideDown("slow");
+            $("#contentRight").slideDown("slow");
+        });
 	});
 
 });

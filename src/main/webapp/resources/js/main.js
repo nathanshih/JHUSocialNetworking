@@ -43,16 +43,17 @@ $(document).ready(function() {
                 dataType: "json",
                 type: "POST",
                 success: function() {
-                    // clear contentLeft & contentRight
-                    $("#contentLeft").empty();
-                    $("#contentRight").empty();
-    
-                    // slide out profileForm
-                    $("#profileForm").slideUp("slow", function() {
-                        $("#contentLeft").slideDown("slow");
-                        $("#contentRight").slideDown("slow");
-                    });
+                    alert("Profile successfully updated.");
+                },
+                error: function() {
+                    alert("Unable to update profile information.");
                 }
+            });
+
+            // slide out profileForm
+            $("#profileForm").slideUp("slow", function() {
+                $("#contentLeft").slideDown("slow");
+                $("#contentRight").slideDown("slow");
             });
         }
     });

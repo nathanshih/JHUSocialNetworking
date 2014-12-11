@@ -6,7 +6,7 @@ import com.jhu.socialnetworking.model.CompletedCourse;
 
 public interface CompletedCourseDAO {
 
-	public void insert(CompletedCourse completedCourse);
+	public CompletedCourse insert(CompletedCourse completedCourse);
 	
 	List<Integer> getCompletedCourseIdsByStudentId(int studentID);
 	

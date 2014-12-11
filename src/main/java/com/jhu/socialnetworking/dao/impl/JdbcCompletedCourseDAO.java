@@ -31,7 +31,7 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 		this.dataSource = dataSource;
 	}
 
-	public void insert(CompletedCourse completedCourse) {
+	public CompletedCourse insert(CompletedCourse completedCourse) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -39,6 +39,8 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 		String sql = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		CompletedCourse cc = null;
 
 		try {
 
@@ -49,7 +51,16 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 							completedCourse.getCourseId(), completedCourse.getStudentId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
-
+			
+			sql = String.format("SELECT * FROM CompletedCourse WHERE course_id='%s' AND student_id='%s'",
+					completedCourse.getCourseId(), completedCourse.getStudentId());
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			rs.next();
+			cc = new CompletedCourse();
+			cc.setCompletedCourseId(rs.getInt("completed_course_id"));
+			cc.setCourseId(rs.getInt("course_id"));
+			cc.setStudentId(rs.getInt("student_id"));
 			ps.close();
 
 		} catch (SQLException e) {
@@ -63,7 +74,9 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 				}
 			}
 		}
-
+		
+		return cc;
+		
 	}
 
 	public List<Integer> getCompletedCourseIdsByStudentId(int studentID) {

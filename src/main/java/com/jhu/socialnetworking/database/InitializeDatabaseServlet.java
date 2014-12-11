@@ -52,29 +52,6 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
-
-		// Test StudentDAO.update()
-		response.getWriter().println("-----Test Student Update-----");
-		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");
-		List<Student> studentList = studentDAO.getAllStudents();
-		Student student = studentList.get(0);
-		response.getWriter().println(student.getName());
-		student.setName("Aaron Rogers");
-		studentDAO.update(student);
-		studentList = studentDAO.getAllStudents();
-		student = studentList.get(0);
-		response.getWriter().println(student.getName());
-		
-		response.getWriter().println("-----Test Course Update-----");
-		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
-		List<Course> courseList = courseDAO.getAllCourses();
-		Course course = courseList.get(0);
-		response.getWriter().println(course.getCourseName());
-		course.setCourseName("Introduction to Python Programming");
-		courseDAO.update(course);
-		courseList = courseDAO.getAllCourses();
-		course = courseList.get(0);
-		response.getWriter().println(course.getCourseName());
 		
 		response.getWriter().println("-----Test CompletedCourses Insert-----");
 		CompletedCourseDAO ccDAO = (CompletedCourseDAO) context.getBean("completedCourseDAO");
@@ -82,13 +59,22 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		CompletedCourse cc = new CompletedCourse();
 		cc.setStudentId(0);
 		cc.setCourseId(3);
-		ccDAO.insert(cc);
+		CompletedCourse returnedCC = ccDAO.insert(cc);
+		response.getWriter().print("printing the CompletedCourse inserted into the database: ");
+		response.getWriter().print("returnedCC.getCompletedCourseId(): " + returnedCC.getCompletedCourseId());
+		response.getWriter().print(",    returnedCC.getCourseId(): " + returnedCC.getCourseId());
+		response.getWriter().println(",    returnedCC.getStudentId(): " + returnedCC.getStudentId());
 		
 		cc = new CompletedCourse();
 		cc.setStudentId(0);
 		cc.setCourseId(4);
-		ccDAO.insert(cc);
-				
+		returnedCC = ccDAO.insert(cc);
+		response.getWriter().print("printing the CompletedCourse inserted into the database: ");
+		response.getWriter().print("returnedCC.getCompletedCourseId(): " + returnedCC.getCompletedCourseId());
+		response.getWriter().print(",    returnedCC.getCourseId(): " + returnedCC.getCourseId());
+		response.getWriter().println(",    returnedCC.getStudentId(): " + returnedCC.getStudentId());
+		
+		response.getWriter().println();
 		response.getWriter().println("-----Test CompletedCourses getCourseIds by studentId-----");
 		
 		List<Integer> completedCoursesIds = null;

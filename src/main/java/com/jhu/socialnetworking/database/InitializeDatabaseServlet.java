@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.jhu.socialnetworking.dao.CourseDAO;
+import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.Student;
 
@@ -47,6 +49,40 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
+
+		response.getWriter().println("-----Test Course Insert-----");
+		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
+
+		Course course = new Course();
+		course.setCourseId("711.911");
+		course.setCourseName("Python Programming");
+		course.setDescription("Programming in Python");
+		course.setDiscipline("Computer Science");
+		course.setUsersCompleted(7);
+		course.setUsersCheckedOut(20);
+
+		Course insertedCourse = courseDAO.insert(course);
+		response.getWriter().println("courseId:\t\t" + insertedCourse.getCourseId());
+		response.getWriter().println("courseName:\t\t" + insertedCourse.getCourseName());
+		response.getWriter().println("description:\t\t" + insertedCourse.getDescription());
+		response.getWriter().println("discipline:\t\t" + insertedCourse.getDiscipline());
+		response.getWriter().println("usersCompleted:\t\t" + insertedCourse.getUsersCompleted());
+		response.getWriter().println("usersCheckedOut:\t" + insertedCourse.getUsersCheckedOut());
+		
+		response.getWriter().println("\n-----Test Course Update-----");
+		insertedCourse.setCourseName("Java Programming");
+		insertedCourse.setDescription("Programming in Java");
+		insertedCourse.setDiscipline("Information Systems");
+		insertedCourse.setUsersCompleted(500);
+		insertedCourse.setUsersCheckedOut(75);
+
+		insertedCourse = courseDAO.update(insertedCourse);
+		response.getWriter().println("course id:\t\t" + insertedCourse.getCourseId());
+		response.getWriter().println("course name:\t\t" + insertedCourse.getCourseName());
+		response.getWriter().println("course email:\t\t" + insertedCourse.getDescription());
+		response.getWriter().println("course discipline:\t" + insertedCourse.getDiscipline());
+		response.getWriter().println("course usersCompleted:\t" + insertedCourse.getUsersCompleted());
+		response.getWriter().println("course usersCheckedOut:\t" + insertedCourse.getUsersCheckedOut());
 
 		response.getWriter().println("-----Test Student Insert-----");
 		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");

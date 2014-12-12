@@ -1,7 +1,6 @@
 package com.jhu.socialnetworking.database;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.jhu.socialnetworking.dao.CartDAO;
-import com.jhu.socialnetworking.dao.ProfessorCourseDAO;
+import com.jhu.socialnetworking.dao.ProfessorDAO;
+import com.jhu.socialnetworking.model.Professor;
+import com.jhu.socialnetworking.model.Student;
 
 /**
  * Servlet implementation class InitializeDatabaseServlet
@@ -49,57 +49,16 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
 
-		response.getWriter().println("-----Test Cart Insert-----");
-		CartDAO ctDAO = (CartDAO) context.getBean("cartDAO");
-		ctDAO.insert(100, 200);
-		ctDAO.insert(300, 200);
+		response.getWriter().println("-----Test Professor Insert-----");
+		ProfessorDAO professorDAO = (ProfessorDAO) context.getBean("professorDAO");
 		
-		response.getWriter().println("-----Test CartTuple getCourseIdsByStudentId-----");
-		List<Integer> completedCoursesIds = null;
-		completedCoursesIds = null;
-		completedCoursesIds = ctDAO.getCourseIdsByStudentId(200);
-
-		/*
-		for (Integer courseId : completedCoursesIds) {
-
-			response.getWriter().println("course id: " + courseId);
-
-			ccDAO.insert(400,2);
-			ccDAO.insert(500,2);
-				
-			response.getWriter().println("-----Test CompletedCourses getCourseIds by studentId-----");
-			
-			List<Integer> completedCoursesIds = null;
-			completedCoursesIds = ccDAO.getCompletedCourseIdsByStudentId(2);
-		}
-		*/
+		Professor professor = new Professor();
+		professor.setName("Charles Kingsfield");
 		
-		response.getWriter().println("-----Test Cart Remove-----");
-		ctDAO.remove(100, 200);
+		Professor insertedProfessor = professorDAO.insert(professor);
 		
-		completedCoursesIds = null;
-		completedCoursesIds = ctDAO.getCourseIdsByStudentId(200);
+		response.getWriter().println("professor id:\t\t" + insertedProfessor.getProfessorId());
+		response.getWriter().println("professor name:\t\t" + insertedProfessor.getName());
 
-		for (Integer courseId : completedCoursesIds) {
-
-			response.getWriter().println("course id: " + courseId);
-
-		}
-
-		response.getWriter().println("-----Test ProfessorCourse insert-----");
-		ProfessorCourseDAO pcDAO = (ProfessorCourseDAO) context.getBean("professorCourseDAO");
-
-		pcDAO.insert(2000, 100);
-		pcDAO.insert(2000, 200);
-		
-		response.getWriter().println("-----Test ProfessorCourse getProfessorIdsByCourseId-----");
-		List<Integer> professorIdList = null;
-		professorIdList = pcDAO.getProfessorIdsByCourseId(2000);
-		
-		for (Integer professorId : professorIdList) {
-			
-			response.getWriter().println("professor id: " + professorId);
-			
-		}
 	}
 }

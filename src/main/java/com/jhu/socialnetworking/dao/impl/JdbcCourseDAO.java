@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 import com.jhu.socialnetworking.dao.CourseDAO;
 import com.jhu.socialnetworking.database.InitializeDatabase;
 import com.jhu.socialnetworking.model.Course;
-import com.jhu.socialnetworking.model.Student;
 
 /**
  * Provides the implementation logic to persist a Course object
@@ -38,7 +37,7 @@ public class JdbcCourseDAO implements CourseDAO {
 	 * Persists a course in the database
 	 */
 	@Override
-	public void insert(Course course) {
+	public Course insert(Course course) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -46,6 +45,8 @@ public class JdbcCourseDAO implements CourseDAO {
 		String sql = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Course courseObj = null;
 
 		try {
 
@@ -60,6 +61,25 @@ public class JdbcCourseDAO implements CourseDAO {
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
+			// Return the new course from the database
+			sql = String
+					.format("SELECT * FROM Course WHERE course_id='%s' AND course_name='%s' AND description='%s' AND discipline='%s' AND usersCompleted='%s' AND usersCheckedOut='%s'",
+							course.getCourseId(), course.getCourseName(),
+							course.getDescription(), course.getDiscipline(),
+							course.getUsersCompleted(),
+							course.getUsersCheckedOut());
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			rs.next();
+			courseObj = new Course();
+			courseObj.setCourseId(rs.getString("course_id"));
+			courseObj.setCourseName(rs.getString("course_name"));
+			courseObj.setDescription(rs.getString("description"));
+			courseObj.setDiscipline(rs.getString("discipline"));
+			courseObj.setUsersCompleted(rs.getInt("usersCompleted"));
+			courseObj.setUsersCheckedOut(rs.getInt("usersCheckedOut"));
+
 			ps.close();
 
 		} catch (SQLException e) {
@@ -73,6 +93,8 @@ public class JdbcCourseDAO implements CourseDAO {
 				}
 			}
 		}
+
+		return courseObj;
 	}
 
 	/**
@@ -219,7 +241,7 @@ public class JdbcCourseDAO implements CourseDAO {
 	 * Updates a course from the database based on course id
 	 */
 	@Override
-	public void update(Course course) {
+	public Course update(Course course) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -227,6 +249,8 @@ public class JdbcCourseDAO implements CourseDAO {
 		String sql = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Course courseObj = null;
 
 		try {
 
@@ -242,7 +266,24 @@ public class JdbcCourseDAO implements CourseDAO {
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
+			// Return the updated course from the database
+			sql = String
+					.format("SELECT * FROM Course WHERE course_id='%s'",
+							course.getCourseId());
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			rs.next();
+			courseObj = new Course();
+			courseObj.setCourseId(rs.getString("course_id"));
+			courseObj.setCourseName(rs.getString("course_name"));
+			courseObj.setDescription(rs.getString("description"));
+			courseObj.setDiscipline(rs.getString("discipline"));
+			courseObj.setUsersCompleted(rs.getInt("usersCompleted"));
+			courseObj.setUsersCheckedOut(rs.getInt("usersCheckedOut"));
+
 			ps.close();
+
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -255,5 +296,7 @@ public class JdbcCourseDAO implements CourseDAO {
 				}
 			}
 		}
+		
+		return courseObj;
 	}
 }

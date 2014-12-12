@@ -30,7 +30,7 @@ public class JdbcProfessorDAO implements ProfessorDAO {
 		this.dataSource = dataSource;
 	}
 
-	public void insert(Professor professor) {
+	public Professor insert(Professor professor) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -38,6 +38,8 @@ public class JdbcProfessorDAO implements ProfessorDAO {
 		String sql = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Professor professorObj = null;
 
 		try {
 
@@ -48,6 +50,18 @@ public class JdbcProfessorDAO implements ProfessorDAO {
 							professor.getName());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
+
+			// Return the new professor from the database
+			sql = String
+					.format("SELECT * FROM Professor WHERE name='%s'",
+							professor.getName());
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			rs.next();
+			professorObj = new Professor();
+			professorObj.setProfessorId(rs.getInt("professor_id"));
+			professorObj.setName(rs.getString("name"));
 
 			ps.close();
 
@@ -62,6 +76,8 @@ public class JdbcProfessorDAO implements ProfessorDAO {
 				}
 			}
 		}
+		
+		return professorObj;
 
 	}
 
@@ -164,16 +180,18 @@ public class JdbcProfessorDAO implements ProfessorDAO {
 		try {
 
 			conn = dataSource.getConnection();
-			sql = String.format("SELECT * FROM PROFESSOR WHERE professor_id='%s'",
+			sql = String.format(
+					"SELECT * FROM PROFESSOR WHERE professor_id='%s'",
 					professorId);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
 			professor = new Professor();
 			rs.next();
-			professor.setProfessorId(Integer.parseInt(rs.getString("professor_id")));
+			professor.setProfessorId(Integer.parseInt(rs
+					.getString("professor_id")));
 			professor.setName(rs.getString("name"));
-			
+
 			ps.close();
 
 		} catch (SQLException e) {

@@ -6,7 +6,7 @@ import com.jhu.socialnetworking.model.Professor;
 
 public interface ProfessorDAO {
 
-		public void insert(Professor professor);
+		public Professor insert(Professor professor);
 		
 		public void remove(Professor professor);
 

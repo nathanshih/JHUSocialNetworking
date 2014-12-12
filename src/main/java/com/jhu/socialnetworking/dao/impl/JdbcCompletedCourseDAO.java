@@ -29,7 +29,7 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 		this.dataSource = dataSource;
 	}
 
-	public void insert(String courseId, String studentId) {
+	public void insert(String courseId, int studentId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -64,12 +64,12 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 
 	}
 
-	public List<Integer> getCompletedCourseIdsByStudentId(String studentId) {
+	public List<String> getCompletedCourseIdsByStudentId(int studentId) {
 	
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
 
-		List<Integer> completedCoursesIdList = new ArrayList<Integer>();
+		List<String> completedCoursesIdList = new ArrayList<String>();
 		
 		String sql = null;
 		Connection conn = null;
@@ -85,7 +85,7 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				completedCoursesIdList.add(rs.getInt("course_id"));
+				completedCoursesIdList.add(rs.getString("course_id"));
 			}
 			
 			ps.close();

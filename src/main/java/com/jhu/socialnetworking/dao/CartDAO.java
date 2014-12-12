@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface CartDAO {
 
-	public void insert (int course_id, int student_id);
+	public void insert (String courseId, String studentId);
 	
-	public List<Integer> getCourseIdsByStudentId(int studentId);
+	public List<Integer> getCourseIdsByStudentId(String studentId);
 	
-	public void remove (int course_id, int student_id);
+	public void remove (String courseId, String studentId);
 	
 }

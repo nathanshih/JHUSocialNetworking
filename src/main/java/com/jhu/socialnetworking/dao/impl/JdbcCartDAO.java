@@ -30,7 +30,7 @@ public class JdbcCartDAO implements CartDAO {
 	}
 
 	@Override
-	public void insert(int course_id, int student_id) {
+	public void insert(String courseId, String studentId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -45,7 +45,7 @@ public class JdbcCartDAO implements CartDAO {
 
 			sql = String
 					.format("INSERT INTO Cart (cart_id, course_id, student_id) VALUES (NULL, '%s', '%s')",
-							course_id, student_id);
+							courseId, studentId);
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -64,7 +64,7 @@ public class JdbcCartDAO implements CartDAO {
 		}
 	}
 
-	public List<Integer> getCourseIdsByStudentId(int studentId) {
+	public List<Integer> getCourseIdsByStudentId(String studentId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -108,7 +108,7 @@ public class JdbcCartDAO implements CartDAO {
 
 	}
 
-	public void remove(int course_id, int student_id) {
+	public void remove(String courseId, String studentId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -122,7 +122,7 @@ public class JdbcCartDAO implements CartDAO {
 			conn = dataSource.getConnection();
 
 			sql = String.format("DELETE FROM Cart WHERE course_id='%s' AND student_id='%s'",
-					course_id, student_id);
+					courseId, studentId);
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 

@@ -219,8 +219,8 @@ public class JdbcStudentDAO implements StudentDAO {
 				student.setId(rs.getString("student_id"));
 				student.setName(rs.getString("name"));
 				student.setEmail(rs.getString("email"));
-				student.setEmail(rs.getString("password"));
-				student.setEmail(rs.getString("discipline"));
+				student.setPassword(rs.getString("password"));
+				student.setDiscipline(rs.getString("discipline"));
 
 				studentList.add(student);
 			}
@@ -262,7 +262,7 @@ public class JdbcStudentDAO implements StudentDAO {
 					studentId);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-
+			
 			rs.next();
 			studentObj = new Student();
 			studentObj.setId(Integer.toString(rs.getInt("student_id")));
@@ -270,7 +270,7 @@ public class JdbcStudentDAO implements StudentDAO {
 			studentObj.setEmail(rs.getString("email"));
 			studentObj.setPassword(rs.getString("password"));
 			studentObj.setDiscipline(rs.getString("discipline"));
-
+			
 			ps.close();
 
 		} catch (SQLException e) {

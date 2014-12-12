@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface CompletedCourseDAO {
 
-	public void insert(String courseId, String studentId);
+	public void insert(String courseId, int studentId);
 	
-	List<Integer> getCompletedCourseIdsByStudentId(String studentId);
+	List<String> getCompletedCourseIdsByStudentId(int studentId);
 	
 }

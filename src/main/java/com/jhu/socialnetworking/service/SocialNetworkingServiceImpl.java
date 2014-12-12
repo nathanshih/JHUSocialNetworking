@@ -1,5 +1,6 @@
 package com.jhu.socialnetworking.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -29,10 +30,7 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	private CompletedCourseDAO completedCourseDAO;
 	private CartDAO cartDAO;
 	
-	//private static AtomicLong idCounter;
-	
 	public SocialNetworkingServiceImpl() {
-		//idCounter = new AtomicLong();
 		
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext(
@@ -52,7 +50,10 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	@Override
 	public Student updateStudent(Student student) {
 		
-		return studentDAO.update(student);
+		Student studentObj = studentDAO.update(student);
+		studentObj = populateStudentExtraInfo(studentObj);
+		
+		return studentObj;
 	}
 
 	@Override
@@ -64,7 +65,14 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	@Override
 	public List<Student> getAllStudents() {
 		
-		return studentDAO.getAllStudents();
+		List<Student> students = studentDAO.getAllStudents();
+		List<Student> studentObjs = new ArrayList<Student>();
+		for (Student student : students) {
+			student = populateStudentExtraInfo(student);
+			studentObjs.add(student);
+		}
+		
+		return studentObjs;
 	}
 	
     @Override
@@ -95,25 +103,20 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	public Student addCompletedCourse(String studentId, String courseId) {
 		
 		// insert completed course into DB
-		completedCourseDAO.insert(courseId, studentId);
+		completedCourseDAO.insert(courseId, Integer.valueOf(studentId));
 		
-		// get all the completed courses for a student to populate the model object
-		List<Integer> completedCourses = completedCourseDAO.getCompletedCourseIdsByStudentId(studentId);
 		Student student = studentDAO.getStudentByStudentId(studentId);
-		for (Integer completedCourse : completedCourses) {
-			Course course = courseDAO.getCourseById(Integer.toString(completedCourse));
-			CourseLight courseLight = new CourseLight();
-			courseLight.setCourseId(course.getCourseId());
-			courseLight.setCourseName(course.getCourseName());
-			student.addCourse(courseLight);
-		}
+		student = populateStudentExtraInfo(student);
 		
 		return student;
 	}
 
 	@Override
 	public Student addCourseCheckedOut(String studentId, String courseId) {
-		// TODO Auto-generated method stub
+		
+		// insert checked out course into DB
+		
+		// get all the checked out courses for a student to populate the model object
 		return null;
 	}
 
@@ -121,5 +124,20 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	public List<EmailContact> getAllContacts(String studentId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private Student populateStudentExtraInfo(Student student) {
+		
+		// get all the completed courses for a student to populate the model object
+		List<String> completedCourseIds = completedCourseDAO.getCompletedCourseIdsByStudentId(Integer.valueOf(student.getId()));
+		for (String completedCourseId : completedCourseIds) {
+			Course course = courseDAO.getCourseById(completedCourseId);
+			CourseLight courseLight = new CourseLight();
+			courseLight.setCourseId(course.getCourseId());
+			courseLight.setCourseName(course.getCourseName());
+			student.addCourse(courseLight);
+		}
+		
+		return student;
 	}
 }

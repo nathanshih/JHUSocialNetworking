@@ -55,16 +55,20 @@ public class JdbcStudentDAO implements StudentDAO {
 			// Insert the new student
 			sql = String
 					.format("INSERT INTO Student(student_id, name, email, password, discipline) VALUES (NULL, '%s', '%s', '%s', '%s')",
-							student.getName(), student.getEmail(),
-							student.getPassword(), student.getDiscipline());
+							student.getName(), 
+							student.getEmail(),
+							student.getPassword(), 
+							student.getDiscipline());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
 			// Return the new student from the database
 			sql = String
 					.format("SELECT * FROM Student WHERE name='%s' AND email='%s' AND password='%s' AND discipline='%s'",
-							student.getName(), student.getEmail(),
-							student.getPassword(), student.getDiscipline());
+							student.getName(), 
+							student.getEmail(),
+							student.getPassword(), 
+							student.getDiscipline());
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
@@ -73,7 +77,6 @@ public class JdbcStudentDAO implements StudentDAO {
 			studentObj.setId(Integer.toString(rs.getInt("student_id")));
 			studentObj.setName(rs.getString("name"));
 			studentObj.setEmail(rs.getString("email"));
-			studentObj.setPassword(rs.getString("password"));
 			studentObj.setDiscipline(rs.getString("discipline"));
 
 			ps.close();
@@ -150,9 +153,10 @@ public class JdbcStudentDAO implements StudentDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("UPDATE Student SET name='%s', email='%s', password='%s', discipline='%s' WHERE student_id='%s'",
-							student.getName(), student.getEmail(),
-							student.getPassword(), student.getDiscipline(),
+					.format("UPDATE Student SET name='%s', email='%s', discipline='%s' WHERE student_id='%s'",
+							student.getName(), 
+							student.getEmail(),
+							student.getDiscipline(),
 							student.getId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
@@ -168,7 +172,6 @@ public class JdbcStudentDAO implements StudentDAO {
 			studentObj.setId(Integer.toString(rs.getInt("student_id")));
 			studentObj.setName(rs.getString("name"));
 			studentObj.setEmail(rs.getString("email"));
-			studentObj.setPassword(rs.getString("password"));
 			studentObj.setDiscipline(rs.getString("discipline"));
 
 			ps.close();
@@ -219,7 +222,6 @@ public class JdbcStudentDAO implements StudentDAO {
 				student.setId(rs.getString("student_id"));
 				student.setName(rs.getString("name"));
 				student.setEmail(rs.getString("email"));
-				student.setPassword(rs.getString("password"));
 				student.setDiscipline(rs.getString("discipline"));
 
 				studentList.add(student);
@@ -268,7 +270,6 @@ public class JdbcStudentDAO implements StudentDAO {
 			studentObj.setId(Integer.toString(rs.getInt("student_id")));
 			studentObj.setName(rs.getString("name"));
 			studentObj.setEmail(rs.getString("email"));
-			studentObj.setPassword(rs.getString("password"));
 			studentObj.setDiscipline(rs.getString("discipline"));
 			
 			ps.close();

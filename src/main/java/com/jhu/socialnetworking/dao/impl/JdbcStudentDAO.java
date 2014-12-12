@@ -47,7 +47,7 @@ public class JdbcStudentDAO implements StudentDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Student studentObj = null;
-		
+
 		try {
 
 			conn = dataSource.getConnection();
@@ -75,7 +75,7 @@ public class JdbcStudentDAO implements StudentDAO {
 			studentObj.setEmail(rs.getString("email"));
 			studentObj.setPassword(rs.getString("password"));
 			studentObj.setDiscipline(rs.getString("discipline"));
-						
+
 			ps.close();
 
 		} catch (SQLException e) {
@@ -89,7 +89,7 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
-		
+
 		return studentObj;
 	}
 
@@ -134,7 +134,7 @@ public class JdbcStudentDAO implements StudentDAO {
 	 * Updates a student from the database based on student id
 	 */
 	@Override
-	public void update(Student student) {
+	public Student update(Student student) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -142,6 +142,8 @@ public class JdbcStudentDAO implements StudentDAO {
 		String sql = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Student studentObj = null;
 
 		try {
 
@@ -154,6 +156,20 @@ public class JdbcStudentDAO implements StudentDAO {
 							student.getId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
+
+			// Return the updated student from the database
+			sql = String.format("SELECT * FROM Student WHERE student_id='%s'",
+					student.getId());
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			rs.next();
+			studentObj = new Student();
+			studentObj.setId(Integer.toString(rs.getInt("student_id")));
+			studentObj.setName(rs.getString("name"));
+			studentObj.setEmail(rs.getString("email"));
+			studentObj.setPassword(rs.getString("password"));
+			studentObj.setDiscipline(rs.getString("discipline"));
 
 			ps.close();
 
@@ -168,6 +184,8 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
+		
+		return studentObj;
 	}
 
 	/**

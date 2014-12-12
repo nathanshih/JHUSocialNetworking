@@ -13,7 +13,7 @@ public interface StudentDAO {
 	
 	public void remove(Student student);
 	
-	public void update(Student student);
+	public Student update(Student student);
 
 	public List<Student> getAllStudents();
 

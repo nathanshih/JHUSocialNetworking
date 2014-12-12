@@ -20,6 +20,7 @@
             <div id="leftNavigation" class="leftnavigation">
                 <%-- Include the navigation menu --%>
                 <%@ include file="../includes/navigation.html"%>
+                <a id="admin" href="admin" >Admin</a>
             </div>
             <div id="adminForm">
                 <form action="" method="post">

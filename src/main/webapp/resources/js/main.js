@@ -38,7 +38,7 @@ $(document).ready(function() {
                 data: JSON.stringify({
                     "name": $("#name").val(),
                     "email": $("#email").val(),
-                    "degreeProgram": $("#degree").val()
+                    "discipline": $("#degree").val()
                 }),
                 dataType: "json",
                 type: "POST",

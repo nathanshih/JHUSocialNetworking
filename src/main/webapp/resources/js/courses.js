@@ -41,7 +41,8 @@ $(document).ready(function() {
                                     $("<a href=\"#\">").text("MORE INFORMATION")
                                 ),
                                 $("<div class=\"CollapsiblePanelContent\">").append(
-                                    $("<p>").text(course.courseDescription)
+                                    $("<p>").text(course.description),
+                                    $("<p>").text(course.discipline)
                                 )
                             )
                         ),

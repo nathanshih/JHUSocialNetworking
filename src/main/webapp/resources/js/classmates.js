@@ -31,17 +31,19 @@ $(document).ready(function() {
                             ),
                             $("<div class=\"CollapsiblePanelContent\">").append(
                                 $("<p>").text(student.email),
-                                $("<p>").text(student.degreeProgram)
+                                $("<p>").text(student.discipline),
+                                $("<p>").text(student.completedCourses.length + " completed courses")
                             )
                         )
 	                ),
 	                $("<br class=\"clear_both\">")
 			    );
 				// space the displayed students between 2 columns
-				if (counter % 2 == 1)
+				if (counter % 2 == 1) {
 				    content.appendTo("#contentLeft");
-				else
+				} else {
 				    content.appendTo("#contentRight");
+			    }
 				// build javascript string for collapsible panels
 				jsString = jsString + "var cp1" + 
 				  " = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 

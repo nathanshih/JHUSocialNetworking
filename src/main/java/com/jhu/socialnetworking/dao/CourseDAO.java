@@ -9,7 +9,7 @@ import com.jhu.socialnetworking.model.Course;
  */
 public interface CourseDAO {
 
-	public void insert(Course course);
+	public Course insert(Course course);
 	
 	public void remove(Course course);
 

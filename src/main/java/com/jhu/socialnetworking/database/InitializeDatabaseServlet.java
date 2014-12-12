@@ -13,6 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.jhu.socialnetworking.dao.CourseDAO;
 import com.jhu.socialnetworking.model.Course;
+import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.Student;
 
 /**
@@ -82,6 +83,43 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		response.getWriter().println("course discipline:\t" + insertedCourse.getDiscipline());
 		response.getWriter().println("course usersCompleted:\t" + insertedCourse.getUsersCompleted());
 		response.getWriter().println("course usersCheckedOut:\t" + insertedCourse.getUsersCheckedOut());
+
+		response.getWriter().println("-----Test Student Insert-----");
+		StudentDAO studentDAO = (StudentDAO) context.getBean("studentDAO");
+		
+		Student student = new Student();
+		student.setName("Aaron Rogers");
+		student.setEmail("aaron@packers.com");
+		student.setPassword("bears");
+		student.setDiscipline("Football");
+		
+		Student insertedStudent = studentDAO.insert(student);
+		response.getWriter().println("student id:\t\t" + insertedStudent.getId());
+		response.getWriter().println("student name:\t\t" + insertedStudent.getName());
+		response.getWriter().println("student email:\t\t" + insertedStudent.getEmail());
+		response.getWriter().println("student password:\t" + insertedStudent.getPassword());
+		response.getWriter().println("student discipline:\t" + insertedStudent.getDiscipline());
+		
+		response.getWriter().println("\n-----Test Student Update-----");
+		insertedStudent.setName("Jay Culter");
+		insertedStudent.setEmail("jay@bears.com");
+		insertedStudent.setPassword("packers");
+		insertedStudent.setDiscipline("Losing");
+		
+		insertedStudent = studentDAO.update(insertedStudent);
+		response.getWriter().println("student id:\t\t" + insertedStudent.getId());
+		response.getWriter().println("student name:\t\t" + insertedStudent.getName());
+		response.getWriter().println("student email:\t\t" + insertedStudent.getEmail());
+		response.getWriter().println("student password:\t" + insertedStudent.getPassword());
+		response.getWriter().println("student discipline:\t" + insertedStudent.getDiscipline());
+		
+		response.getWriter().println("\n-----Test getStudentByStudentId-----");
+		student = studentDAO.getStudentByStudentId(insertedStudent.getId());
+		response.getWriter().println("student id:\t\t" + student.getId());
+		response.getWriter().println("student name:\t\t" + student.getName());
+		response.getWriter().println("student email:\t\t" + student.getEmail());
+		response.getWriter().println("student password:\t" + student.getPassword());
+		response.getWriter().println("student discipline:\t" + student.getDiscipline());
 		
 	}
 }

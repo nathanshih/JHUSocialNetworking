@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.jhu.socialnetworking.dao.ProfessorDAO;
+import com.jhu.socialnetworking.model.Professor;
 import com.jhu.socialnetworking.dao.CourseDAO;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.dao.StudentDAO;
@@ -49,6 +51,17 @@ public class InitializeDatabaseServlet extends HttpServlet {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
+
+		response.getWriter().println("-----Test Professor Insert-----");
+		ProfessorDAO professorDAO = (ProfessorDAO) context.getBean("professorDAO");
+		
+		Professor professor = new Professor();
+		professor.setName("Charles Kingsfield");
+		
+		Professor insertedProfessor = professorDAO.insert(professor);
+		
+		response.getWriter().println("professor id:\t\t" + insertedProfessor.getProfessorId());
+		response.getWriter().println("professor name:\t\t" + insertedProfessor.getName());
 
 		response.getWriter().println("-----Test Course Insert-----");
 		CourseDAO courseDAO = (CourseDAO) context.getBean("courseDAO");
@@ -120,6 +133,5 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		response.getWriter().println("student email:\t\t" + student.getEmail());
 		response.getWriter().println("student password:\t" + student.getPassword());
 		response.getWriter().println("student discipline:\t" + student.getDiscipline());
-		
 	}
 }

@@ -11,7 +11,7 @@ public interface CourseDAO {
 
 	public Course insert(Course course);
 	
-	public void remove(Course course);
+	public void remove(String courseId);
 
 	public List<Course> getAllCourses();
 	

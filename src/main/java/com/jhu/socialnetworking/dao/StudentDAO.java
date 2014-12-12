@@ -11,7 +11,7 @@ public interface StudentDAO {
 
 	public Student insert(Student student);
 	
-	public void remove(Student student);
+	public void remove(String studentId);
 	
 	public Student update(Student student);
 

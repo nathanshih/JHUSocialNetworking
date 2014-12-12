@@ -97,7 +97,7 @@ public class JdbcStudentDAO implements StudentDAO {
 	 * Removes a student from the database based on student id
 	 */
 	@Override
-	public void remove(Student student) {
+	public void remove(String studentId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -111,7 +111,7 @@ public class JdbcStudentDAO implements StudentDAO {
 			conn = dataSource.getConnection();
 
 			sql = String.format("DELETE FROM STUDENT WHERE student_id='%s'",
-					student.getId());
+					studentId);
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 

@@ -67,6 +67,21 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		response.getWriter().println("discipline:\t\t" + insertedCourse.getDiscipline());
 		response.getWriter().println("usersCompleted:\t\t" + insertedCourse.getUsersCompleted());
 		response.getWriter().println("usersCheckedOut:\t" + insertedCourse.getUsersCheckedOut());
-				
+		
+		response.getWriter().println("\n-----Test Course Update-----");
+		insertedCourse.setCourseName("Java Programming");
+		insertedCourse.setDescription("Programming in Java");
+		insertedCourse.setDiscipline("Information Systems");
+		insertedCourse.setUsersCompleted(500);
+		insertedCourse.setUsersCheckedOut(75);
+
+		insertedCourse = courseDAO.update(insertedCourse);
+		response.getWriter().println("course id:\t\t" + insertedCourse.getCourseId());
+		response.getWriter().println("course name:\t\t" + insertedCourse.getCourseName());
+		response.getWriter().println("course email:\t\t" + insertedCourse.getDescription());
+		response.getWriter().println("course discipline:\t" + insertedCourse.getDiscipline());
+		response.getWriter().println("course usersCompleted:\t" + insertedCourse.getUsersCompleted());
+		response.getWriter().println("course usersCheckedOut:\t" + insertedCourse.getUsersCheckedOut());
+		
 	}
 }

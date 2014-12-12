@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 
 import com.jhu.socialnetworking.dao.CompletedCourseDAO;
 import com.jhu.socialnetworking.database.InitializeDatabase;
-import com.jhu.socialnetworking.model.Professor;
 
 public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 
@@ -30,7 +29,7 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 		this.dataSource = dataSource;
 	}
 
-	public void insert(int course_id, int student_id) {
+	public void insert(String courseId, int studentId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -45,7 +44,7 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 
 			sql = String
 					.format("INSERT INTO CompletedCourse(completed_course_id, course_id, student_id) VALUES (NULL, '%s', '%s')",
-							course_id, student_id);
+							courseId, studentId);
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -65,12 +64,12 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 
 	}
 
-	public List<Integer> getCompletedCourseIdsByStudentId(int studentID) {
+	public List<String> getCompletedCourseIdsByStudentId(int studentId) {
 	
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
 
-		List<Integer> completedCoursesIdList = new ArrayList<Integer>();
+		List<String> completedCoursesIdList = new ArrayList<String>();
 		
 		String sql = null;
 		Connection conn = null;
@@ -81,12 +80,12 @@ public class JdbcCompletedCourseDAO implements CompletedCourseDAO {
 
 			conn = dataSource.getConnection();
 			sql = String.format("SELECT * FROM CompletedCourse WHERE student_id='%s'",
-					studentID);
+					studentId);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				completedCoursesIdList.add(rs.getInt("course_id"));
+				completedCoursesIdList.add(rs.getString("course_id"));
 			}
 			
 			ps.close();

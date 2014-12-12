@@ -101,7 +101,7 @@ public class JdbcCourseDAO implements CourseDAO {
 	 * Removes a course from the database based on course id
 	 */
 	@Override
-	public void remove(Course course) {
+	public void remove(String courseId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -115,7 +115,7 @@ public class JdbcCourseDAO implements CourseDAO {
 			conn = dataSource.getConnection();
 
 			sql = String.format("DELETE FROM Course WHERE course_id='%s'",
-					course.getCourseId());
+					courseId);
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 

@@ -38,9 +38,8 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	
 	@Override
 	public Student register(Student student) {
-		studentDAO.insert(student);
-		
-		return student;
+			
+		return studentDAO.insert(student);
 	}
 
 	@Override

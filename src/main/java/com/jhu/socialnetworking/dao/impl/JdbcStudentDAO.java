@@ -25,7 +25,9 @@ public class JdbcStudentDAO implements StudentDAO {
 
 	/**
 	 * Sets the datasource when the bean is instantiated
-	 * @param dataSource the datasource used to perist student objects
+	 * 
+	 * @param dataSource
+	 *            the datasource used to perist student objects
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -35,7 +37,7 @@ public class JdbcStudentDAO implements StudentDAO {
 	 * Persists a student in the database
 	 */
 	@Override
-	public void insert(Student student) {
+	public Student insert(Student student) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -43,17 +45,37 @@ public class JdbcStudentDAO implements StudentDAO {
 		String sql = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
-
+		ResultSet rs = null;
+		Student studentObj = null;
+		
 		try {
 
 			conn = dataSource.getConnection();
 
+			// Insert the new student
 			sql = String
 					.format("INSERT INTO Student(student_id, name, email, password, discipline) VALUES (NULL, '%s', '%s', '%s', '%s')",
-							student.getName(), student.getEmail(), student.getPassword(), student.getDiscipline());
+							student.getName(), student.getEmail(),
+							student.getPassword(), student.getDiscipline());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
+			// Return the new student from the database
+			sql = String
+					.format("SELECT * FROM Student WHERE name='%s' AND email='%s' AND password='%s' AND discipline='%s'",
+							student.getName(), student.getEmail(),
+							student.getPassword(), student.getDiscipline());
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			rs.next();
+			studentObj = new Student();
+			studentObj.setId(Integer.toString(rs.getInt("student_id")));
+			studentObj.setName(rs.getString("name"));
+			studentObj.setEmail(rs.getString("email"));
+			studentObj.setPassword(rs.getString("password"));
+			studentObj.setDiscipline(rs.getString("discipline"));
+						
 			ps.close();
 
 		} catch (SQLException e) {
@@ -67,6 +89,8 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
+		
+		return studentObj;
 	}
 
 	/**
@@ -86,8 +110,7 @@ public class JdbcStudentDAO implements StudentDAO {
 
 			conn = dataSource.getConnection();
 
-			sql = String.format(
-					"DELETE FROM STUDENT WHERE student_id='%s'",
+			sql = String.format("DELETE FROM STUDENT WHERE student_id='%s'",
 					student.getId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
@@ -106,7 +129,7 @@ public class JdbcStudentDAO implements StudentDAO {
 			}
 		}
 	}
-	
+
 	/**
 	 * Updates a student from the database based on student id
 	 */
@@ -124,9 +147,11 @@ public class JdbcStudentDAO implements StudentDAO {
 
 			conn = dataSource.getConnection();
 
-			sql = String.format(
-					"UPDATE Student SET name='%s', email='%s', password='%s', discipline='%s' WHERE student_id='%s'",
-					student.getName(), student.getEmail(), student.getPassword(), student.getDiscipline(), student.getId());
+			sql = String
+					.format("UPDATE Student SET name='%s', email='%s', password='%s', discipline='%s' WHERE student_id='%s'",
+							student.getName(), student.getEmail(),
+							student.getPassword(), student.getDiscipline(),
+							student.getId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 
@@ -170,7 +195,7 @@ public class JdbcStudentDAO implements StudentDAO {
 			studentList = new ArrayList<Student>();
 
 			while (rs.next()) {
-				
+
 				Student student = new Student();
 
 				student.setId(rs.getString("student_id"));
@@ -195,7 +220,7 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
-		
+
 		return studentList;
 	}
 }

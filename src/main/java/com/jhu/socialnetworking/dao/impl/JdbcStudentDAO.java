@@ -184,7 +184,7 @@ public class JdbcStudentDAO implements StudentDAO {
 				}
 			}
 		}
-		
+
 		return studentObj;
 	}
 
@@ -240,5 +240,51 @@ public class JdbcStudentDAO implements StudentDAO {
 		}
 
 		return studentList;
+	}
+
+	public Student getStudentByStudentId(String studentId) {
+
+		// Ensure datasource is initialized with InitializeDatabase singleton
+		InitializeDatabase.getInstance().initializeDatabase(dataSource);
+
+		String sql = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Student studentObj = null;
+
+		try {
+
+			conn = dataSource.getConnection();
+
+			// Return the student from the database
+			sql = String.format("SELECT * FROM Student WHERE student_id='%s'",
+					studentId);
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			rs.next();
+			studentObj = new Student();
+			studentObj.setId(Integer.toString(rs.getInt("student_id")));
+			studentObj.setName(rs.getString("name"));
+			studentObj.setEmail(rs.getString("email"));
+			studentObj.setPassword(rs.getString("password"));
+			studentObj.setDiscipline(rs.getString("discipline"));
+
+			ps.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return studentObj;
 	}
 }

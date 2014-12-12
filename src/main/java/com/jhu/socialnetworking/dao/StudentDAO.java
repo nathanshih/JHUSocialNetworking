@@ -16,5 +16,7 @@ public interface StudentDAO {
 	public Student update(Student student);
 
 	public List<Student> getAllStudents();
+	
+	public Student getStudentByStudentId(String studentId);
 
 }

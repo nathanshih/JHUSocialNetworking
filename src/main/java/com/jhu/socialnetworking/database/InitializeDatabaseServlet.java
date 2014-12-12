@@ -77,6 +77,13 @@ public class InitializeDatabaseServlet extends HttpServlet {
 		response.getWriter().println("student password:\t" + insertedStudent.getPassword());
 		response.getWriter().println("student discipline:\t" + insertedStudent.getDiscipline());
 		
+		response.getWriter().println("\n-----Test getStudentByStudentId-----");
+		student = studentDAO.getStudentByStudentId(insertedStudent.getId());
+		response.getWriter().println("student id:\t\t" + student.getId());
+		response.getWriter().println("student name:\t\t" + student.getName());
+		response.getWriter().println("student email:\t\t" + student.getEmail());
+		response.getWriter().println("student password:\t" + student.getPassword());
+		response.getWriter().println("student discipline:\t" + student.getDiscipline());
 		
 	}
 }

@@ -50,7 +50,7 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 
 	@Override
-	public Student update(Student student) {
+	public Student updateStudent(Student student) {
 		
 		return studentDAO.update(student);
 	}

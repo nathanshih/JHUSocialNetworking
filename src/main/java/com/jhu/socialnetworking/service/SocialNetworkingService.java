@@ -28,7 +28,7 @@ public interface SocialNetworkingService {
 	 * @param student - the student to be updated
 	 * @return an updated Student object
 	 */
-	public Student update(Student student);
+	public Student updateStudent(Student student);
 	
 	/**
 	 * This removes a student from the system.

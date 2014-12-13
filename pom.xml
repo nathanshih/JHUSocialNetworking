@@ -18,6 +18,9 @@
 		<jsp-api.version>2.1</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
 		<jackson-core.version>2.4.2</jackson-core.version>
+		<javamail.version>1.5.2</javamail.version>
+		<hsqldb.version>2.3.2</hsqldb.version>
+		<commons-dbcp>1.4</commons-dbcp>
 	</properties>
 	<dependencies>
 	
@@ -39,6 +42,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
 
 		<!--jackson -->
 		<dependency>
@@ -106,6 +114,13 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- Java mail -->
+		<dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>${javamail.version}</version>
+        </dependency>
 
 		<!-- @Inject -->
 		<dependency>
@@ -145,20 +160,18 @@
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
+			<version>${commons-dbcp}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
+        <dependency>
+        <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
+        </dependency>
 		        
 	</dependencies>
     <build>

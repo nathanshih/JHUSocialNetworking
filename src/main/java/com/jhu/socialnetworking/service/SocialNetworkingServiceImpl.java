@@ -112,14 +112,23 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 
 	@Override
-	public Student addCourseCheckedOut(String studentId, String courseId) {
+	public Student checkoutCourse(String studentId, String courseId) {
 		
 		// insert checked out course into DB
+		cartDAO.insert(courseId, studentId);
 		
-		// get all the checked out courses for a student to populate the model object
-		return null;
+		Student student = studentDAO.getStudentByStudentId(studentId);
+		student = populateStudentExtraInfo(student);
+		
+		return student;
 	}
 
+	@Override
+	public void removeFomCart(String studentId, String courseId) {
+		
+		cartDAO.remove(courseId, studentId);
+	}
+	
 	@Override
 	public List<EmailContact> getAllContacts(String studentId) {
 		// TODO Auto-generated method stub
@@ -136,6 +145,16 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 			courseLight.setCourseId(course.getCourseId());
 			courseLight.setCourseName(course.getCourseName());
 			student.addCourse(courseLight);
+		}
+		
+		// get all the checked out courses for a student to populate the model object
+		List<String> checkoutCourseIds = cartDAO.getCourseIdsByStudentId(student.getId());
+		for (String checkoutCourseId : checkoutCourseIds) {
+			Course course = courseDAO.getCourseById(checkoutCourseId);
+			CourseLight courseLight = new CourseLight();
+			courseLight.setCourseId(course.getCourseId());
+			courseLight.setCourseName(course.getCourseName());
+			student.addToCart(courseLight);
 		}
 		
 		return student;

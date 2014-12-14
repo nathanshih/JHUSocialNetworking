@@ -90,7 +90,15 @@ public interface SocialNetworkingService {
 	 * @param courseId - the id of the course to add to the student's cart
 	 * @return an updated Student object
 	 */
-	public Student addCourseCheckedOut(String studentId, String courseId);
+	public Student checkoutCourse(String studentId, String courseId);
+	
+	/**
+	 * This removes a course from a student's cart.
+	 *
+	 * @param studentId - the id of the student to remove from their cart
+	 * @param courseId - the id of the course to remove from the student's cart
+	 */
+	public void removeFomCart(String studentId, String courseId);
 	
 	/**
 	 * This gets a list of email addresses for whom the student is connected with.

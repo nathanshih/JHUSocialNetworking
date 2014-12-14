@@ -178,4 +178,37 @@ public class SocialNetworkingController {
     	return socialNetworkingService.addCompletedCourse(studentId, courseId);
     }
 
+    /**
+	 * This adds a course to a student's cart.
+	 *
+	 * @param studentId - the id of the student to add to their cart
+	 * @param courseId - the id of the course to add to the student's cart
+	 * @return an updated Student object
+	 */
+    @RequestMapping(value = "/checkoutCourse", method = RequestMethod.POST)
+    @ResponseBody
+    public Student checkoutCourse(@RequestParam(value = "studentId", required = true) String studentId,
+    							      @RequestParam(value = "courseId", required = true) String courseId) {
+    	
+    	LOG.debug("Checking out course: " + courseId + " by student: " + studentId);
+    	
+    	return socialNetworkingService.checkoutCourse(studentId, courseId);
+    }
+    
+    /**
+	 * This removes a course from a student's cart.
+	 *
+	 * @param studentId - the id of the student to remove from their cart
+	 * @param courseId - the id of the course to remove from the student's cart
+	 */
+    @RequestMapping(value = "/removeFomCart", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> removeCourse(@RequestParam(value = "studentId", required = true) String studentId,
+		      									@RequestParam(value = "courseId", required = true) String courseId) {
+		
+		LOG.debug("Removing course: " + courseId + " from cart.");
+		
+		socialNetworkingService.removeFomCart(studentId, courseId);
+		
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
 }

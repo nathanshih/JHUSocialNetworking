@@ -31,16 +31,17 @@ $(document).ready(function() {
                                 )
                             ),
                             $("<div class=\"CollapsiblePanelContent\">").append(
-                                $("<p>").text(student.discipline),
-                                $("<p>").text(student.completedCourses.length + 
-                                  " completed courses"),
+                                $("<p>").text("Major: " + student.discipline),
+                                $("<p>").text("Courses completed: " + 
+                                              student.completedCourses.length),
                                 $("<form action=\"\" method=\"post\">").append(
                                     $("<input id=\"student" + student.id + 
                                       "\" name=\"student" + student.id + 
                                       "\" type=\"hidden\" value=\"" + 
                                       student.email + "\">"),
-                                    $("<a id=\"email" + student.id + 
-                                      "\" href=\"#\">").text("Send Email")
+                                    $("<input id=\"email" + student.id + 
+                                      "\" name=\"email" + student.id + 
+                                      "\" type=\"button\" value=\"Send Email\">")
                                 )
                             )
                         )

@@ -35,6 +35,18 @@ $(document).ready(function() {
                         $("<div class=\"contenttype\">").append(
                             $("<h2>").text(course.courseName),
                             $("<p>").text(course.courseId),
+                            $("<form action=\"\" method=\"post\">").append(
+                                    $("<input id=\"course" + course.courseId + 
+                                      "\" name=\"course" + course.courseId + 
+                                      "\" type=\"hidden\" value=\"" + 
+                                      course.courseId + "\">"),
+                                    $("<input id=\"addToCart" + course.courseId + 
+                                      "\" name=\"addToCart" + course.courseId + 
+                                      "\" type=\"button\" value=\"Add to Cart\">"),
+                                      $("<input id=\"markCompleted" + course.courseId + 
+                                              "\" name=\"markCompleted" + course.courseId + 
+                                              "\" type=\"button\" value=\"Mark Completed\">")
+                                ),
                             $("<div id=\"CollapsiblePanel" + course.courseId + 
                               "\"" + " class=\"CollapsiblePanel\">").append(
                                 $("<div class=\"CollapsiblePanelTab\">").append(
@@ -43,22 +55,12 @@ $(document).ready(function() {
                                     )
                                 ),
                                 $("<div class=\"CollapsiblePanelContent\">").append(
-                                    $("<p>").text(course.description),
                                     $("<p>").text(course.discipline),
+                                    $("<p>").text("Course Description: " + course.description),
                                     $("<p>").text(course.usersCompleted + 
                                             " users completed course"),
                                     $("<p>").text(course.usersCheckedOut + 
-                                            " users checked out courses"),
-                                    $("<form action=\"\" method=\"post\">").append(
-                                        $("<input id=\"course" + course.courseId + 
-                                          "\" name=\"course" + course.courseId + 
-                                          "\" type=\"hidden\" value=\"" + 
-                                          course.courseId + "\">"),
-                                        $("<a id=\"addCart" + course.courseId + 
-                                          "\" href=\"#\">").text("Add to Cart"),
-                                        $("<a id=\"complete" + course.courseId + 
-                                          "\" href=\"#\">").text("Mark Completed")
-                                    )
+                                            " users checked out courses")
                                 )
                             )
                         ),

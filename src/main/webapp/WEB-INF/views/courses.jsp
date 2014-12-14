@@ -29,7 +29,8 @@
                         <option value="checkedOutCourses" disabled>Checked Out Courses</option>
                         <option value="completedCourses" disabled>Completed Courses</option>
                     </select>
-                    <input id="courseButton" name="courseButton" type="button" value="Display Courses">
+                    <input id="courseButton" name="courseButton" class="submitButton" 
+                           type="button" value="Display Courses">
                 </form>
             </div>
             <%-- Include the content --%>

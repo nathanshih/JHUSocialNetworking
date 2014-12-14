@@ -45,7 +45,8 @@
                             </td>
                         </tr>
                     </table>
-                    <input id="addStudent" name="addStudent" type="button" value="Add Student">
+                    <input id="addStudent" name="addStudent" class="submitButton" 
+                           type="button" value="Add Student">
                     <table>
                         <tr>
                             <td>Course Name:</td>
@@ -66,7 +67,8 @@
                             </td>
                         </tr>
                     </table>
-                    <input id="addCourse" name="addCourse" type="button" value="Add Course">
+                    <input id="addCourse" name="addCourse" class="submitButton"
+                           type="button" value="Add Course">
                 </form>
             </div>
             <%-- Include the content --%>

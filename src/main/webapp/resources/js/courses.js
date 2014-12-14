@@ -13,7 +13,8 @@ $(document).ready(function() {
         $("#contentLeft").empty();
         $("#contentRight").empty();
         
-        var courses = document.getElementsByTagName("option")[document.getElementById("courseSelect").selectedIndex].value;
+        var courses = document.getElementsByTagName("option")
+            [document.getElementById("courseSelect").selectedIndex].value;
 
         // AJAX request for course data
 		$.ajax({
@@ -26,7 +27,6 @@ $(document).ready(function() {
 			},
 			success: function(response) {
                 var counter = 1;
-                var jsString = "";
                 var content;
                 
                 // iterate through courses and display info
@@ -35,14 +35,32 @@ $(document).ready(function() {
                         $("<div class=\"contenttype\">").append(
                             $("<h2>").text(course.courseName),
                             $("<p>").text(course.courseId),
-                            $("<div id=\"CollapsiblePanel" + counter + 
+                            $("<form action=\"\" method=\"post\">").append(
+                                    $("<input id=\"course" + course.courseId + 
+                                      "\" name=\"course" + course.courseId + 
+                                      "\" type=\"hidden\" value=\"" + 
+                                      course.courseId + "\">"),
+                                    $("<input id=\"addToCart" + course.courseId + 
+                                      "\" name=\"addToCart" + course.courseId + 
+                                      "\" type=\"button\" value=\"Add to Cart\">"),
+                                      $("<input id=\"markCompleted" + course.courseId + 
+                                              "\" name=\"markCompleted" + course.courseId + 
+                                              "\" type=\"button\" value=\"Mark Completed\">")
+                                ),
+                            $("<div id=\"CollapsiblePanel" + course.courseId + 
                               "\"" + " class=\"CollapsiblePanel\">").append(
                                 $("<div class=\"CollapsiblePanelTab\">").append(
-                                    $("<a href=\"#\">").text("MORE INFORMATION")
+                                    $("<a href=\"#\">").append(
+                                        $("<u>").text("MORE INFORMATION")
+                                    )
                                 ),
                                 $("<div class=\"CollapsiblePanelContent\">").append(
-                                    $("<p>").text(course.description),
-                                    $("<p>").text(course.discipline)
+                                    $("<p>").text(course.discipline),
+                                    $("<p>").text("Course Description: " + course.description),
+                                    $("<p>").text(course.usersCompleted + 
+                                            " users completed course"),
+                                    $("<p>").text(course.usersCheckedOut + 
+                                            " users checked out courses")
                                 )
                             )
                         ),
@@ -53,16 +71,13 @@ $(document).ready(function() {
                         content.appendTo("#contentLeft");
                     else
                         content.appendTo("#contentRight");
-                    // build javascript string for collapsible panels
-                    jsString = jsString + "var cp1" + 
-                      " = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 
-                      counter + "\", { contentIsOpen: false });\n";
+                    // execute javascript for collapsible panels
+                    jQuery.globalEval(
+                        "var cp1 = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 
+                        course.courseId + "\", { contentIsOpen: false });\n");
 
                     counter = counter + 1;
                 });
-                
-                // set javascript string
-                $("#javascript").text(jsString);
 			}
 		});
 

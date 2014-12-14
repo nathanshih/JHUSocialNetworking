@@ -16,7 +16,6 @@ $(document).ready(function() {
         },
 		success: function(response) {
 		    var counter = 1;
-		    var jsString = "";
 		    var content;
 
             // iterate through students and display info
@@ -24,15 +23,26 @@ $(document).ready(function() {
 				content = $("<div class=\"contentbox\">").append(
 					$("<div class=\"contenttype\">").append(
 						$("<h2>").text(student.name),
-                        $("<div id=\"CollapsiblePanel" + counter + 
+                        $("<div id=\"CollapsiblePanel" + student.id + 
                           "\"" + " class=\"CollapsiblePanel\">").append(
                             $("<div class=\"CollapsiblePanelTab\">").append(
-                                $("<a href=\"#\">").text("MORE INFORMATION")
+                                $("<a href=\"#\">").append(
+                                    $("<u>").text("MORE INFORMATION")
+                                )
                             ),
                             $("<div class=\"CollapsiblePanelContent\">").append(
-                                $("<p>").text(student.email),
-                                $("<p>").text(student.discipline),
-                                $("<p>").text(student.completedCourses.length + " completed courses")
+                                $("<p>").text("Major: " + student.discipline),
+                                $("<p>").text("Courses completed: " + 
+                                              student.completedCourses.length),
+                                $("<form action=\"\" method=\"post\">").append(
+                                    $("<input id=\"student" + student.id + 
+                                      "\" name=\"student" + student.id + 
+                                      "\" type=\"hidden\" value=\"" + 
+                                      student.email + "\">"),
+                                    $("<input id=\"email" + student.id + 
+                                      "\" name=\"email" + student.id + 
+                                      "\" type=\"button\" value=\"Send Email\">")
+                                )
                             )
                         )
 	                ),
@@ -41,19 +51,50 @@ $(document).ready(function() {
 				// space the displayed students between 2 columns
 				if (counter % 2 == 1) {
 				    content.appendTo("#contentLeft");
+				    $("#contentLeft").on("click", "#email" + student.id, function() {
+                        $.ajax({
+                            url: "emailStudent",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                "email": $("#student" + student.id).val()
+                            }),
+                            dataType: "json",
+                            type: "POST",
+                            success: function() {
+                                alert("Student successfully emailed.");
+                            },
+                            error: function() {
+                                alert("Unable to email student.");
+                            }
+                        });
+				    });
 				} else {
 				    content.appendTo("#contentRight");
+                    $("#contentRight").on("click", "#email" + student.id, function() {
+                        $.ajax({
+                            url: "emailStudent",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                "email": $("#student" + student.id).val()
+                            }),
+                            dataType: "json",
+                            type: "POST",
+                            success: function() {
+                                alert("Student successfully emailed.");
+                            },
+                            error: function() {
+                                alert("Unable to email student.");
+                            }
+                        });
+                    });
 			    }
-				// build javascript string for collapsible panels
-				jsString = jsString + "var cp1" + 
-				  " = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 
-				  counter + "\", { contentIsOpen: false });\n";
+				// execute javascript for collapsible panels
+				jQuery.globalEval(
+				    "var cp1 = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 
+		            student.id + "\", { contentIsOpen: false });\n");
 
 				counter = counter + 1;
 			});
-            
-            // set javascript string
-            $("#javascript").text(jsString);
 		}
 	});
 });

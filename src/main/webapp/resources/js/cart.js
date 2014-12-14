@@ -16,7 +16,6 @@ $(document).ready(function() {
         },
         success: function(response) {
             var counter = 1;
-            var jsString = "";
             var content;
 
             // iterate through cart and display
@@ -49,9 +48,6 @@ $(document).ready(function() {
 
                 counter = counter + 1;
             });
-            
-            // set javascript string
-            $("#javascript").text(jsString);
         }
     });
 });

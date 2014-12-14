@@ -2,7 +2,7 @@ package com.jhu.socialnetworking.service;
 
 import java.util.List;
 
-import com.jhu.socialnetworking.model.EmailContact;
+import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Student;
 
@@ -52,6 +52,14 @@ public interface SocialNetworkingService {
      */
     public Student emailStudent(Student student);
 
+	/**
+	 * This gets a list of email addresses for whom the student is connected with.
+	 *
+	 * @param studentId - the id of the student to
+	 * @return the set of emails for students this student is connected with
+	 */
+	public EmailContacts getAllContacts(String studentId);
+	
     /**
      * This inserts a new course.
      *
@@ -98,14 +106,13 @@ public interface SocialNetworkingService {
 	 * @param courseId - the id of the course to add to the student's cart
 	 * @return an updated Student object
 	 */
-	public Student addCourseCheckedOut(String studentId, String courseId);
+	public Student checkoutCourse(String studentId, String courseId);
 	
 	/**
-	 * This gets a list of email addresses for whom the student is connected with.
+	 * This removes a course from a student's cart.
 	 *
-	 * @param studentId - the id of the student to
-	 * @return
+	 * @param studentId - the id of the student to remove from their cart
+	 * @param courseId - the id of the course to remove from the student's cart
 	 */
-	public List<EmailContact> getAllContacts(String studentId);
-
+	public void removeFomCart(String studentId, String courseId);
 }

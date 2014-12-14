@@ -64,7 +64,7 @@ public class JdbcCartDAO implements CartDAO {
 		}
 	}
 
-	public List<Integer> getCourseIdsByStudentId(String studentId) {
+	public List<String> getCourseIdsByStudentId(String studentId) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -74,7 +74,7 @@ public class JdbcCartDAO implements CartDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		List<Integer> courseIdList = new ArrayList<Integer>();
+		List<String> courseIdList = new ArrayList<String>();
 
 		try {
 
@@ -86,7 +86,7 @@ public class JdbcCartDAO implements CartDAO {
 
 			while (rs.next()) {
 
-				courseIdList.add(rs.getInt("course_id"));
+				courseIdList.add(rs.getString("course_id"));
 
 			}
 

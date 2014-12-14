@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 
 import com.jhu.socialnetworking.dao.StudentConnectionDAO;
 import com.jhu.socialnetworking.database.InitializeDatabase;
-import com.jhu.socialnetworking.model.Evaluation;
 import com.jhu.socialnetworking.model.StudentConnection;
 
 public class JdbcStudentConnectionDAO implements StudentConnectionDAO {

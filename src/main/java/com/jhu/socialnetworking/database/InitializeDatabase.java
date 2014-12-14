@@ -424,6 +424,7 @@ public class InitializeDatabase {
 	 */
 	private void prepopulateDatabase() {
 
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
 

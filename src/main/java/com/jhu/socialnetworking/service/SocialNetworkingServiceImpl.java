@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import com.jhu.socialnetworking.dao.CartDAO;
 import com.jhu.socialnetworking.dao.CompletedCourseDAO;
 import com.jhu.socialnetworking.dao.CourseDAO;
+import com.jhu.socialnetworking.dao.StudentConnectionDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.CourseLight;
-import com.jhu.socialnetworking.model.EmailContact;
+import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Student;
+import com.jhu.socialnetworking.model.StudentConnection;
 
 /**
  * This is the implementation of the service. The actual business logic code is here.
@@ -29,6 +31,7 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	private CourseDAO courseDAO;
 	private CompletedCourseDAO completedCourseDAO;
 	private CartDAO cartDAO;
+	private StudentConnectionDAO studentConnectionDAO;
 	
 	public SocialNetworkingServiceImpl() {
 		
@@ -39,6 +42,7 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 		courseDAO = (CourseDAO) context.getBean("courseDAO");
 		completedCourseDAO = (CompletedCourseDAO) context.getBean("completedCourseDAO");
 		cartDAO = (CartDAO) context.getBean("cartDAO");
+		studentConnectionDAO = (StudentConnectionDAO) context.getBean("studentConnectionDAO");
 	}
 	
 	@Override
@@ -148,9 +152,16 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 	
 	@Override
-	public List<EmailContact> getAllContacts(String studentId) {
-		// TODO Auto-generated method stub
-		return null;
+	public EmailContacts getAllContacts(String studentId) {
+		
+		List<StudentConnection> studentConnections = studentConnectionDAO.getConnectionsByStudentId(Integer.valueOf(studentId));
+		EmailContacts emailContacts = new EmailContacts();
+		for (StudentConnection studentConnection : studentConnections) {
+			Student student = studentDAO.getStudentByStudentId(String.valueOf(studentConnection.getFirstStudentId()));
+			emailContacts.addEmailContact(student.getEmail());
+		}
+		
+		return emailContacts;
 	}
 	
 	private Student populateStudentExtraInfo(Student student) {

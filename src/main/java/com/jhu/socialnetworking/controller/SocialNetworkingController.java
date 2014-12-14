@@ -102,6 +102,21 @@ public class SocialNetworkingController {
 		return socialNetworkingService.getAllStudents();
 	}
 
+    /**
+     * This sends an email to a student.
+     *
+     * @param student - the student to be emailed
+     * @return a Student object
+     */
+    @RequestMapping(value = "/emailStudent", method = RequestMethod.POST)
+    @ResponseBody
+    public Student emailStudent(@RequestBody Student student) {
+        
+        LOG.debug("Emailing student: " + student.toString());
+        
+        return socialNetworkingService.emailStudent(student);
+    }
+    
 	/**
      * This inserts a new course.
      *

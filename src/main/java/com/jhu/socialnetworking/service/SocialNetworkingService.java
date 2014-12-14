@@ -45,6 +45,14 @@ public interface SocialNetworkingService {
 	public List<Student> getAllStudents();
 	
     /**
+     * This emails a student.
+     *
+     * @param student - the student to be emailed
+     * @return the Student object
+     */
+    public Student emailStudent(Student student);
+
+    /**
      * This inserts a new course.
      *
      * @param course - the new course to be inserted
@@ -107,4 +115,5 @@ public interface SocialNetworkingService {
 	 * @return
 	 */
 	public List<EmailContact> getAllContacts(String studentId);
+
 }

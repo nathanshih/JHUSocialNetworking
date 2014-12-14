@@ -52,7 +52,8 @@
                             <td>Number of courses checked out:</td>
                         </tr>
                     </table>
-                    <input id="updateProfile" name="updateProfile" type="button" value="Update Profile">
+                    <input id="updateProfile" name="updateProfile" class="submitButton" 
+                           type="button" value="Update Profile">
                 </form>
             </div>
             <%-- Include the content --%>

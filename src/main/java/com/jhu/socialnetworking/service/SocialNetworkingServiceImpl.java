@@ -76,6 +76,24 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 	
     @Override
+    public Student emailStudent(Student student) {
+            
+        String content = "";
+        // Send confirmation email using Gmail Utility
+        try {
+            MailUtilGmail.sendMail(
+                    student.getEmail(),
+                    "noreply",
+                    "JERCS Email Exchange",
+                    content, true);
+        } catch (RuntimeException re) {
+            System.out.println(re);
+        }
+
+        return student;
+    }
+
+    @Override
     public Course insertCourse(Course course) {
                
         return courseDAO.insert(course);

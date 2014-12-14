@@ -33,7 +33,7 @@ $(document).ready(function() {
             alert("Invalid email entered.");
         } else {
             $.ajax({
-                url: "register",
+                url: "updateStudent",
                 contentType: "application/json",
                 data: JSON.stringify({
                     "name": $("#name").val(),
@@ -41,7 +41,7 @@ $(document).ready(function() {
                     "discipline": $("#degree").val()
                 }),
                 dataType: "json",
-                type: "POST",
+                type: "PUT",
                 success: function() {
                     alert("Profile successfully updated.");
                 },

@@ -25,8 +25,6 @@
             <%@ include file="../includes/content.html"%>
 		</div>
 	</div>
-	<script id="javascript" type="text/javascript">
-	</script>
     <%-- Include the footer --%>
     <%@ include file="../includes/footer.html"%>
 </body>

@@ -39,6 +39,12 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>Student Password:</td>
+                            <td>
+                                <input id="studentPassword" name="studentPassword" type="password">
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Student Degree Program:</td>
                             <td>
                                 <input id="studentDegree" name="studentDegree" type="text">
@@ -64,6 +70,12 @@
                             <td>Course Description:</td>
                             <td>
                                 <input id="courseDescription" name="courseDescription" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Course Discipline:</td>
+                            <td>
+                                <input id="courseDiscipline" name="courseDiscipline" type="text">
                             </td>
                         </tr>
                     </table>

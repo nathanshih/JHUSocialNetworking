@@ -17,9 +17,10 @@ $(document).ready(function() {
 				url: "login?email=" + loginEmail + "&password=" + loginPassword,
 				contentType: "text/plain",
 				type: "POST",
-				success: function() {
+				dataType: "json",
+				success: function(response) {
 					alert("You have successfully logged in.");
-		            document.cookie = "studentId=1;";
+		            document.cookie = "studentId=" + response.id;
 					window.location = "main";
 				},
 				error: function() {
@@ -50,10 +51,11 @@ $(document).ready(function() {
 					"password": $("#registerpassword").val(),
 					"discipline": $("#discipline").val()
 				}),
-				dataType: "json",
 				type: "POST",
-				success: function() {
+				dataType: "json",
+				success: function(response) {
 					alert("You have successfully signed up.");
+		            document.cookie = "studentId=" + response.id;
 					window.location = "main";
 				},
 				error: function() {

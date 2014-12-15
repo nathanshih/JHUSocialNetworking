@@ -288,4 +288,50 @@ public class JdbcStudentDAO implements StudentDAO {
 
 		return studentObj;
 	}
+
+	@Override
+	public Student login(String email, String password) {
+		// Ensure datasource is initialized with InitializeDatabase singleton
+		InitializeDatabase.getInstance().initializeDatabase(dataSource);
+
+		String sql = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Student studentObj = null;
+
+		try {
+
+			conn = dataSource.getConnection();
+
+			// Return the student from the database
+			sql = String.format("SELECT * FROM Student WHERE email='%s' and password='%s'",
+					email, password);
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				studentObj = new Student();
+				studentObj.setId(Integer.toString(rs.getInt("student_id")));
+				studentObj.setName(rs.getString("name"));
+				studentObj.setEmail(rs.getString("email"));
+				studentObj.setDiscipline(rs.getString("discipline"));
+			}
+			
+			ps.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return studentObj;
+	}
 }

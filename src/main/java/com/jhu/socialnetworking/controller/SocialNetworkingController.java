@@ -45,6 +45,27 @@ public class SocialNetworkingController {
 	}
 	
 	/**
+	 * This processes a login call. Matching on the email and password is case sensitive.
+	 *
+	 * @param email - the email of the registered student
+	 * @param password - the password of the registered student
+	 * @return the registered Student object
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<Student> register(@RequestParam(value = "email", required = true) String email,
+		      				@RequestParam(value = "password", required = true) String password) {
+		
+		LOG.debug("Attempting to login user: " + email);
+		
+		Student student = socialNetworkingService.login(email, password);
+		if (student == null) {
+			return new ResponseEntity<Student>(HttpStatus.UNAUTHORIZED);
+		} else {
+			return new ResponseEntity<Student>(student, HttpStatus.OK);
+		}
+	}
+	
+	/**
 	 * This registers a new student.
 	 *
 	 * @param student - the new student to be registered

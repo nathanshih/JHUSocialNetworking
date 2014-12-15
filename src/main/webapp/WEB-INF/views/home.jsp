@@ -39,7 +39,7 @@
 				<input id="name" placeholder="Full Name" type="text">
 				<input id="registeremail" placeholder="Email" type="text">
 				<input id="registerpassword" placeholder="Password" type="password">
-				<input id="contact" placeholder="Contact Number" type="text">
+				<input id="discipline" placeholder="Discipline" type="text">
 				<input id="register" type="button" value="Create your account.">
 				<p id="two">
 					Already have an account? <a class="signin" id="signin" href="#">Sign in</a>

@@ -23,6 +23,7 @@ $(document).ready(function() {
                 data: JSON.stringify({
                     "name": $("#studentName").val(),
                     "email": $("#studentEmail").val(),
+                    "password": $("#studentPassword").val(),
                     "discipline": $("#studentDegree").val()
                 }),
                 dataType: "json",
@@ -51,7 +52,8 @@ $(document).ready(function() {
             data: JSON.stringify({
                 "courseId": $("#courseId").val(),
                 "courseName": $("#courseName").val(),
-                "description": $("#courseDescription").val()
+                "description": $("#courseDescription").val(),
+                "discipline": $("#courseDiscipline").val()
             }),
             dataType: "json",
             type: "POST",

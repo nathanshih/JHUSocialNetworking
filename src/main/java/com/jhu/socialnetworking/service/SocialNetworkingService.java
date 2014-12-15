@@ -15,6 +15,15 @@ import com.jhu.socialnetworking.model.Student;
 public interface SocialNetworkingService {
 
 	/**
+	 * This processes a login call. Matching on the email and password is case sensitive.
+	 *
+	 * @param email - the email of the registered student
+	 * @param password - the password of the registered student
+	 * @return the registered Student object
+	 */
+	public Student login(String email, String password);
+	
+	/**
 	 * This registers a new student.
 	 *
 	 * @param student - the new student to be registered

@@ -19,4 +19,5 @@ public interface StudentDAO {
 	
 	public Student getStudentByStudentId(String studentId);
 
+	public Student login(String email, String password);
 }

@@ -10,9 +10,22 @@ $(document).ready(function() {
 		} else if (!($("#loginemail").val()).match(email)) {
 			alert("Invalid email entered.");
 		} else {
-			// TODO: implement login jquery logic
-			alert("You have successfully logged in.");
-			window.location = "main";
+			// do the login
+			loginEmail = $("#loginemail").val();
+			loginPassword = $("#loginpassword").val();
+			$.ajax({
+				url: "login?email=" + loginEmail + "&password=" + loginPassword,
+				contentType: "text/plain",
+				type: "POST",
+				success: function() {
+					alert("You have successfully logged in.");
+					window.location = "main";
+				},
+				error: function() {
+					alert("Email or password not found.");
+					$("form")[0].reset();
+				}
+			});		
 		}
 	});
 	
@@ -21,13 +34,11 @@ $(document).ready(function() {
 		
 		// first check that the email is in correct format and all fields are filled in
 		var email = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-		if ($("#name").val() === '' || $("#registeremail").val() === '' || $("#registerpassword").val() === '' || $("#contact").val() === '') {
+		if ($("#name").val() === '' || $("#registeremail").val() === '' || $("#registerpassword").val() === '' || $("#discipline").val() === '') {
 			alert("All fields required.");
 		} else if (!($("#registeremail").val()).match(email)) {
 			alert("Invalid email entered.");
-		} else {
-			alert("You have successfully signed up. Now you can login.");
-			
+		} else {		
 			// send the register call
 			$.ajax({
 				url: "register",
@@ -36,12 +47,17 @@ $(document).ready(function() {
 					"name": $("#name").val(),
 					"email": $("#registeremail").val(),
 					"password": $("#registerpassword").val(),
-					"contact": $("#contact").val()
+					"discipline": $("#discipline").val()
 				}),
 				dataType: "json",
 				type: "POST",
 				success: function() {
-				    $("form")[0].reset();
+					alert("You have successfully signed up.");
+					window.location = "main";
+				},
+				error: function() {
+					alert("Registration failed.");
+					$("form")[0].reset();
 				}
 			});
 			

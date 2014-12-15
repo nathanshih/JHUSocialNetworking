@@ -21,6 +21,17 @@
                 <%-- Include the navigation menu --%>
                 <%@ include file="../includes/navigation.html"%>
             </div>
+            <div id="classmateControls">
+                <form action="" method="post">
+                    <select id="classmateSelect" name="classmateSelect" required>
+                        <option value="" selected disabled>Select classmates to view...</option>
+                        <option value="getAllContacts">Contacts</option>
+                        <option value="students">All Students</option>
+                    </select>
+                    <input id="classmateButton" name="classmateButton" class="submitButton" 
+                           type="button" value="Display Classmates">
+                </form>
+            </div>
             <%-- Include the content --%>
             <%@ include file="../includes/content.html"%>
 		</div>

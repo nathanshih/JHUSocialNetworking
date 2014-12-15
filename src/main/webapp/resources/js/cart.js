@@ -41,10 +41,6 @@ $(document).ready(function() {
                     content.appendTo("#contentLeft");
                 else
                     content.appendTo("#contentRight");
-                // build javascript string for collapsible panels
-                jsString = jsString + "var cp1" + 
-                  " = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 
-                  counter + "\", { contentIsOpen: false });\n";
 
                 counter = counter + 1;
             });

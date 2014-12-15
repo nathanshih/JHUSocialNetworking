@@ -12,6 +12,7 @@ $(document).ready(function() {
 		} else {
 			// TODO: implement login jquery logic
 			alert("You have successfully logged in.");
+			document.cookie = "studentId=1;";
 			window.location = "main";
 		}
 	});

@@ -1,3 +1,15 @@
+// used from w3schools.com
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
 // Activated when clicking "Classmates" from left navigation panel
 $(document).ready(function() {
 
@@ -48,17 +60,20 @@ $(document).ready(function() {
 	                ),
 	                $("<br class=\"clear_both\">")
 			    );
+
+                // get user student ID from session cookie
+                var studentId = getCookie("studentId");
+
 				// space the displayed students between 2 columns
 				if (counter % 2 == 1) {
 				    content.appendTo("#contentLeft");
 				    $("#contentLeft").on("click", "#email" + student.id, function() {
                         $.ajax({
                             url: "emailStudent",
-                            contentType: "application/json",
-                            data: JSON.stringify({
-                                "email": $("#student" + student.id).val()
-                            }),
-                            dataType: "json",
+                            data: {
+                                "studentId": studentId,
+                                "toEmail": $("#student" + student.id).val()
+                            },
                             type: "POST",
                             success: function() {
                                 alert("Student successfully emailed.");
@@ -73,11 +88,10 @@ $(document).ready(function() {
                     $("#contentRight").on("click", "#email" + student.id, function() {
                         $.ajax({
                             url: "emailStudent",
-                            contentType: "application/json",
-                            data: JSON.stringify({
-                                "email": $("#student" + student.id).val()
-                            }),
-                            dataType: "json",
+                            data: {
+                                "studentId": studentId,
+                                "toEmail": $("#student" + student.id).val()
+                            },
                             type: "POST",
                             success: function() {
                                 alert("Student successfully emailed.");

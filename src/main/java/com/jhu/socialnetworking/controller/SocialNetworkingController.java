@@ -106,16 +106,20 @@ public class SocialNetworkingController {
     /**
      * This sends an email to a student.
      *
-     * @param student - the student to be emailed
-     * @return a Student object
+     * @param studentId - the sender student ID
+     * @param toEmail - the student email recipient
+     * @return the email content
      */
     @RequestMapping(value = "/emailStudent", method = RequestMethod.POST)
     @ResponseBody
-    public Student emailStudent(@RequestBody Student student) {
+    public String emailStudent(@RequestParam(value = "studentId", 
+                                   required = true) String studentId,
+                               @RequestParam(value = "toEmail",
+                                   required = true) String toEmail) {
         
-        LOG.debug("Emailing student: " + student.toString());
+        LOG.debug("Emailing student " + toEmail + " from " + studentId);
         
-        return socialNetworkingService.emailStudent(student);
+        return socialNetworkingService.emailStudent(studentId, toEmail);
     }
     
     /**

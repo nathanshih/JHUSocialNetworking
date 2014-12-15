@@ -1,3 +1,15 @@
+// used from w3schools.com
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
 // Activated when clicking "Courses" from left navigation panel
 $(document).ready(function() {
 
@@ -31,21 +43,18 @@ $(document).ready(function() {
                 
                 // iterate through courses and display info
                 $.each(response, function(i, course) {
+                    var courseId = course.courseId.replace('.','');
                     content = $("<div class=\"contentbox\">").append(
                         $("<div class=\"contenttype\">").append(
                             $("<h2>").text(course.courseName),
                             $("<p>").text(course.courseId),
                             $("<form action=\"\" method=\"post\">").append(
-                                    $("<input id=\"course" + course.courseId + 
-                                      "\" name=\"course" + course.courseId + 
-                                      "\" type=\"hidden\" value=\"" + 
-                                      course.courseId + "\">"),
-                                    $("<input id=\"addToCart" + course.courseId + 
-                                      "\" name=\"addToCart" + course.courseId + 
+                                    $("<input id=\"addToCart" + courseId + 
+                                      "\" name=\"addToCart" + courseId + 
                                       "\" type=\"button\" value=\"Add to Cart\">"),
-                                      $("<input id=\"markCompleted" + course.courseId + 
-                                              "\" name=\"markCompleted" + course.courseId + 
-                                              "\" type=\"button\" value=\"Mark Completed\">")
+                                    $("<input id=\"markCompleted" + courseId + 
+                                      "\" name=\"markCompleted" + courseId + 
+                                      "\" type=\"button\" value=\"Mark Completed\">")
                                 ),
                             $("<div id=\"CollapsiblePanel" + course.courseId + 
                               "\"" + " class=\"CollapsiblePanel\">").append(
@@ -66,11 +75,82 @@ $(document).ready(function() {
                         ),
                         $("<br class=\"clear_both\">")
                     );
+
+                    // get user student ID from session cookie
+                    var studentId = getCookie("studentId");
+
                     // space the displayed courses between 2 columns
-                    if (counter % 2 == 1)
+                    if (counter % 2 == 1) {
                         content.appendTo("#contentLeft");
-                    else
+                        // add Javascript events to modified DOM
+                        $("#contentLeft").on("click", "#addToCart" + courseId, function() {
+                            $.ajax({
+                                url: "checkoutCourse",
+                                data: {
+                                    "studentId": studentId,
+                                    "courseId": course.courseId
+                                },
+                                type: "POST",
+                                success: function() {
+                                    alert("Course added to cart.");
+                                },
+                                error: function() {
+                                    alert("Unable to add course to cart. " + courseId);
+                                }
+                            });
+                        });
+                        $("#contentLeft").on("click", "#markCompleted" + courseId, function() {
+                            $.ajax({
+                                url: "completedCourse",
+                                data: {
+                                    "studentId": studentId,
+                                    "courseId": course.courseId
+                                },
+                                type: "POST",
+                                success: function() {
+                                    alert("Course marked as completed.");
+                                },
+                                error: function() {
+                                    alert("Unable to mark course completed.");
+                                }
+                            });
+                        });
+                    } else {
                         content.appendTo("#contentRight");
+                        // add Javascript events to modified DOM
+                        $("#contentRight").on("click", "#addToCart" + courseId, function() {
+                            $.ajax({
+                                url: "checkoutCourse",
+                                data: {
+                                    "studentId": studentId,
+                                    "courseId": course.courseId
+                                },
+                                type: "POST",
+                                success: function() {
+                                    alert("Course added to cart.");
+                                },
+                                error: function() {
+                                    alert("Unable to add course to cart. " + courseId);
+                                }
+                            });
+                        });
+                        $("#contentRight").on("click", "#markCompleted" + courseId, function() {
+                            $.ajax({
+                                url: "completedCourse",
+                                data: {
+                                    "studentId": studentId,
+                                    "courseId": course.courseId
+                                },
+                                type: "POST",
+                                success: function() {
+                                    alert("Course marked as completed.");
+                                },
+                                error: function() {
+                                    alert("Unable to mark course completed.");
+                                }
+                            });
+                        });
+                    }
                     // execute javascript for collapsible panels
                     jQuery.globalEval(
                         "var cp1 = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 

@@ -45,6 +45,13 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 		studentConnectionDAO = (StudentConnectionDAO) context.getBean("studentConnectionDAO");
 	}
 	
+
+	@Override
+	public Student login(String email, String password) {
+		
+		return studentDAO.login(email, password);
+	}
+	
 	@Override
 	public Student register(Student student) {
 			

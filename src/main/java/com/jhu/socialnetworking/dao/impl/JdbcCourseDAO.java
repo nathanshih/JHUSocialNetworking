@@ -164,7 +164,7 @@ public class JdbcCourseDAO implements CourseDAO {
 
 				course.setCourseId(rs.getString("course_id"));
 				course.setCourseName(rs.getString("course_name"));
-				course.setDiscipline(rs.getString("description"));
+				course.setDescription(rs.getString("description"));
 				course.setDiscipline(rs.getString("discipline"));
 				course.setUsersCompleted(rs.getInt("usersCompleted"));
 				course.setUsersCheckedOut(rs.getInt("usersCheckedOut"));
@@ -215,7 +215,7 @@ public class JdbcCourseDAO implements CourseDAO {
 			rs.next();
 			course.setCourseId(rs.getString("course_id"));
 			course.setCourseName(rs.getString("course_name"));
-			course.setDiscipline(rs.getString("description"));
+			course.setDescription(rs.getString("description"));
 			course.setDiscipline(rs.getString("discipline"));
 			course.setUsersCompleted(rs.getInt("usersCompleted"));
 			course.setUsersCheckedOut(rs.getInt("usersCheckedOut"));

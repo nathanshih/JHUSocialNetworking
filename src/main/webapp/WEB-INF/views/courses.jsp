@@ -26,8 +26,7 @@
                     <select id="courseSelect" name="courseSelect" required>
                         <option value="" selected disabled>Select courses to view...</option>
                         <option value="allCourses">All Courses</option>
-                        <option value="checkedOutCourses" disabled>Checked Out Courses</option>
-                        <option value="completedCourses" disabled>Completed Courses</option>
+                        <option value="completedCourses">Completed Courses</option>
                     </select>
                     <input id="courseButton" name="courseButton" class="submitButton" 
                            type="button" value="Display Courses">

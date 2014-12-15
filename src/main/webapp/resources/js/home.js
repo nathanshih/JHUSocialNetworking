@@ -19,6 +19,7 @@ $(document).ready(function() {
 				type: "POST",
 				success: function() {
 					alert("You have successfully logged in.");
+		            document.cookie = "studentId=1;";
 					window.location = "main";
 				},
 				error: function() {

@@ -87,21 +87,28 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 	
     @Override
-    public Student emailStudent(Student student) {
+    public String emailStudent(String studentId, String toEmail) {
             
-        String content = "";
+        Student student = studentDAO.getStudentByStudentId(studentId);
+        String fromEmail = student.getEmail();
+        String content = "Hello,\nI am planning to enroll in a course that "
+                         + "you have previously completed in the Johns Hopkins "
+                         + "University Engineering for Professionals program. I "
+                         + "would appreciate your response and feedback.\n"
+                         + "Regards,\n" + student.getName() + "\n" + fromEmail;
         // Send confirmation email using Gmail Utility
         try {
             MailUtilGmail.sendMail(
-                    student.getEmail(),
-                    "noreply",
+                    toEmail,
+                    fromEmail,
                     "JERCS Email Exchange",
                     content, true);
         } catch (RuntimeException re) {
             System.out.println(re);
+            return "";
         }
 
-        return student;
+        return content;
     }
 
     @Override
@@ -142,8 +149,8 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 
 	@Override
 	public Student checkoutCourse(String studentId, String courseId) {
-		
-		// insert checked out course into DB
+
+	    // insert checked out course into DB
 		cartDAO.insert(courseId, studentId);
 		
 		Student student = studentDAO.getStudentByStudentId(studentId);

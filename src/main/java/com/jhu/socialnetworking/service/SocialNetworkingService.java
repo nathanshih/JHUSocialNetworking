@@ -54,12 +54,13 @@ public interface SocialNetworkingService {
 	public List<Student> getAllStudents();
 	
     /**
-     * This emails a student.
+     * This sends an email to a student.
      *
-     * @param student - the student to be emailed
-     * @return the Student object
+     * @param studentId - the sender student ID
+     * @param toEmail - the student email recipient
+     * @return the email content
      */
-    public Student emailStudent(Student student);
+    public String emailStudent(String studentId, String toEmail);
 
 	/**
 	 * This gets a list of email addresses for whom the student is connected with.

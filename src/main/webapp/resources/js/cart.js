@@ -54,14 +54,11 @@ $(document).ready(function() {
                     content.appendTo("#contentLeft");
                     $("#contentLeft").on("click", "#removeCourse" + courseId, function() {
                         $.ajax({
-                            url: "removeFromCart",
-                            data: {
-                                "studentId": studentId,
-                                "courseId": courseLight.courseId
-                            },
+                            url: "removeFromCart?studentId=" + studentId + "&courseId=" + courseLight.courseId,                           
                             type: "DELETE",
                             success: function() {
                                 alert("Deleted " + courseLight.courseId + " from cart.");
+                                location.reload();
                             },
                             error: function() {
                                 alert("Unable to delete " + courseLight.courseId + " from cart.");
@@ -72,14 +69,11 @@ $(document).ready(function() {
                     content.appendTo("#contentRight");
                     $("#contentRight").on("click", "#removeCourse" + courseId, function() {
                         $.ajax({
-                            url: "removeFromCart",
-                            data: {
-                                "studentId": studentId,
-                                "courseId": courseLight.courseId
-                            },
+                        	url: "removeFromCart?studentId=" + studentId + "&courseId=" + courseLight.courseId,
                             type: "DELETE",
                             success: function() {
                                 alert("Deleted " + courseLight.courseId + " from cart.");
+                                location.reload();
                             },
                             error: function() {
                                 alert("Unable to delete " + courseLight.courseId + " from cart.");

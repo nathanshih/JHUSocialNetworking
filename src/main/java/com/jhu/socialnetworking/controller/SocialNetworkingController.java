@@ -290,7 +290,7 @@ public class SocialNetworkingController {
 	 * @param studentId - the id of the student to remove from their cart
 	 * @param courseId - the id of the course to remove from the student's cart
 	 */
-    @RequestMapping(value = "/removeFomCart", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/removeFromCart", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> removeCourse(@RequestParam(value = "studentId", required = true) String studentId,
 		      									@RequestParam(value = "courseId", required = true) String courseId) {
 		

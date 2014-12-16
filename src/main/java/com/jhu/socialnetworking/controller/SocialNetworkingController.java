@@ -259,25 +259,25 @@ public class SocialNetworkingController {
 	 * @param courseId - the id of the course to add to the student's cart
 	 * @return an updated Student object
 	 */
-    @RequestMapping(value = "/checkedOutCourse", method = RequestMethod.POST)
+    @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
     @ResponseBody
-    public Student checkoutCourse(@RequestParam(value = "studentId", required = true) String studentId,
+    public Student addToCart(@RequestParam(value = "studentId", required = true) String studentId,
     							      @RequestParam(value = "courseId", required = true) String courseId) {
     	
     	LOG.debug("Checking out course: " + courseId + " by student: " + studentId);
     	
-    	return socialNetworkingService.checkoutCourse(studentId, courseId);
+    	return socialNetworkingService.addToCart(studentId, courseId);
     }
     
     /**
 	 * This returns the cart for the student
 	 *
 	 * @param studentId - the id of the student to get their cart from
-	 * @return
+	 * @return a list of courses in the students cart
 	 */
     @RequestMapping(value = "/getCart", method = RequestMethod.GET)
     @ResponseBody
-    public List<CourseLight> checkoutCourse(@RequestParam(value = "studentId", required = true) String studentId) {
+    public List<CourseLight> getCart(@RequestParam(value = "studentId", required = true) String studentId) {
     	
     	LOG.debug("Getting cart for student: " + studentId);
     	

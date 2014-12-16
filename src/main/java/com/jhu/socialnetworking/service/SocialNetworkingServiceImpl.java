@@ -147,7 +147,7 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 
 	@Override
-	public Student checkoutCourse(String studentId, String courseId) {
+	public Student addToCart(String studentId, String courseId) {
 
 	    // insert checked out course into DB
 		cartDAO.insert(courseId, studentId);

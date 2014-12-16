@@ -85,7 +85,7 @@ $(document).ready(function() {
                             // add Javascript events to modified DOM
                             $("#contentLeft").on("click", "#addToCart" + courseId, function() {
                                 $.ajax({
-                                    url: "checkedOutCourse",
+                                    url: "addToCart",
                                     data: {
                                         "studentId": studentId,
                                         "courseId": course.courseId
@@ -120,7 +120,7 @@ $(document).ready(function() {
                             // add Javascript events to modified DOM
                             $("#contentRight").on("click", "#addToCart" + courseId, function() {
                                 $.ajax({
-                                    url: "checkedOutCourse",
+                                    url: "addToCart",
                                     data: {
                                         "studentId": studentId,
                                         "courseId": course.courseId

@@ -126,13 +126,13 @@ public interface SocialNetworkingService {
 	 * @param courseId - the id of the course to add to the student's cart
 	 * @return an updated Student object
 	 */
-	public Student checkoutCourse(String studentId, String courseId);
+	public Student addToCart(String studentId, String courseId);
 	
 	/**
 	 * This returns the cart for the student
 	 *
 	 * @param studentId - the id of the student to get their cart from
-	 * @return
+	 * @return a list of courses in the students cart
 	 */
 	public List<CourseLight> getCart(String studentId);
 	

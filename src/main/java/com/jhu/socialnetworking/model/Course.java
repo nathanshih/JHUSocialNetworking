@@ -14,6 +14,8 @@ public class Course {
 	
 	public Course() {
 		professors = new ArrayList<Professor>();
+		usersCompleted = new Integer(0);
+		usersCheckedOut = new Integer(0);
 	}
 	
 	public String getCourseId() {

@@ -85,33 +85,33 @@ $(document).ready(function() {
                             // add Javascript events to modified DOM
                             $("#contentLeft").on("click", "#addToCart" + courseId, function() {
                                 $.ajax({
-                                    url: "checkoutCourse",
+                                    url: "checkedOutCourse",
                                     data: {
                                         "studentId": studentId,
                                         "courseId": course.courseId
                                     },
                                     type: "POST",
                                     success: function() {
-                                        alert("Course added to cart.");
+                                        alert("Added course " + course.courseId + " to cart.");
                                     },
                                     error: function() {
-                                        alert("Unable to add course to cart. " + courseId);
+                                        alert("Unable to add course " + course.courseId + " to cart.");
                                     }
                                 });
                             });
                             $("#contentLeft").on("click", "#markCompleted" + courseId, function() {
                                 $.ajax({
-                                    url: "completedCourse",
+                                    url: "completedCourses",
                                     data: {
                                         "studentId": studentId,
                                         "courseId": course.courseId
                                     },
                                     type: "POST",
                                     success: function() {
-                                        alert("Course marked as completed.");
+                                        alert("Marked course " + course.courseId + " as completed.");
                                     },
                                     error: function() {
-                                        alert("Unable to mark course completed.");
+                                        alert("Unable to mark course " + course.courseId + " as completed.");
                                     }
                                 });
                             });
@@ -120,33 +120,33 @@ $(document).ready(function() {
                             // add Javascript events to modified DOM
                             $("#contentRight").on("click", "#addToCart" + courseId, function() {
                                 $.ajax({
-                                    url: "checkoutCourse",
+                                    url: "checkedOutCourse",
                                     data: {
                                         "studentId": studentId,
                                         "courseId": course.courseId
                                     },
                                     type: "POST",
                                     success: function() {
-                                        alert("Course added to cart.");
+                                        alert("Added course " + course.courseId + " to cart.");
                                     },
                                     error: function() {
-                                        alert("Unable to add course to cart. " + courseId);
+                                        alert("Unable to add course " + course.courseId + " to cart.");
                                     }
                                 });
                             });
                             $("#contentRight").on("click", "#markCompleted" + courseId, function() {
                                 $.ajax({
-                                    url: "completedCourse",
+                                    url: "completedCourses",
                                     data: {
                                         "studentId": studentId,
                                         "courseId": course.courseId
                                     },
                                     type: "POST",
                                     success: function() {
-                                        alert("Course marked as completed.");
+                                        alert("Marked course " + course.courseId + " as completed.");
                                     },
                                     error: function() {
-                                        alert("Unable to mark course completed.");
+                                        alert("Unable to mark course " + course.courseId + " as completed.");
                                     }
                                 });
                             });

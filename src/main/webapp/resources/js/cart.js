@@ -61,10 +61,10 @@ $(document).ready(function() {
                             },
                             type: "DELETE",
                             success: function() {
-                                alert("Course deleted from cart.");
+                                alert("Deleted " + courseLight.courseId + " from cart.");
                             },
                             error: function() {
-                                alert("Unable to delete course from cart.");
+                                alert("Unable to delete " + courseLight.courseId + " from cart.");
                             }
                         });
                     });
@@ -79,10 +79,10 @@ $(document).ready(function() {
                             },
                             type: "DELETE",
                             success: function() {
-                                alert("Course deleted from cart.");
+                                alert("Deleted " + courseLight.courseId + " from cart.");
                             },
                             error: function() {
-                                alert("Unable to delete course from cart.");
+                                alert("Unable to delete " + courseLight.courseId + " from cart.");
                             }
                         });
                     });

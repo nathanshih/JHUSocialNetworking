@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Student;
+import com.jhu.socialnetworking.model.StudentConnection;
 import com.jhu.socialnetworking.service.SocialNetworkingService;
 
 /**
@@ -144,6 +145,23 @@ public class SocialNetworkingController {
     }
     
     /**
+     * This adds a new connection for a student.
+     *
+     * @param studentId - the student ID
+     * @param contactId - the contact ID of the student to be added
+     * @return a StudentConnection object
+     */
+    @RequestMapping(value = "/addContact", method = RequestMethod.POST)
+    @ResponseBody
+    public StudentConnection addContacts(@RequestParam(value = "studentId", required = true) String studentId,
+    										@RequestParam(value = "contactId", required = true) String contactId) {
+		
+    	LOG.debug("Adding contact: " + contactId + " for student: " + studentId);
+    	
+    	return socialNetworkingService.addContact(studentId, contactId);	
+    }
+    
+    /**
 	 * This gets a list of email addresses for whom the student is connected with.
 	 *
 	 * @param studentId - the id of the student to
@@ -224,7 +242,7 @@ public class SocialNetworkingController {
      * @param courseId - the id of the course the student completed
      * @return an updated Student object
      */
-    @RequestMapping(value = "/completedCourse", method = RequestMethod.POST)
+    @RequestMapping(value = "/completedCourses", method = RequestMethod.POST)
     @ResponseBody
     public Student addCompletedCourse(@RequestParam(value = "studentId", required = true) String studentId,
     							      @RequestParam(value = "courseId", required = true) String courseId) {
@@ -241,7 +259,7 @@ public class SocialNetworkingController {
 	 * @param courseId - the id of the course to add to the student's cart
 	 * @return an updated Student object
 	 */
-    @RequestMapping(value = "/checkoutCourse", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkedOutCourse", method = RequestMethod.POST)
     @ResponseBody
     public Student checkoutCourse(@RequestParam(value = "studentId", required = true) String studentId,
     							      @RequestParam(value = "courseId", required = true) String courseId) {

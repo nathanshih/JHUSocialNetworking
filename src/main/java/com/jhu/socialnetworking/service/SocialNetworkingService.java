@@ -5,6 +5,7 @@ import java.util.List;
 import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Student;
+import com.jhu.socialnetworking.model.StudentConnection;
 
 /**
  * This is the interface for the service. All the methods for the business logic will be written here.
@@ -62,6 +63,15 @@ public interface SocialNetworkingService {
      */
     public String emailStudent(String studentId, String toEmail);
 
+    /**
+     * This adds a new connection for a student.
+     *
+     * @param studentId - the student ID
+     * @param contactId - the contact ID of the student to be added
+     * @return a StudentConnection object
+     */
+    public StudentConnection addContact(String studentId, String contactId);
+    
 	/**
 	 * This gets a list of email addresses for whom the student is connected with.
 	 *

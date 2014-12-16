@@ -34,7 +34,7 @@ public class JdbcStudentConnectionDAO implements StudentConnectionDAO {
 	 * Persists a student connection in the database
 	 */
 	@Override
-	public void insert(StudentConnection studentConnection) {
+	public StudentConnection insert(StudentConnection studentConnection) {
 
 		// Ensure datasource is initialized with InitializeDatabase singleton
 		InitializeDatabase.getInstance().initializeDatabase(dataSource);
@@ -42,18 +42,34 @@ public class JdbcStudentConnectionDAO implements StudentConnectionDAO {
 		String sql = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
-
+		ResultSet rs = null;
+		
+		StudentConnection sc = null;
+		
 		try {
 
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("INSERT INTO StudentConnection(connection_id, first_student_id, second_student_id) VALUES (NULL, '%s', '%s')",
-							studentConnection.getFirstStudentId(),
-							studentConnection.getSecondStudentId());
+					.format("INSERT INTO StudentConnection(connection_id, student_id, contact_id) VALUES (NULL, '%s', '%s')",
+							studentConnection.getStudentId(),
+							studentConnection.getContactId());
 			ps = conn.prepareStatement(sql);
 			ps.execute();
+			
+			sql = String
+					.format("SELECT * FROM StudentConnection WHERE student_id='%s' and contact_id='%s'",
+							studentConnection.getStudentId(),
+							studentConnection.getContactId());
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
 
+			if (rs.next()) {
+				sc = new StudentConnection();
+				sc.setConnectionId(Integer.parseInt(rs.getString("connection_id")));
+				sc.setStudentId(Integer.parseInt(rs.getString("student_id")));
+				sc.setContactId(Integer.parseInt(rs.getString("contact_id")));
+			}
 			ps.close();
 
 		} catch (SQLException e) {
@@ -67,6 +83,8 @@ public class JdbcStudentConnectionDAO implements StudentConnectionDAO {
 				}
 			}
 		}
+		
+		return sc;
 	}
 
 	/**
@@ -127,8 +145,8 @@ public class JdbcStudentConnectionDAO implements StudentConnectionDAO {
 			conn = dataSource.getConnection();
 
 			sql = String
-					.format("SELECT * FROM StudentConnection WHERE first_student_id='%s' OR second_student_id='%s';",
-							studentId, studentId);
+					.format("SELECT * FROM StudentConnection WHERE student_id='%s';",
+							studentId);
 
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -142,11 +160,11 @@ public class JdbcStudentConnectionDAO implements StudentConnectionDAO {
 				studentConnection.setConnectionId(Integer.parseInt(rs
 						.getString("connection_id")));
 				
-				studentConnection.setFirstStudentId(Integer.parseInt(rs
-						.getString("first_student_id")));
+				studentConnection.setStudentId(Integer.parseInt(rs
+						.getString("student_id")));
 
-				studentConnection.setSecondStudentId(Integer.parseInt(rs
-						.getString("second_student_id")));
+				studentConnection.setContactId(Integer.parseInt(rs
+						.getString("contact_id")));
 
 				studentConnectionList.add(studentConnection);
 			}
@@ -180,10 +198,10 @@ public class JdbcStudentConnectionDAO implements StudentConnectionDAO {
 		for (int i = 0; i < inputList.size(); i++) {
 			for (int j = 0; j < inputList.size(); j++) {
 
-				if (inputList.get(i).getFirstStudentId() == inputList.get(j)
-						.getSecondStudentId()
-						&& inputList.get(j).getFirstStudentId() == inputList
-								.get(i).getSecondStudentId()) {
+				if (inputList.get(i).getStudentId() == inputList.get(j)
+						.getContactId()
+						&& inputList.get(j).getStudentId() == inputList
+								.get(i).getContactId()) {
 					inputList.remove(i);
 				}
 			}

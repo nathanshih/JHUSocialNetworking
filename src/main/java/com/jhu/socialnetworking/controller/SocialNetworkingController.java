@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhu.socialnetworking.model.Course;
+import com.jhu.socialnetworking.model.CourseLight;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.model.StudentConnection;
 import com.jhu.socialnetworking.service.SocialNetworkingService;
@@ -258,14 +259,29 @@ public class SocialNetworkingController {
 	 * @param courseId - the id of the course to add to the student's cart
 	 * @return an updated Student object
 	 */
-    @RequestMapping(value = "/checkedOutCourse", method = RequestMethod.POST)
+    @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
     @ResponseBody
-    public Student checkoutCourse(@RequestParam(value = "studentId", required = true) String studentId,
+    public Student addToCart(@RequestParam(value = "studentId", required = true) String studentId,
     							      @RequestParam(value = "courseId", required = true) String courseId) {
     	
     	LOG.debug("Checking out course: " + courseId + " by student: " + studentId);
     	
-    	return socialNetworkingService.checkoutCourse(studentId, courseId);
+    	return socialNetworkingService.addToCart(studentId, courseId);
+    }
+    
+    /**
+	 * This returns the cart for the student
+	 *
+	 * @param studentId - the id of the student to get their cart from
+	 * @return a list of courses in the students cart
+	 */
+    @RequestMapping(value = "/getCart", method = RequestMethod.GET)
+    @ResponseBody
+    public List<CourseLight> getCart(@RequestParam(value = "studentId", required = true) String studentId) {
+    	
+    	LOG.debug("Getting cart for student: " + studentId);
+    	
+    	return socialNetworkingService.getCart(studentId);
     }
     
     /**
@@ -274,7 +290,7 @@ public class SocialNetworkingController {
 	 * @param studentId - the id of the student to remove from their cart
 	 * @param courseId - the id of the course to remove from the student's cart
 	 */
-    @RequestMapping(value = "/removeFomCart", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/removeFromCart", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> removeCourse(@RequestParam(value = "studentId", required = true) String studentId,
 		      									@RequestParam(value = "courseId", required = true) String courseId) {
 		

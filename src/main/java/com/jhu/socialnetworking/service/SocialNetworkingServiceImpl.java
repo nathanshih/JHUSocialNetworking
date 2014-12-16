@@ -147,7 +147,7 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 
 	@Override
-	public Student checkoutCourse(String studentId, String courseId) {
+	public Student addToCart(String studentId, String courseId) {
 
 	    // insert checked out course into DB
 		cartDAO.insert(courseId, studentId);
@@ -158,6 +158,22 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 		return student;
 	}
 
+	@Override
+	public List<CourseLight> getCart(String studentId) {
+		
+		List<CourseLight> courseLights = new ArrayList<CourseLight>();
+		List<String> courseIds = cartDAO.getCourseIdsByStudentId(studentId);
+		for (String courseId : courseIds) {
+			Course course = courseDAO.getCourseById(courseId);
+			CourseLight courseLight = new CourseLight();
+			courseLight.setCourseId(courseId);
+			courseLight.setCourseName(course.getCourseName());
+			courseLights.add(courseLight);
+		}
+		
+		return courseLights;
+	}
+	
 	@Override
 	public void removeFomCart(String studentId, String courseId) {
 		

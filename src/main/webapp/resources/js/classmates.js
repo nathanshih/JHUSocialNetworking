@@ -91,10 +91,10 @@ $(document).ready(function() {
                                     },
                                     type: "POST",
                                     success: function() {
-                                        alert("Student successfully emailed.");
+                                        alert("Emailed student " + student.name + " successfully.");
                                     },
                                     error: function() {
-                                        alert("Unable to email student.");
+                                        alert("Unable to email student " + student.name + ".");
                                     }
                                 });
         				    });
@@ -103,14 +103,14 @@ $(document).ready(function() {
                                     url: "addContact",
                                     data: {
                                         "studentId": studentId,
-                                        "contactId": $("#student" + student.id).val()
+                                        "contactId": student.id
                                     },
                                     type: "POST",
                                     success: function() {
-                                        alert("Contact successfully added.");
+                                        alert("Added student " + student.name + " to contacts.");
                                     },
                                     error: function() {
-                                        alert("Unable to add contact.");
+                                        alert("Unable to add student " + student.name + " to contacts.");
                                     }
                                 });
                             });
@@ -125,10 +125,10 @@ $(document).ready(function() {
                                     },
                                     type: "POST",
                                     success: function() {
-                                        alert("Student successfully emailed.");
+                                        alert("Emailed student " + student.name + " successfully.");
                                     },
                                     error: function() {
-                                        alert("Unable to email student.");
+                                        alert("Unable to email student " + student.name + ".");
                                     }
                                 });
                             });
@@ -137,14 +137,14 @@ $(document).ready(function() {
                                     url: "addContact",
                                     data: {
                                         "studentId": studentId,
-                                        "contactId": $("#student" + student.id).val()
+                                        "contactId": student.id
                                     },
                                     type: "POST",
                                     success: function() {
-                                        alert("Contact successfully added.");
+                                        alert("Added student " + student.name + " to contacts.");
                                     },
                                     error: function() {
-                                        alert("Unable to add contact.");
+                                        alert("Unable to add student " + student.name + " to contacts.");
                                     }
                                 });
                             });

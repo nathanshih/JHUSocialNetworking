@@ -169,7 +169,7 @@ public class SocialNetworkingController {
 	 */
     @RequestMapping(value = "/getAllContacts", method = RequestMethod.GET)
     @ResponseBody
-    public EmailContacts getAllContacts(@RequestParam(value = "studentId", required = true) String studentId) {
+    public List<Student> getAllContacts(@RequestParam(value = "studentId", required = true) String studentId) {
 		
     	LOG.debug("Getting all contacts for student: " + studentId);
     	

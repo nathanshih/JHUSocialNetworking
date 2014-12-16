@@ -441,7 +441,7 @@ public class InitializeDatabase {
 
 		student = new Student();
 		student.setName("Nathan Shih");
-		student.setEmail("nathan@email.com");
+		student.setEmail("nathan.shih@gmail.com");
 		student.setPassword("password2");
 		student.setDiscipline("Computer Science");
 		studentDAO.insert(student);

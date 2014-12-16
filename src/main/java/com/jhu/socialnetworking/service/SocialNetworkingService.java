@@ -76,9 +76,9 @@ public interface SocialNetworkingService {
 	 * This gets a list of email addresses for whom the student is connected with.
 	 *
 	 * @param studentId - the id of the student to
-	 * @return the set of emails for students this student is connected with
+	 * @return a list of Student objects the student is connected with
 	 */
-	public EmailContacts getAllContacts(String studentId);
+	public List<Student> getAllContacts(String studentId);
 	
     /**
      * This inserts a new course.

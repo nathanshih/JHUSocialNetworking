@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhu.socialnetworking.model.Course;
-import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.model.StudentConnection;
 import com.jhu.socialnetworking.service.SocialNetworkingService;
@@ -169,7 +168,7 @@ public class SocialNetworkingController {
 	 */
     @RequestMapping(value = "/getAllContacts", method = RequestMethod.GET)
     @ResponseBody
-    public EmailContacts getAllContacts(@RequestParam(value = "studentId", required = true) String studentId) {
+    public List<Student> getAllContacts(@RequestParam(value = "studentId", required = true) String studentId) {
 		
     	LOG.debug("Getting all contacts for student: " + studentId);
     	

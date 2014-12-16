@@ -65,15 +65,6 @@ Course (model object returned)
 	]
 }
 
-Student Profile Listing Screen
-EmailContact (model object returned)
-{
-	"emailContacts": [
-		"atuck@email.com",
-		"ckarlen@email.com"
-	]
-}
-
 Student Profile Screen
 Student (model object returned)
 {

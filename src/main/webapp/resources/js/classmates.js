@@ -170,25 +170,84 @@ $(document).ready(function() {
                     alert("Unable to display classmates.");
                 },
                 success: function(response) {
-                    // iterate through email addresses
-                    $.each(response.emailContacts, function(i, email) {
-                        content = $("<div class=\"contentbox\">").append(
-                            $("<div class=\"contenttype\">").append(
-                                $("<h2>").text(email)
-                            ),
-                            $("<br class=\"clear_both\">")
-                        );
+                    // iterate through students and display info
+        			$.each(response, function(i, student) {
+        				content = $("<div class=\"contentbox\">").append(
+        					$("<div class=\"contenttype\">").append(
+        						$("<h2>").text(student.name),
+                                $("<form action=\"\" method=\"post\">").append(
+                                    $("<input id=\"student" + student.id + 
+                                      "\" name=\"student" + student.id + 
+                                      "\" type=\"hidden\" value=\"" + 
+                                      student.email + "\">"),
+                                    $("<input id=\"email" + student.id + 
+                                      "\" name=\"email" + student.id + 
+                                      "\" type=\"button\" value=\"Send Email\">")
+                                ),
+                                $("<div id=\"CollapsiblePanel" + student.id + 
+                                  "\"" + " class=\"CollapsiblePanel\">").append(
+                                    $("<div class=\"CollapsiblePanelTab\">").append(
+                                        $("<a href=\"#\">").append(
+                                            $("<u>").text("MORE INFORMATION")
+                                        )
+                                    ),
+                                    $("<div class=\"CollapsiblePanelContent\">").append(
+                                        $("<p>").text("Email Address: " + student.email),
+                                        $("<p>").text("Major: " + student.discipline),
+                                        $("<p>").text("Courses completed: " + 
+                                                      student.completedCourses.length)
+                                    )
+                                )
+        	                ),
+        	                $("<br class=\"clear_both\">")
+        			    );
         
-                        // space the displayed students between 2 columns
-                        if (counter % 2 == 1) {
-                            content.appendTo("#contentLeft");
-                        } else {
-                            content.appendTo("#contentRight");
-                        }
+        				// space the displayed students between 2 columns
+        				if (counter % 2 == 1) {
+        				    content.appendTo("#contentLeft");
+        				    $("#contentLeft").on("click", "#email" + student.id, function() {
+                                $.ajax({
+                                    url: "emailStudent",
+                                    data: {
+                                        "studentId": studentId,
+                                        "toEmail": $("#student" + student.id).val()
+                                    },
+                                    type: "POST",
+                                    success: function() {
+                                        alert("Emailed student " + student.name + " successfully.");
+                                    },
+                                    error: function() {
+                                        alert("Unable to email student " + student.name + ".");
+                                    }
+                                });
+        				    });
+        				} else {
+        				    content.appendTo("#contentRight");
+                            $("#contentRight").on("click", "#email" + student.id, function() {
+                                $.ajax({
+                                    url: "emailStudent",
+                                    data: {
+                                        "studentId": studentId,
+                                        "toEmail": $("#student" + student.id).val()
+                                    },
+                                    type: "POST",
+                                    success: function() {
+                                        alert("Emailed student " + student.name + " successfully.");
+                                    },
+                                    error: function() {
+                                        alert("Unable to email student " + student.name + ".");
+                                    }
+                                });
+                            });
+        			    }
+        				// execute javascript for collapsible panels
+        				jQuery.globalEval(
+        				    "var cp1 = new Spry.Widget.CollapsiblePanel(\"CollapsiblePanel" + 
+        		            student.id + "\", { contentIsOpen: false });\n");
         
-                        counter = counter + 1;
-                    });
-                }
+        				counter = counter + 1;
+        			});
+        		}
             });
         }
     	

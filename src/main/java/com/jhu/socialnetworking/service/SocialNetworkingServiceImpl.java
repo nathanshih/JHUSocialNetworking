@@ -14,7 +14,6 @@ import com.jhu.socialnetworking.dao.StudentConnectionDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.CourseLight;
-import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.model.StudentConnection;
 
@@ -175,16 +174,16 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 	
 	@Override
-	public EmailContacts getAllContacts(String studentId) {
+	public List<Student> getAllContacts(String studentId) {
 		
+		List<Student> connectedStudents = new ArrayList<Student>();
 		List<StudentConnection> studentConnections = studentConnectionDAO.getConnectionsByStudentId(Integer.valueOf(studentId));
-		EmailContacts emailContacts = new EmailContacts();
 		for (StudentConnection studentConnection : studentConnections) {
 			Student student = studentDAO.getStudentByStudentId(String.valueOf(studentConnection.getContactId()));
-			emailContacts.addEmailContact(student.getEmail());
+			connectedStudents.add(student);
 		}
 		
-		return emailContacts;
+		return connectedStudents;
 	}
 	
 	private Student populateStudentExtraInfo(Student student) {

@@ -111,13 +111,21 @@ public interface SocialNetworkingService {
     public List<Course> getAllCourses();
     
     /**
-     * This adds a completed course the list of completed courses for a given student.
+     * This adds a completed course to the list of completed courses for a given student.
      *
      * @param studentId - the id of the student who completed the course
      * @param courseId - the id of the course the student completed
      * @return an updated Student object
      */
 	public Student addCompletedCourse(String studentId, String courseId);
+	
+	/**
+	 * This gets the completed courses for a given student
+	 *
+	 * @param studentId - the id of the student to get completed courses for
+	 * @return a list of completed courses for a student
+	 */
+	public List<CourseLight> getCompletedCourses(String studentId);
 	
 	/**
 	 * This adds a course to a student's cart.

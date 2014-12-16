@@ -242,7 +242,7 @@ public class SocialNetworkingController {
      * @param courseId - the id of the course the student completed
      * @return an updated Student object
      */
-    @RequestMapping(value = "/completedCourses", method = RequestMethod.POST)
+    @RequestMapping(value = "/addCompletedCourse", method = RequestMethod.POST)
     @ResponseBody
     public Student addCompletedCourse(@RequestParam(value = "studentId", required = true) String studentId,
     							      @RequestParam(value = "courseId", required = true) String courseId) {
@@ -252,6 +252,21 @@ public class SocialNetworkingController {
     	return socialNetworkingService.addCompletedCourse(studentId, courseId);
     }
 
+    /**
+	 * This gets the completed courses for a given student
+	 *
+	 * @param studentId - the id of the student to get completed courses for
+	 * @return a list of completed courses for a student
+	 */
+    @RequestMapping(value = "/getCompletedCourses", method = RequestMethod.GET)
+    @ResponseBody
+    public List<CourseLight> getCompletedCourses(@RequestParam(value = "studentId", required = true) String studentId) {
+    	
+    	LOG.debug("Getting completed courses for student: " + studentId);
+    	
+    	return socialNetworkingService.getCompletedCourses(studentId);
+    }
+    
     /**
 	 * This adds a course to a student's cart.
 	 *

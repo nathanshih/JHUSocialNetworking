@@ -101,7 +101,7 @@ $(document).ready(function() {
                             });
                             $("#contentLeft").on("click", "#markCompleted" + courseId, function() {
                                 $.ajax({
-                                    url: "completedCourses",
+                                    url: "addCompletedCourse",
                                     data: {
                                         "studentId": studentId,
                                         "courseId": course.courseId
@@ -136,7 +136,7 @@ $(document).ready(function() {
                             });
                             $("#contentRight").on("click", "#markCompleted" + courseId, function() {
                                 $.ajax({
-                                    url: "completedCourses",
+                                    url: "addCompletedCourse",
                                     data: {
                                         "studentId": studentId,
                                         "courseId": course.courseId
@@ -163,7 +163,7 @@ $(document).ready(function() {
         } else if (courses === "completedCourses") {
             // AJAX request for course data
             $.ajax({
-                url: "completedCourses",
+                url: "getCompletedCourses",
                 data: {
                     "studentId": studentId
                 },

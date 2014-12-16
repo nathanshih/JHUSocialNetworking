@@ -6,7 +6,7 @@ import com.jhu.socialnetworking.model.StudentConnection;
 
 public interface StudentConnectionDAO {
 	
-	public void insert(StudentConnection studentConnection);
+	public StudentConnection insert(StudentConnection studentConnection);
 	
 	public void remove(StudentConnection studentConnection);
 	

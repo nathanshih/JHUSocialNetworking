@@ -4,33 +4,17 @@ public class StudentConnection {
 	
 	private int connectionId;
 	
-	private int firstStudentId;
+	private int studentId;
 	
-	private int secondStudentId;
+	private int contactId;
 
-	public StudentConnection(int firstStudentId, int secondStudentId) {
-		this.firstStudentId = firstStudentId;
-		this.secondStudentId = secondStudentId;
+	public StudentConnection(int studentId, int contactId) {
+		this.studentId = studentId;
+		this.contactId = contactId;
 	}
 	
 	public StudentConnection() {
 
-	}
-	
-	public int getFirstStudentId() {
-		return firstStudentId;
-	}
-
-	public void setFirstStudentId(int firstStudentId) {
-		this.firstStudentId = firstStudentId;
-	}
-
-	public int getSecondStudentId() {
-		return secondStudentId;
-	}
-
-	public void setSecondStudentId(int secondStudentId) {
-		this.secondStudentId = secondStudentId;
 	}
 	
 	public int getConnectionId() {
@@ -40,9 +24,25 @@ public class StudentConnection {
 	public void setConnectionId(int connectionId) {
 		this.connectionId = connectionId;
 	}
-	
+
+	public int getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+
+	public int getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(int contactId) {
+		this.contactId = contactId;
+	}
+
 	public String toString() {
-		return "firstStudentId: " + firstStudentId + " secondStudentId: " + secondStudentId;
+		return "Student ID: " + studentId + " connected with: " + contactId;
 	}
 	
 }

@@ -166,12 +166,21 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 	
 	@Override
+	public StudentConnection addContact(String studentId, String contactId) {
+		StudentConnection studentConnection = new StudentConnection();
+		studentConnection.setStudentId(Integer.valueOf(studentId));
+		studentConnection.setContactId(Integer.valueOf(contactId));
+		
+		return studentConnectionDAO.insert(studentConnection);
+	}
+	
+	@Override
 	public EmailContacts getAllContacts(String studentId) {
 		
 		List<StudentConnection> studentConnections = studentConnectionDAO.getConnectionsByStudentId(Integer.valueOf(studentId));
 		EmailContacts emailContacts = new EmailContacts();
 		for (StudentConnection studentConnection : studentConnections) {
-			Student student = studentDAO.getStudentByStudentId(String.valueOf(studentConnection.getFirstStudentId()));
+			Student student = studentDAO.getStudentByStudentId(String.valueOf(studentConnection.getContactId()));
 			emailContacts.addEmailContact(student.getEmail());
 		}
 		

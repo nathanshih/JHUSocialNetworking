@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhu.socialnetworking.model.Course;
+import com.jhu.socialnetworking.model.CourseLight;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.model.StudentConnection;
 import com.jhu.socialnetworking.service.SocialNetworkingService;
@@ -266,6 +267,21 @@ public class SocialNetworkingController {
     	LOG.debug("Checking out course: " + courseId + " by student: " + studentId);
     	
     	return socialNetworkingService.checkoutCourse(studentId, courseId);
+    }
+    
+    /**
+	 * This returns the cart for the student
+	 *
+	 * @param studentId - the id of the student to get their cart from
+	 * @return
+	 */
+    @RequestMapping(value = "/getCart", method = RequestMethod.GET)
+    @ResponseBody
+    public List<CourseLight> checkoutCourse(@RequestParam(value = "studentId", required = true) String studentId) {
+    	
+    	LOG.debug("Getting cart for student: " + studentId);
+    	
+    	return socialNetworkingService.getCart(studentId);
     }
     
     /**

@@ -3,6 +3,7 @@ package com.jhu.socialnetworking.service;
 import java.util.List;
 
 import com.jhu.socialnetworking.model.Course;
+import com.jhu.socialnetworking.model.CourseLight;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.model.StudentConnection;
 
@@ -126,6 +127,14 @@ public interface SocialNetworkingService {
 	 * @return an updated Student object
 	 */
 	public Student checkoutCourse(String studentId, String courseId);
+	
+	/**
+	 * This returns the cart for the student
+	 *
+	 * @param studentId - the id of the student to get their cart from
+	 * @return
+	 */
+	public List<CourseLight> getCart(String studentId);
 	
 	/**
 	 * This removes a course from a student's cart.

@@ -24,7 +24,7 @@ $(document).ready(function() {
 
     // AJAX request for cart data
     $.ajax({
-        url: "checkedOutCourses",
+        url: "getCart",
         data: {
             "studentId": studentId
         },

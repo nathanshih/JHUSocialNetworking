@@ -159,6 +159,22 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 
 	@Override
+	public List<CourseLight> getCart(String studentId) {
+		
+		List<CourseLight> courseLights = new ArrayList<CourseLight>();
+		List<String> courseIds = cartDAO.getCourseIdsByStudentId(studentId);
+		for (String courseId : courseIds) {
+			Course course = courseDAO.getCourseById(courseId);
+			CourseLight courseLight = new CourseLight();
+			courseLight.setCourseId(courseId);
+			courseLight.setCourseName(course.getCourseName());
+			courseLights.add(courseLight);
+		}
+		
+		return courseLights;
+	}
+	
+	@Override
 	public void removeFomCart(String studentId, String courseId) {
 		
 		cartDAO.remove(courseId, studentId);

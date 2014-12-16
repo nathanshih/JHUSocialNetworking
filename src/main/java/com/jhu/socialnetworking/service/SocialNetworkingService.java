@@ -2,7 +2,6 @@ package com.jhu.socialnetworking.service;
 
 import java.util.List;
 
-import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.model.StudentConnection;

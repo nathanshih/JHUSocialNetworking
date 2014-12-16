@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhu.socialnetworking.model.Course;
-import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.model.StudentConnection;
 import com.jhu.socialnetworking.service.SocialNetworkingService;

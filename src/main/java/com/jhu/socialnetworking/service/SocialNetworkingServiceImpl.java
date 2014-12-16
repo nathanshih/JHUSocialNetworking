@@ -14,7 +14,6 @@ import com.jhu.socialnetworking.dao.StudentConnectionDAO;
 import com.jhu.socialnetworking.dao.StudentDAO;
 import com.jhu.socialnetworking.model.Course;
 import com.jhu.socialnetworking.model.CourseLight;
-import com.jhu.socialnetworking.model.EmailContacts;
 import com.jhu.socialnetworking.model.Student;
 import com.jhu.socialnetworking.model.StudentConnection;
 

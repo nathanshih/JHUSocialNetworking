@@ -147,6 +147,22 @@ public class SocialNetworkingServiceImpl implements SocialNetworkingService {
 	}
 
 	@Override
+	public List<CourseLight> getCompletedCourses(String studentId) {
+	
+		List<CourseLight> courseLights = new ArrayList<CourseLight>();
+		List<String> courseIds = completedCourseDAO.getCompletedCourseIdsByStudentId(Integer.valueOf(studentId));
+		for (String courseId : courseIds) {
+			Course course = courseDAO.getCourseById(courseId);
+			CourseLight courseLight = new CourseLight();
+			courseLight.setCourseId(courseId);
+			courseLight.setCourseName(course.getCourseName());
+			courseLights.add(courseLight);
+		}
+		
+		return courseLights;
+	}
+	
+	@Override
 	public Student addToCart(String studentId, String courseId) {
 
 	    // insert checked out course into DB
